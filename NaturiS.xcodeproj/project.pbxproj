@@ -10,12 +10,26 @@
 		F55E96031D510CA600EFEAAA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F55E96021D510CA600EFEAAA /* main.m */; };
 		F55E96061D510CA600EFEAAA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F55E96051D510CA600EFEAAA /* AppDelegate.m */; };
 		F55E96091D510CA600EFEAAA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55E96081D510CA600EFEAAA /* ViewController.m */; };
-		F55E960C1D510CA600EFEAAA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F55E960A1D510CA600EFEAAA /* Main.storyboard */; };
 		F55E960F1D510CA600EFEAAA /* NaturiS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F55E960D1D510CA600EFEAAA /* NaturiS.xcdatamodeld */; };
-		F55E96111D510CA600EFEAAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F55E96101D510CA600EFEAAA /* Assets.xcassets */; };
 		F55E96141D510CA600EFEAAA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F55E96121D510CA600EFEAAA /* LaunchScreen.storyboard */; };
 		F55E961F1D510CA600EFEAAA /* NaturiSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F55E961E1D510CA600EFEAAA /* NaturiSTests.m */; };
 		F55E962A1D510CA600EFEAAA /* NaturiSUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F55E96291D510CA600EFEAAA /* NaturiSUITests.m */; };
+		F55E96381D510CCF00EFEAAA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F55E96371D510CCF00EFEAAA /* Main.storyboard */; };
+		F55E963A1D510D6300EFEAAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F55E96391D510D6300EFEAAA /* Assets.xcassets */; };
+		F58B10601D512F6A00B64183 /* DemoIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F58B105F1D512F6A00B64183 /* DemoIntroViewController.m */; };
+		F58B10631D512F8200B64183 /* TravelIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F58B10621D512F8200B64183 /* TravelIntroViewController.m */; };
+		F58B10661D512F8F00B64183 /* TravelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F58B10651D512F8F00B64183 /* TravelViewController.m */; };
+		F58B10691D512F9D00B64183 /* ArriveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F58B10681D512F9D00B64183 /* ArriveViewController.m */; };
+		F58B106C1D512FB300B64183 /* CollectIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F58B106B1D512FB300B64183 /* CollectIntroViewController.m */; };
+		F58B106F1D512FBC00B64183 /* CollectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F58B106E1D512FBC00B64183 /* CollectViewController.m */; };
+		F58B10721D512FCE00B64183 /* DemoReadyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F58B10711D512FCE00B64183 /* DemoReadyViewController.m */; };
+		F58B10751D512FD600B64183 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F58B10741D512FD600B64183 /* DemoViewController.m */; };
+		F58B10781D512FE900B64183 /* FeedbackIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F58B10771D512FE900B64183 /* FeedbackIntroViewController.m */; };
+		F58B107B1D512FF400B64183 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F58B107A1D512FF400B64183 /* FeedbackViewController.m */; };
+		F58B107E1D51301400B64183 /* CongratulationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F58B107D1D51301400B64183 /* CongratulationViewController.m */; };
+		F58B10811D51302900B64183 /* LeaveIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F58B10801D51302900B64183 /* LeaveIntroViewController.m */; };
+		F58B10841D51303100B64183 /* LeaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F58B10831D51303100B64183 /* LeaveViewController.m */; };
+		F58B10871D51304800B64183 /* NextDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F58B10861D51304800B64183 /* NextDemoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,9 +56,7 @@
 		F55E96051D510CA600EFEAAA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		F55E96071D510CA600EFEAAA /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		F55E96081D510CA600EFEAAA /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		F55E960B1D510CA600EFEAAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F55E960E1D510CA600EFEAAA /* NaturiS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NaturiS.xcdatamodel; sourceTree = "<group>"; };
-		F55E96101D510CA600EFEAAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F55E96131D510CA600EFEAAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F55E96151D510CA600EFEAAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F55E961A1D510CA600EFEAAA /* NaturiSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NaturiSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,6 +65,36 @@
 		F55E96251D510CA600EFEAAA /* NaturiSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NaturiSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F55E96291D510CA600EFEAAA /* NaturiSUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NaturiSUITests.m; sourceTree = "<group>"; };
 		F55E962B1D510CA600EFEAAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F55E96371D510CCF00EFEAAA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		F55E96391D510D6300EFEAAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F58B105E1D512F6A00B64183 /* DemoIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoIntroViewController.h; sourceTree = "<group>"; };
+		F58B105F1D512F6A00B64183 /* DemoIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoIntroViewController.m; sourceTree = "<group>"; };
+		F58B10611D512F8200B64183 /* TravelIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TravelIntroViewController.h; sourceTree = "<group>"; };
+		F58B10621D512F8200B64183 /* TravelIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TravelIntroViewController.m; sourceTree = "<group>"; };
+		F58B10641D512F8F00B64183 /* TravelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TravelViewController.h; sourceTree = "<group>"; };
+		F58B10651D512F8F00B64183 /* TravelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TravelViewController.m; sourceTree = "<group>"; };
+		F58B10671D512F9D00B64183 /* ArriveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArriveViewController.h; sourceTree = "<group>"; };
+		F58B10681D512F9D00B64183 /* ArriveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArriveViewController.m; sourceTree = "<group>"; };
+		F58B106A1D512FB300B64183 /* CollectIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectIntroViewController.h; sourceTree = "<group>"; };
+		F58B106B1D512FB300B64183 /* CollectIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectIntroViewController.m; sourceTree = "<group>"; };
+		F58B106D1D512FBC00B64183 /* CollectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectViewController.h; sourceTree = "<group>"; };
+		F58B106E1D512FBC00B64183 /* CollectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectViewController.m; sourceTree = "<group>"; };
+		F58B10701D512FCE00B64183 /* DemoReadyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoReadyViewController.h; sourceTree = "<group>"; };
+		F58B10711D512FCE00B64183 /* DemoReadyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoReadyViewController.m; sourceTree = "<group>"; };
+		F58B10731D512FD600B64183 /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
+		F58B10741D512FD600B64183 /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
+		F58B10761D512FE900B64183 /* FeedbackIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackIntroViewController.h; sourceTree = "<group>"; };
+		F58B10771D512FE900B64183 /* FeedbackIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackIntroViewController.m; sourceTree = "<group>"; };
+		F58B10791D512FF400B64183 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
+		F58B107A1D512FF400B64183 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
+		F58B107C1D51301400B64183 /* CongratulationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CongratulationViewController.h; sourceTree = "<group>"; };
+		F58B107D1D51301400B64183 /* CongratulationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CongratulationViewController.m; sourceTree = "<group>"; };
+		F58B107F1D51302900B64183 /* LeaveIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaveIntroViewController.h; sourceTree = "<group>"; };
+		F58B10801D51302900B64183 /* LeaveIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaveIntroViewController.m; sourceTree = "<group>"; };
+		F58B10821D51303100B64183 /* LeaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaveViewController.h; sourceTree = "<group>"; };
+		F58B10831D51303100B64183 /* LeaveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaveViewController.m; sourceTree = "<group>"; };
+		F58B10851D51304800B64183 /* NextDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextDemoViewController.h; sourceTree = "<group>"; };
+		F58B10861D51304800B64183 /* NextDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextDemoViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,15 +145,39 @@
 		F55E96001D510CA600EFEAAA /* NaturiS */ = {
 			isa = PBXGroup;
 			children = (
-				F55E96041D510CA600EFEAAA /* AppDelegate.h */,
-				F55E96051D510CA600EFEAAA /* AppDelegate.m */,
 				F55E96071D510CA600EFEAAA /* ViewController.h */,
 				F55E96081D510CA600EFEAAA /* ViewController.m */,
-				F55E960A1D510CA600EFEAAA /* Main.storyboard */,
-				F55E96101D510CA600EFEAAA /* Assets.xcassets */,
+				F58B10851D51304800B64183 /* NextDemoViewController.h */,
+				F58B10861D51304800B64183 /* NextDemoViewController.m */,
+				F58B10821D51303100B64183 /* LeaveViewController.h */,
+				F58B10831D51303100B64183 /* LeaveViewController.m */,
+				F58B107F1D51302900B64183 /* LeaveIntroViewController.h */,
+				F58B10801D51302900B64183 /* LeaveIntroViewController.m */,
+				F58B107C1D51301400B64183 /* CongratulationViewController.h */,
+				F58B107D1D51301400B64183 /* CongratulationViewController.m */,
+				F58B10791D512FF400B64183 /* FeedbackViewController.h */,
+				F58B107A1D512FF400B64183 /* FeedbackViewController.m */,
+				F58B10761D512FE900B64183 /* FeedbackIntroViewController.h */,
+				F58B10771D512FE900B64183 /* FeedbackIntroViewController.m */,
+				F58B10731D512FD600B64183 /* DemoViewController.h */,
+				F58B10741D512FD600B64183 /* DemoViewController.m */,
+				F58B10701D512FCE00B64183 /* DemoReadyViewController.h */,
+				F58B10711D512FCE00B64183 /* DemoReadyViewController.m */,
+				F58B106D1D512FBC00B64183 /* CollectViewController.h */,
+				F58B106E1D512FBC00B64183 /* CollectViewController.m */,
+				F58B106A1D512FB300B64183 /* CollectIntroViewController.h */,
+				F58B106B1D512FB300B64183 /* CollectIntroViewController.m */,
+				F58B10671D512F9D00B64183 /* ArriveViewController.h */,
+				F58B10681D512F9D00B64183 /* ArriveViewController.m */,
+				F58B10641D512F8F00B64183 /* TravelViewController.h */,
+				F58B10651D512F8F00B64183 /* TravelViewController.m */,
+				F58B10611D512F8200B64183 /* TravelIntroViewController.h */,
+				F58B10621D512F8200B64183 /* TravelIntroViewController.m */,
+				F58B105E1D512F6A00B64183 /* DemoIntroViewController.h */,
+				F58B105F1D512F6A00B64183 /* DemoIntroViewController.m */,
+				F55E96371D510CCF00EFEAAA /* Main.storyboard */,
+				F55E96391D510D6300EFEAAA /* Assets.xcassets */,
 				F55E96121D510CA600EFEAAA /* LaunchScreen.storyboard */,
-				F55E96151D510CA600EFEAAA /* Info.plist */,
-				F55E960D1D510CA600EFEAAA /* NaturiS.xcdatamodeld */,
 				F55E96011D510CA600EFEAAA /* Supporting Files */,
 			);
 			path = NaturiS;
@@ -120,6 +186,10 @@
 		F55E96011D510CA600EFEAAA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F55E96041D510CA600EFEAAA /* AppDelegate.h */,
+				F55E96051D510CA600EFEAAA /* AppDelegate.m */,
+				F55E960D1D510CA600EFEAAA /* NaturiS.xcdatamodeld */,
+				F55E96151D510CA600EFEAAA /* Info.plist */,
 				F55E96021D510CA600EFEAAA /* main.m */,
 			);
 			name = "Supporting Files";
@@ -247,8 +317,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F55E96141D510CA600EFEAAA /* LaunchScreen.storyboard in Resources */,
-				F55E96111D510CA600EFEAAA /* Assets.xcassets in Resources */,
-				F55E960C1D510CA600EFEAAA /* Main.storyboard in Resources */,
+				F55E963A1D510D6300EFEAAA /* Assets.xcassets in Resources */,
+				F55E96381D510CCF00EFEAAA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,9 +344,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				F55E96091D510CA600EFEAAA /* ViewController.m in Sources */,
+				F58B10721D512FCE00B64183 /* DemoReadyViewController.m in Sources */,
+				F58B107E1D51301400B64183 /* CongratulationViewController.m in Sources */,
+				F58B10781D512FE900B64183 /* FeedbackIntroViewController.m in Sources */,
+				F58B107B1D512FF400B64183 /* FeedbackViewController.m in Sources */,
+				F58B106C1D512FB300B64183 /* CollectIntroViewController.m in Sources */,
+				F58B10751D512FD600B64183 /* DemoViewController.m in Sources */,
+				F58B10691D512F9D00B64183 /* ArriveViewController.m in Sources */,
+				F58B10661D512F8F00B64183 /* TravelViewController.m in Sources */,
 				F55E96061D510CA600EFEAAA /* AppDelegate.m in Sources */,
+				F58B10871D51304800B64183 /* NextDemoViewController.m in Sources */,
 				F55E960F1D510CA600EFEAAA /* NaturiS.xcdatamodeld in Sources */,
 				F55E96031D510CA600EFEAAA /* main.m in Sources */,
+				F58B10841D51303100B64183 /* LeaveViewController.m in Sources */,
+				F58B106F1D512FBC00B64183 /* CollectViewController.m in Sources */,
+				F58B10811D51302900B64183 /* LeaveIntroViewController.m in Sources */,
+				F58B10601D512F6A00B64183 /* DemoIntroViewController.m in Sources */,
+				F58B10631D512F8200B64183 /* TravelIntroViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,14 +396,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		F55E960A1D510CA600EFEAAA /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F55E960B1D510CA600EFEAAA /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		F55E96121D510CA600EFEAAA /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -502,6 +578,7 @@
 				F55E96301D510CA600EFEAAA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F55E96311D510CA600EFEAAA /* Build configuration list for PBXNativeTarget "NaturiSTests" */ = {
 			isa = XCConfigurationList;
@@ -510,6 +587,7 @@
 				F55E96331D510CA600EFEAAA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F55E96341D510CA600EFEAAA /* Build configuration list for PBXNativeTarget "NaturiSUITests" */ = {
 			isa = XCConfigurationList;
@@ -518,6 +596,7 @@
 				F55E96361D510CA600EFEAAA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

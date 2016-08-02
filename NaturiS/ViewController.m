@@ -7,21 +7,33 @@
 //
 
 #import "ViewController.h"
+#import "DemoIntroViewController.h"
 
 @interface ViewController ()
-
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    // Hide Navigation Controller bar
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    
+    // Add swipe gesture
+    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRecognizer:)];
+    recognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:recognizer];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+}
+
+- (void)swipeRecognizer:(UISwipeGestureRecognizer *)sender {
+    UIViewController *demoIntro = [[DemoIntroViewController alloc] init];
+    demoIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"DemoIntroViewController"];
+    [self.navigationController showViewController:demoIntro sender:self];
 }
 
 @end
