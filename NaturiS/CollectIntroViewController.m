@@ -7,6 +7,8 @@
 //
 
 #import "CollectIntroViewController.h"
+#import "ArriveViewController.h"
+#import "CollectViewController.h"
 
 @interface CollectIntroViewController ()
 
@@ -16,12 +18,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // Add right swipe gesture
+    UISwipeGestureRecognizer *recognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeRecognizer:)];
+    recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:recognizerRight];
+    // Add left swipe gesture
+    UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeRecognizer:)];
+    recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:recognizerLeft];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+}
+
+- (void)rightSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
+    UIViewController *collect = [[CollectViewController alloc] init];
+    collect = [self.storyboard instantiateViewControllerWithIdentifier:@"CollectViewController"];
+    [self.navigationController showViewController:collect sender:self];
+}
+
+- (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
+    UIViewController *arrive = [[ArriveViewController alloc] init];
+    arrive = [self.storyboard instantiateViewControllerWithIdentifier:@"ArriveViewController"];
+    [self.navigationController showViewController:arrive sender:self];
 }
 
 /*

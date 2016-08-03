@@ -7,6 +7,8 @@
 //
 
 #import "DemoViewController.h"
+#import "DemoReadyViewController.h"
+#import "FeedbackIntroViewController.h"
 
 @interface DemoViewController ()
 
@@ -16,12 +18,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // Add right swipe gesture
+    UISwipeGestureRecognizer *recognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeRecognizer:)];
+    recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:recognizerRight];
+    // Add left swipe gesture
+    UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeRecognizer:)];
+    recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:recognizerLeft];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+}
+
+- (void)rightSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
+    UIViewController *feedbackIntro = [[FeedbackIntroViewController alloc] init];
+    feedbackIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"FeedbackIntroViewController"];
+    [self.navigationController showViewController:feedbackIntro sender:self];
+}
+
+- (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
+    UIViewController *demoReady = [[DemoReadyViewController alloc] init];
+    demoReady = [self.storyboard instantiateViewControllerWithIdentifier:@"DemoReadyViewController"];
+    [self.navigationController showViewController:demoReady sender:self];
 }
 
 /*

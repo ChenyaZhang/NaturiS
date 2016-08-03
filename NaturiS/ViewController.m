@@ -20,9 +20,9 @@
     // Hide Navigation Controller bar
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
     
-    // Add swipe gesture
-    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRecognizer:)];
-    recognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    // Add tap gesture
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRecognizer:)];
+    [recognizer setNumberOfTapsRequired:1];
     [self.view addGestureRecognizer:recognizer];
 }
 
@@ -30,7 +30,7 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)swipeRecognizer:(UISwipeGestureRecognizer *)sender {
+- (void)tapRecognizer:(UISwipeGestureRecognizer *)sender {
     UIViewController *demoIntro = [[DemoIntroViewController alloc] init];
     demoIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"DemoIntroViewController"];
     [self.navigationController showViewController:demoIntro sender:self];

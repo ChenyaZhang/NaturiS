@@ -7,6 +7,8 @@
 //
 
 #import "LeaveViewController.h"
+#import "LeaveIntroViewController.h"
+#import "NextDemoViewController.h"
 
 @interface LeaveViewController ()
 
@@ -16,12 +18,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // Add right swipe gesture
+    UISwipeGestureRecognizer *recognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeRecognizer:)];
+    recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:recognizerRight];
+    // Add left swipe gesture
+    UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeRecognizer:)];
+    recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:recognizerLeft];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+}
+
+- (void)rightSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
+    UIViewController *nextDemo = [[NextDemoViewController alloc] init];
+    nextDemo = [self.storyboard instantiateViewControllerWithIdentifier:@"NextDemoViewController"];
+    [self.navigationController showViewController:nextDemo sender:self];
+}
+
+- (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
+    UIViewController *leaveIntro = [[LeaveIntroViewController alloc] init];
+    leaveIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"LeaveIntroViewController"];
+    [self.navigationController showViewController:leaveIntro sender:self];
 }
 
 /*
