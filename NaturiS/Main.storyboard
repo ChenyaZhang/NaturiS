@@ -60,7 +60,7 @@
                     <navigationItem key="navigationItem" id="1iG-MO-KX0"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1298" y="346"/>
+            <point key="canvasLocation" x="1406" y="1962"/>
         </scene>
         <!--Demo Intro View Controller-->
         <scene sceneID="FF7-5d-na4">
@@ -120,7 +120,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XIL-dv-C6G" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2070" y="346"/>
+            <point key="canvasLocation" x="3642" y="-490"/>
         </scene>
         <!--Travel View Controller-->
         <scene sceneID="bwe-Bz-Zpp">
@@ -357,7 +357,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DjN-5v-3gN" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5988" y="346"/>
+            <point key="canvasLocation" x="3642" y="1162"/>
         </scene>
         <!--Demo View Controller-->
         <scene sceneID="9TJ-MA-Ngm">
@@ -415,7 +415,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LJI-u8-dtn" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7500" y="346"/>
+            <point key="canvasLocation" x="3642" y="1962"/>
         </scene>
         <!--Travel Intro View Controller-->
         <scene sceneID="jIP-75-Smd">
@@ -487,7 +487,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bJQ-24-p3v" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5236" y="346"/>
+            <point key="canvasLocation" x="2846" y="1162"/>
         </scene>
         <!--Demo Ready View Controller-->
         <scene sceneID="1E4-9V-Olz">
@@ -523,7 +523,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hB3-dM-wJF" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6744" y="346"/>
+            <point key="canvasLocation" x="2846" y="1962"/>
         </scene>
         <!--Feedback Intro View Controller-->
         <scene sceneID="sDB-Wo-tDc">
@@ -562,7 +562,7 @@ feedback?</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LLl-DA-lMR" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8266" y="346"/>
+            <point key="canvasLocation" x="2846" y="2822"/>
         </scene>
         <!--Feedback View Controller-->
         <scene sceneID="xAF-Ac-RqY">
@@ -641,7 +641,7 @@ feedback?</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2iI-OF-pbf" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9024" y="346"/>
+            <point key="canvasLocation" x="3642" y="2822"/>
         </scene>
         <!--Leave View Controller-->
         <scene sceneID="BpD-rv-UCg">
@@ -720,7 +720,7 @@ feedback?</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="peE-aU-owg" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="11184" y="346"/>
+            <point key="canvasLocation" x="3642" y="3690"/>
         </scene>
         <!--Leave Intro View Controller-->
         <scene sceneID="XBu-yE-EGM">
@@ -756,7 +756,7 @@ feedback?</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HkI-V0-20O" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="10454" y="346"/>
+            <point key="canvasLocation" x="2846" y="3690"/>
         </scene>
         <!--Congratulation View Controller-->
         <scene sceneID="PjB-vV-Iza">
@@ -792,7 +792,7 @@ feedback?</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0qi-L8-d5p" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9744" y="346"/>
+            <point key="canvasLocation" x="4448" y="2822"/>
         </scene>
         <!--Next Demo View Controller-->
         <scene sceneID="Nej-ne-Ed8">
@@ -828,7 +828,7 @@ feedback?</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ULp-wX-klk" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="11942" y="346"/>
+            <point key="canvasLocation" x="2846" y="4530"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Pd6-4E-tee">
@@ -846,7 +846,75 @@ feedback?</string>
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="486" y="346"/>
+            <point key="canvasLocation" x="534" y="1962"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="uot-Xa-Z8t">
+            <objects>
+                <viewController storyboardIdentifier="LoginViewController" id="kLn-aK-hMP" customClass="LoginViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xRc-nN-TlA"/>
+                        <viewControllerLayoutGuide type="bottom" id="t7t-p7-vUS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mTq-um-KmC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Login" translatesAutoresizingMaskIntoConstraints="NO" id="QnG-Hj-QkU">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Button2" translatesAutoresizingMaskIntoConstraints="NO" id="Zp5-Yd-Fvh">
+                                <rect key="frame" x="21" y="-39" width="558" height="558"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Zp5-Yd-Fvh" secondAttribute="height" multiplier="1:1" id="QZv-O0-dT8"/>
+                                </constraints>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="45R-WA-QbA">
+                                <rect key="frame" x="246" y="285" width="108" height="30"/>
+                                <color key="backgroundColor" red="0.87429904449999996" green="0.90632069110000002" blue="0.48758324250000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.81678685900000003" green="0.4758562804" blue="0.47442250000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Username or Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qYA-TF-nJ8">
+                                <rect key="frame" x="221" y="246" width="158.5" height="30"/>
+                                <color key="backgroundColor" red="0.87429904445470863" green="0.90632069110870361" blue="0.48758324248235702" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.81678685897435899" green="0.47585628035398658" blue="0.47442250002944175" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Zp5-Yd-Fvh" firstAttribute="width" secondItem="QnG-Hj-QkU" secondAttribute="width" multiplier="0.93" id="50n-sY-2PU"/>
+                            <constraint firstItem="Zp5-Yd-Fvh" firstAttribute="width" secondItem="QnG-Hj-QkU" secondAttribute="width" multiplier="0.45" id="77H-Xx-reg"/>
+                            <constraint firstItem="qYA-TF-nJ8" firstAttribute="centerX" secondItem="QnG-Hj-QkU" secondAttribute="centerX" id="HQP-TP-CpN"/>
+                            <constraint firstItem="qYA-TF-nJ8" firstAttribute="centerY" secondItem="QnG-Hj-QkU" secondAttribute="centerY" multiplier="0.87" id="JXK-me-DV7"/>
+                            <constraint firstItem="Zp5-Yd-Fvh" firstAttribute="centerX" secondItem="QnG-Hj-QkU" secondAttribute="centerX" id="S0e-mL-PUH"/>
+                            <constraint firstItem="45R-WA-QbA" firstAttribute="centerX" secondItem="QnG-Hj-QkU" secondAttribute="centerX" id="Vtp-69-3Ox"/>
+                            <constraint firstItem="QnG-Hj-QkU" firstAttribute="height" secondItem="mTq-um-KmC" secondAttribute="height" id="YMF-aG-Zma"/>
+                            <constraint firstItem="Zp5-Yd-Fvh" firstAttribute="centerY" secondItem="QnG-Hj-QkU" secondAttribute="centerY" multiplier="0.8" id="bhP-VE-1om"/>
+                            <constraint firstItem="45R-WA-QbA" firstAttribute="centerY" secondItem="QnG-Hj-QkU" secondAttribute="centerY" id="dVM-Uh-PwC"/>
+                            <constraint firstItem="QnG-Hj-QkU" firstAttribute="width" secondItem="mTq-um-KmC" secondAttribute="width" id="irM-rB-7x5"/>
+                            <constraint firstItem="QnG-Hj-QkU" firstAttribute="centerX" secondItem="mTq-um-KmC" secondAttribute="centerX" id="lDm-fP-DUM"/>
+                            <constraint firstItem="QnG-Hj-QkU" firstAttribute="centerY" secondItem="mTq-um-KmC" secondAttribute="centerY" id="qdY-D3-okE"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="77H-Xx-reg"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact">
+                            <mask key="constraints">
+                                <exclude reference="50n-sY-2PU"/>
+                                <include reference="77H-Xx-reg"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mpq-ey-tzL" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2846" y="-490"/>
         </scene>
     </scenes>
     <resources>
@@ -863,6 +931,7 @@ feedback?</string>
         <image name="Feedback_Category" width="800" height="800"/>
         <image name="Leave" width="800" height="800"/>
         <image name="Leave_Ready" width="800" height="800"/>
+        <image name="Login" width="288" height="289"/>
         <image name="Naturi_Logo" width="1010" height="258"/>
         <image name="NextDemo" width="800" height="800"/>
         <image name="Travel" width="800" height="800"/>

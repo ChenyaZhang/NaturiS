@@ -8,7 +8,7 @@
 
 #import "DemoIntroViewController.h"
 #import "TravelIntroViewController.h"
-#import "ViewController.h"
+#import "LoginViewController.h"
 
 @interface DemoIntroViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *buttonImage;
@@ -42,9 +42,9 @@
 }
 
 - (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    UIViewController *home = [[ViewController alloc] init];
-    home = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
-    [self.navigationController showViewController:home sender:self];
+    UIViewController *login = [[LoginViewController alloc] init];
+    login = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    [self.navigationController showViewController:login sender:self];
 }
 
 /*

@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "DemoIntroViewController.h"
+#import "LoginViewController.h"
 
 @interface ViewController ()
 @end
@@ -31,9 +31,9 @@
 }
 
 - (void)tapRecognizer:(UISwipeGestureRecognizer *)sender {
-    UIViewController *demoIntro = [[DemoIntroViewController alloc] init];
-    demoIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"DemoIntroViewController"];
-    [self.navigationController showViewController:demoIntro sender:self];
+    UIViewController *login = [[LoginViewController alloc] init];
+    login = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    [self.navigationController showViewController:login sender:self];
 }
 
 @end

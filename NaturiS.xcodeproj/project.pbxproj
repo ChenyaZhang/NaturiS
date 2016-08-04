@@ -30,6 +30,7 @@
 		F58B10811D51302900B64183 /* LeaveIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F58B10801D51302900B64183 /* LeaveIntroViewController.m */; };
 		F58B10841D51303100B64183 /* LeaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F58B10831D51303100B64183 /* LeaveViewController.m */; };
 		F58B10871D51304800B64183 /* NextDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F58B10861D51304800B64183 /* NextDemoViewController.m */; };
+		F58B108A1D53B68600B64183 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F58B10891D53B68600B64183 /* LoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,8 @@
 		F58B10831D51303100B64183 /* LeaveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaveViewController.m; sourceTree = "<group>"; };
 		F58B10851D51304800B64183 /* NextDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextDemoViewController.h; sourceTree = "<group>"; };
 		F58B10861D51304800B64183 /* NextDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextDemoViewController.m; sourceTree = "<group>"; };
+		F58B10881D53B68600B64183 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		F58B10891D53B68600B64183 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,36 +148,7 @@
 		F55E96001D510CA600EFEAAA /* NaturiS */ = {
 			isa = PBXGroup;
 			children = (
-				F55E96071D510CA600EFEAAA /* ViewController.h */,
-				F55E96081D510CA600EFEAAA /* ViewController.m */,
-				F58B10851D51304800B64183 /* NextDemoViewController.h */,
-				F58B10861D51304800B64183 /* NextDemoViewController.m */,
-				F58B10821D51303100B64183 /* LeaveViewController.h */,
-				F58B10831D51303100B64183 /* LeaveViewController.m */,
-				F58B107F1D51302900B64183 /* LeaveIntroViewController.h */,
-				F58B10801D51302900B64183 /* LeaveIntroViewController.m */,
-				F58B107C1D51301400B64183 /* CongratulationViewController.h */,
-				F58B107D1D51301400B64183 /* CongratulationViewController.m */,
-				F58B10791D512FF400B64183 /* FeedbackViewController.h */,
-				F58B107A1D512FF400B64183 /* FeedbackViewController.m */,
-				F58B10761D512FE900B64183 /* FeedbackIntroViewController.h */,
-				F58B10771D512FE900B64183 /* FeedbackIntroViewController.m */,
-				F58B10731D512FD600B64183 /* DemoViewController.h */,
-				F58B10741D512FD600B64183 /* DemoViewController.m */,
-				F58B10701D512FCE00B64183 /* DemoReadyViewController.h */,
-				F58B10711D512FCE00B64183 /* DemoReadyViewController.m */,
-				F58B106D1D512FBC00B64183 /* CollectViewController.h */,
-				F58B106E1D512FBC00B64183 /* CollectViewController.m */,
-				F58B106A1D512FB300B64183 /* CollectIntroViewController.h */,
-				F58B106B1D512FB300B64183 /* CollectIntroViewController.m */,
-				F58B10671D512F9D00B64183 /* ArriveViewController.h */,
-				F58B10681D512F9D00B64183 /* ArriveViewController.m */,
-				F58B10641D512F8F00B64183 /* TravelViewController.h */,
-				F58B10651D512F8F00B64183 /* TravelViewController.m */,
-				F58B10611D512F8200B64183 /* TravelIntroViewController.h */,
-				F58B10621D512F8200B64183 /* TravelIntroViewController.m */,
-				F58B105E1D512F6A00B64183 /* DemoIntroViewController.h */,
-				F58B105F1D512F6A00B64183 /* DemoIntroViewController.m */,
+				F58B108B1D53B6B900B64183 /* ViewController */,
 				F55E96371D510CCF00EFEAAA /* Main.storyboard */,
 				F55E96391D510D6300EFEAAA /* Assets.xcassets */,
 				F55E96121D510CA600EFEAAA /* LaunchScreen.storyboard */,
@@ -211,6 +185,45 @@
 				F55E962B1D510CA600EFEAAA /* Info.plist */,
 			);
 			path = NaturiSUITests;
+			sourceTree = "<group>";
+		};
+		F58B108B1D53B6B900B64183 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F55E96071D510CA600EFEAAA /* ViewController.h */,
+				F55E96081D510CA600EFEAAA /* ViewController.m */,
+				F58B10851D51304800B64183 /* NextDemoViewController.h */,
+				F58B10861D51304800B64183 /* NextDemoViewController.m */,
+				F58B10821D51303100B64183 /* LeaveViewController.h */,
+				F58B10831D51303100B64183 /* LeaveViewController.m */,
+				F58B107F1D51302900B64183 /* LeaveIntroViewController.h */,
+				F58B10801D51302900B64183 /* LeaveIntroViewController.m */,
+				F58B107C1D51301400B64183 /* CongratulationViewController.h */,
+				F58B107D1D51301400B64183 /* CongratulationViewController.m */,
+				F58B10791D512FF400B64183 /* FeedbackViewController.h */,
+				F58B107A1D512FF400B64183 /* FeedbackViewController.m */,
+				F58B10761D512FE900B64183 /* FeedbackIntroViewController.h */,
+				F58B10771D512FE900B64183 /* FeedbackIntroViewController.m */,
+				F58B10731D512FD600B64183 /* DemoViewController.h */,
+				F58B10741D512FD600B64183 /* DemoViewController.m */,
+				F58B10701D512FCE00B64183 /* DemoReadyViewController.h */,
+				F58B10711D512FCE00B64183 /* DemoReadyViewController.m */,
+				F58B106D1D512FBC00B64183 /* CollectViewController.h */,
+				F58B106E1D512FBC00B64183 /* CollectViewController.m */,
+				F58B106A1D512FB300B64183 /* CollectIntroViewController.h */,
+				F58B106B1D512FB300B64183 /* CollectIntroViewController.m */,
+				F58B10671D512F9D00B64183 /* ArriveViewController.h */,
+				F58B10681D512F9D00B64183 /* ArriveViewController.m */,
+				F58B10641D512F8F00B64183 /* TravelViewController.h */,
+				F58B10651D512F8F00B64183 /* TravelViewController.m */,
+				F58B10611D512F8200B64183 /* TravelIntroViewController.h */,
+				F58B10621D512F8200B64183 /* TravelIntroViewController.m */,
+				F58B105E1D512F6A00B64183 /* DemoIntroViewController.h */,
+				F58B105F1D512F6A00B64183 /* DemoIntroViewController.m */,
+				F58B10881D53B68600B64183 /* LoginViewController.h */,
+				F58B10891D53B68600B64183 /* LoginViewController.m */,
+			);
+			name = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -358,6 +371,7 @@
 				F55E96031D510CA600EFEAAA /* main.m in Sources */,
 				F58B10841D51303100B64183 /* LeaveViewController.m in Sources */,
 				F58B106F1D512FBC00B64183 /* CollectViewController.m in Sources */,
+				F58B108A1D53B68600B64183 /* LoginViewController.m in Sources */,
 				F58B10811D51302900B64183 /* LeaveIntroViewController.m in Sources */,
 				F58B10601D512F6A00B64183 /* DemoIntroViewController.m in Sources */,
 				F58B10631D512F8200B64183 /* TravelIntroViewController.m in Sources */,
