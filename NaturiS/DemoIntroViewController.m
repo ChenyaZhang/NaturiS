@@ -25,6 +25,7 @@
     [self.buttonImage setUserInteractionEnabled:YES];
     [self.view bringSubviewToFront:self.buttonImage];
     [self.buttonImage addGestureRecognizer:recognizer];
+    
     // Add left swipe gesture
     UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeRecognizer:)];
     recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -35,7 +36,7 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)tapRecognizer:(UISwipeGestureRecognizer *)sender {
+- (void)tapRecognizer:(UITapGestureRecognizer *)sender {
     UIViewController *travelIntro = [[TravelIntroViewController alloc] init];
     travelIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"TravelIntroViewController"];
     [self.navigationController showViewController:travelIntro sender:self];

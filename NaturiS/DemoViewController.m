@@ -11,17 +11,20 @@
 #import "FeedbackIntroViewController.h"
 
 @interface DemoViewController ()
-
+@property (weak, nonatomic) IBOutlet UIImageView *buttonImage;
 @end
 
 @implementation DemoViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Add right swipe gesture
-    UISwipeGestureRecognizer *recognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeRecognizer:)];
-    recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.view addGestureRecognizer:recognizerRight];
+    // Add tap gesture
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRecognizer:)];
+    [recognizer setNumberOfTapsRequired:1];
+    [self.buttonImage setUserInteractionEnabled:YES];
+    [self.view bringSubviewToFront:self.buttonImage];
+    [self.buttonImage addGestureRecognizer:recognizer];
+    
     // Add left swipe gesture
     UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeRecognizer:)];
     recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -32,7 +35,7 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)rightSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
+- (void)tapRecognizer:(UISwipeGestureRecognizer *)sender {
     UIViewController *feedbackIntro = [[FeedbackIntroViewController alloc] init];
     feedbackIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"FeedbackIntroViewController"];
     [self.navigationController showViewController:feedbackIntro sender:self];

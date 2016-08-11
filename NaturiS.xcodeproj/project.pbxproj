@@ -31,6 +31,11 @@
 		F58B10841D51303100B64183 /* LeaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F58B10831D51303100B64183 /* LeaveViewController.m */; };
 		F58B10871D51304800B64183 /* NextDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F58B10861D51304800B64183 /* NextDemoViewController.m */; };
 		F58B108A1D53B68600B64183 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F58B10891D53B68600B64183 /* LoginViewController.m */; };
+		F58B108E1D53CA7A00B64183 /* CompetitorAnalysisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F58B108D1D53CA7A00B64183 /* CompetitorAnalysisViewController.m */; };
+		F58B10911D53CA8800B64183 /* OurProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F58B10901D53CA8800B64183 /* OurProductViewController.m */; };
+		F58B10941D53CB3400B64183 /* SpecificQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F58B10931D53CB3400B64183 /* SpecificQuestionViewController.m */; };
+		F58B10971D53CB4200B64183 /* GeneralFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F58B10961D53CB4200B64183 /* GeneralFeedbackViewController.m */; };
+		F58B10991D56175700B64183 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F58B10981D56175700B64183 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +103,15 @@
 		F58B10861D51304800B64183 /* NextDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextDemoViewController.m; sourceTree = "<group>"; };
 		F58B10881D53B68600B64183 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		F58B10891D53B68600B64183 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		F58B108C1D53CA7A00B64183 /* CompetitorAnalysisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompetitorAnalysisViewController.h; sourceTree = "<group>"; };
+		F58B108D1D53CA7A00B64183 /* CompetitorAnalysisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompetitorAnalysisViewController.m; sourceTree = "<group>"; };
+		F58B108F1D53CA8800B64183 /* OurProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OurProductViewController.h; sourceTree = "<group>"; };
+		F58B10901D53CA8800B64183 /* OurProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OurProductViewController.m; sourceTree = "<group>"; };
+		F58B10921D53CB3400B64183 /* SpecificQuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecificQuestionViewController.h; sourceTree = "<group>"; };
+		F58B10931D53CB3400B64183 /* SpecificQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecificQuestionViewController.m; sourceTree = "<group>"; };
+		F58B10951D53CB4200B64183 /* GeneralFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralFeedbackViewController.h; sourceTree = "<group>"; };
+		F58B10961D53CB4200B64183 /* GeneralFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralFeedbackViewController.m; sourceTree = "<group>"; };
+		F58B10981D56175700B64183 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F58B10991D56175700B64183 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,6 +143,7 @@
 		F55E95F51D510CA600EFEAAA = {
 			isa = PBXGroup;
 			children = (
+				F58B109A1D56176100B64183 /* Framework */,
 				F55E96001D510CA600EFEAAA /* NaturiS */,
 				F55E961D1D510CA600EFEAAA /* NaturiSTests */,
 				F55E96281D510CA600EFEAAA /* NaturiSUITests */,
@@ -222,8 +238,24 @@
 				F58B105F1D512F6A00B64183 /* DemoIntroViewController.m */,
 				F58B10881D53B68600B64183 /* LoginViewController.h */,
 				F58B10891D53B68600B64183 /* LoginViewController.m */,
+				F58B108C1D53CA7A00B64183 /* CompetitorAnalysisViewController.h */,
+				F58B108D1D53CA7A00B64183 /* CompetitorAnalysisViewController.m */,
+				F58B108F1D53CA8800B64183 /* OurProductViewController.h */,
+				F58B10901D53CA8800B64183 /* OurProductViewController.m */,
+				F58B10921D53CB3400B64183 /* SpecificQuestionViewController.h */,
+				F58B10931D53CB3400B64183 /* SpecificQuestionViewController.m */,
+				F58B10951D53CB4200B64183 /* GeneralFeedbackViewController.h */,
+				F58B10961D53CB4200B64183 /* GeneralFeedbackViewController.m */,
 			);
 			name = ViewController;
+			sourceTree = "<group>";
+		};
+		F58B109A1D56176100B64183 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				F58B10981D56175700B64183 /* CoreLocation.framework */,
+			);
+			name = Framework;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -358,16 +390,20 @@
 			files = (
 				F55E96091D510CA600EFEAAA /* ViewController.m in Sources */,
 				F58B10721D512FCE00B64183 /* DemoReadyViewController.m in Sources */,
+				F58B108E1D53CA7A00B64183 /* CompetitorAnalysisViewController.m in Sources */,
 				F58B107E1D51301400B64183 /* CongratulationViewController.m in Sources */,
 				F58B10781D512FE900B64183 /* FeedbackIntroViewController.m in Sources */,
+				F58B10971D53CB4200B64183 /* GeneralFeedbackViewController.m in Sources */,
 				F58B107B1D512FF400B64183 /* FeedbackViewController.m in Sources */,
 				F58B106C1D512FB300B64183 /* CollectIntroViewController.m in Sources */,
 				F58B10751D512FD600B64183 /* DemoViewController.m in Sources */,
+				F58B10941D53CB3400B64183 /* SpecificQuestionViewController.m in Sources */,
 				F58B10691D512F9D00B64183 /* ArriveViewController.m in Sources */,
 				F58B10661D512F8F00B64183 /* TravelViewController.m in Sources */,
 				F55E96061D510CA600EFEAAA /* AppDelegate.m in Sources */,
 				F58B10871D51304800B64183 /* NextDemoViewController.m in Sources */,
 				F55E960F1D510CA600EFEAAA /* NaturiS.xcdatamodeld in Sources */,
+				F58B10911D53CA8800B64183 /* OurProductViewController.m in Sources */,
 				F55E96031D510CA600EFEAAA /* main.m in Sources */,
 				F58B10841D51303100B64183 /* LeaveViewController.m in Sources */,
 				F58B106F1D512FBC00B64183 /* CollectViewController.m in Sources */,

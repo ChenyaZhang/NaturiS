@@ -11,6 +11,7 @@
 #import "DemoIntroViewController.h"
 
 @interface LoginViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *loginButton;
 
 @end
 
@@ -18,10 +19,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Add right swipe gesture
-    UISwipeGestureRecognizer *recognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeRecognizer:)];
-    recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.view addGestureRecognizer:recognizerRight];
+    
+    // Add tap gesture
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRecognizer:)];
+    [recognizer setNumberOfTapsRequired:1];
+    [self.loginButton setUserInteractionEnabled:YES];
+    [self.view bringSubviewToFront:self.loginButton];
+    [self.loginButton addGestureRecognizer:recognizer];
+    
     // Add left swipe gesture
     UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeRecognizer:)];
     recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -42,6 +47,12 @@
     UIViewController *view = [[DemoIntroViewController alloc] init];
     view = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
     [self.navigationController showViewController:view sender:self];
+}
+
+- (void)tapRecognizer:(UISwipeGestureRecognizer *)sender {
+    UIViewController *demoIntro = [[DemoIntroViewController alloc] init];
+    demoIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"DemoIntroViewController"];
+    [self.navigationController showViewController:demoIntro sender:self];
 }
 
 /*
