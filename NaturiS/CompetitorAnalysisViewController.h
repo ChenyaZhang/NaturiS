@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CompetitorAnalysisViewController : UIViewController
+@interface CompetitorAnalysisViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F54297D01D5E1467007C6E41 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F54297CF1D5E1467007C6E41 /* QuartzCore.framework */; };
 		F55E96031D510CA600EFEAAA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F55E96021D510CA600EFEAAA /* main.m */; };
 		F55E96061D510CA600EFEAAA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F55E96051D510CA600EFEAAA /* AppDelegate.m */; };
 		F55E96091D510CA600EFEAAA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F55E96081D510CA600EFEAAA /* ViewController.m */; };
@@ -56,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F54297CF1D5E1467007C6E41 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F55E95FE1D510CA600EFEAAA /* NaturiS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NaturiS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F55E96021D510CA600EFEAAA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F55E96041D510CA600EFEAAA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F54297D01D5E1467007C6E41 /* QuartzCore.framework in Frameworks */,
 				F58B10991D56175700B64183 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,6 +146,7 @@
 		F55E95F51D510CA600EFEAAA = {
 			isa = PBXGroup;
 			children = (
+				F54297CF1D5E1467007C6E41 /* QuartzCore.framework */,
 				F58B109A1D56176100B64183 /* Framework */,
 				F55E96001D510CA600EFEAAA /* NaturiS */,
 				F55E961D1D510CA600EFEAAA /* NaturiSTests */,
