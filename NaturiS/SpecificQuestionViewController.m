@@ -24,14 +24,17 @@
     [self.view addGestureRecognizer:recognizerLeft];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 - (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
     UIViewController *feedback = [[FeedbackViewController alloc] init];
     feedback = [self.storyboard instantiateViewControllerWithIdentifier:@"FeedbackViewController"];
     [self.navigationController showViewController:feedback sender:self];
+}
+
+
+#pragma mark - Memory
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
 }
 
 /*

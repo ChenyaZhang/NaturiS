@@ -11,20 +11,117 @@
 
 @interface CompetitorAnalysisViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *submitImageButton;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UITextField *firstObservationTextField;
+@property (weak, nonatomic) IBOutlet UITextField *secondObservationTextField;
+@property (weak, nonatomic) IBOutlet UITextField *thirdObservationTextField;
+@property (weak, nonatomic) IBOutlet UITextField *brandName;
+@property (weak, nonatomic) IBOutlet UITextField *productCategory;
+@property (weak, nonatomic) IBOutlet UIImageView *gift1ImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *gift2ImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *gift3ImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *gift4ImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *gift5ImageView;
 @end
 
 @implementation CompetitorAnalysisViewController {
     NSInteger pressedButtonTagNumber;
+    UITextField *activeTextField;
 }
+
+#pragma mark - ViewDidLoad
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Assign delegate
+    self.firstObservationTextField.delegate = self;
+    self.secondObservationTextField.delegate = self;
+    self.thirdObservationTextField.delegate = self;
+    self.brandName.delegate = self;
+    self.productCategory.delegate = self;
+    
+    // Register keyboard notification
+    [self registerForKeyboardNotifications];
+    
+    // Add stop editing tap gesture
+    UITapGestureRecognizer *tapStopEditingRecognizer = [[UITapGestureRecognizer alloc]
+                                                        initWithTarget:self action:@selector(tapStopEditingRecognizer:)];
+    [self.view addGestureRecognizer: tapStopEditingRecognizer];
+    
+    // Add submit button tap gesture
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRecognizer:)];
+    [recognizer setNumberOfTapsRequired:1];
+    [self.submitImageButton setUserInteractionEnabled:YES];
+    [self.view bringSubviewToFront:self.submitImageButton];
+    [self.submitImageButton addGestureRecognizer:recognizer];
     
     // Add left swipe gesture
     UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeRecognizer:)];
     recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
     [self.view addGestureRecognizer:recognizerLeft];
 }
+
+
+#pragma mark - Keyboard & Scroll
+
+- (void)registerForKeyboardNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+    
+}
+
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification {
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
+    
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    
+    CGRect aPoint = activeTextField.frame;
+    aPoint.origin.y += aPoint.size.height;
+    
+    //    NSLog(@"self.view: %@", NSStringFromCGRect(aRect));
+    //    NSLog(@"self.activeTextField: %@", NSStringFromCGRect(aPoint));
+    
+    if (!CGRectContainsPoint(aRect, aPoint.origin) ) {
+        //        NSLog(@"Hello!");
+        [self.scrollView scrollRectToVisible:activeTextField.frame animated:YES];
+    }
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification {
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    activeTextField = textField;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    activeTextField = nil;
+}
+
+- (void) tapStopEditingRecognizer: (UITapGestureRecognizer *)sender {
+    [[self view] endEditing: YES];
+}
+
+
+#pragma mark - Choose Photo
 
 - (IBAction)choosePhotoButtonPressed:(UIButton *)sender {
     pressedButtonTagNumber = sender.tag;
@@ -110,11 +207,26 @@
     return finalImage;
 }
 
+
+#pragma mark - Gesture
+
+- (void)tapRecognizer:(UISwipeGestureRecognizer *)sender {
+    
+    // Submit Data...
+    
+    UIViewController *collect = [[CollectViewController alloc] init];
+    collect = [self.storyboard instantiateViewControllerWithIdentifier:@"CollectViewController"];
+    [self.navigationController showViewController:collect sender:self];
+}
+
 - (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
     UIViewController *collect = [[CollectViewController alloc] init];
     collect = [self.storyboard instantiateViewControllerWithIdentifier:@"CollectViewController"];
     [self.navigationController showViewController:collect sender:self];
 }
+
+
+#pragma mark - Memory
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

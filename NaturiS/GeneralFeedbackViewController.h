@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GeneralFeedbackViewController : UIViewController
+@interface GeneralFeedbackViewController : UIViewController <UITextViewDelegate>
 
 @end

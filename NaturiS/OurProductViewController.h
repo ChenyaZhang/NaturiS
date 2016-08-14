@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OurProductViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface OurProductViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
 
 @end
