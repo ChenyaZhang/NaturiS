@@ -28,6 +28,9 @@
     BOOL yourCurrentLocationStart;
 }
 
+
+#pragma mark - View Did Load
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -62,6 +65,9 @@
     [self.view addGestureRecognizer:recognizerLeft];
 }
 
+
+#pragma mark - Current Time Function
+
 - (void) startCurrentTimeTimer {
     yourCurrentTimeTimer = [NSTimer scheduledTimerWithTimeInterval: 1.0
                                                             target: self
@@ -70,6 +76,18 @@
     [yourCurrentTimeTimer fire];
     yourCurrentTimeStart = TRUE;
 }
+
+- (void)updateYourCurrentTime: (NSTimer *)timer {
+    NSDate *currentTime = [NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
+    _yourCurrentTime.numberOfLines = 2;
+    _yourCurrentTime.textAlignment = NSTextAlignmentCenter;
+    _yourCurrentTime.text = [NSString stringWithFormat:@"Your Current Time:\n %@", [formatter stringFromDate:currentTime]];
+}
+
+
+#pragma mark - Current Location Function
 
 - (void) startCurrentLocationUpdate {
     // Initialize location manager
@@ -90,14 +108,20 @@
     geocoder = [[CLGeocoder alloc] init];
 }
 
+
 #pragma mark - CLLocationManagerDelegate
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     NSLog(@"didFailWithError: %@", error);
-    UIAlertView *errorAlert = [[UIAlertView alloc]
-                               initWithTitle:@"Error" message:@"Failed to Get Your Location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [errorAlert show];
+    
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:@"Failed to Get Your Location" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    }]];
+    
+    // Present action sheet.
+    [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
@@ -127,20 +151,17 @@
     } ];
 }
 
-- (void)updateYourCurrentTime: (NSTimer *)timer {
-    NSDate *currentTime = [NSDate date];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
-    _yourCurrentTime.numberOfLines = 2;
-    _yourCurrentTime.textAlignment = NSTextAlignmentCenter;
-    _yourCurrentTime.text = [NSString stringWithFormat:@"Your Current Time:\n %@", [formatter stringFromDate:currentTime]];
-}
+
+#pragma mark - Gesture
 
 - (void)currentTimeTapRecognizer:(UITapGestureRecognizer *)sender {
     if (yourCurrentTimeStart) {
         [yourCurrentTimeTimer invalidate];
         yourCurrentTimeTimer = nil;
         yourCurrentTimeStart = FALSE;
+        
+        // Submit/Resubmit data...
+        
     } else {
         [self startCurrentTimeTimer];
     }
@@ -151,22 +172,48 @@
         [locationManager stopUpdatingLocation];
         locationManager = nil;
         yourCurrentLocationStart = FALSE;
+        
+        // Submit/Resubmit data...
+        
     } else {
         [self startCurrentLocationUpdate];
     }
 }
 
 - (void)rightSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
+    
+    // Check data submission...
+    
+    // Stop time & location update
+    [yourCurrentTimeTimer invalidate];
+    yourCurrentTimeTimer = nil;
+    yourCurrentTimeStart = FALSE;
+    [locationManager stopUpdatingLocation];
+    locationManager = nil;
+    yourCurrentLocationStart = FALSE;
+    
     UIViewController *arrive = [[ArriveViewController alloc] init];
     arrive = [self.storyboard instantiateViewControllerWithIdentifier:@"ArriveViewController"];
     [self.navigationController showViewController:arrive sender:self];
 }
 
 - (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
+    
+    // Stop time & location update
+    [yourCurrentTimeTimer invalidate];
+    yourCurrentTimeTimer = nil;
+    yourCurrentTimeStart = FALSE;
+    [locationManager stopUpdatingLocation];
+    locationManager = nil;
+    yourCurrentLocationStart = FALSE;
+    
     UIViewController *travelIntro = [[TravelIntroViewController alloc] init];
     travelIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"TravelIntroViewController"];
     [self.navigationController showViewController:travelIntro sender:self];
 }
+
+
+#pragma mark - Memory
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

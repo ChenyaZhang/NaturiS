@@ -50,7 +50,7 @@
     [self.view addGestureRecognizer: tapStopEditingRecognizer];
     
     // Add submit button tap gesture
-    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRecognizer:)];
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapSubmitDataRecognizer:)];
     [recognizer setNumberOfTapsRequired:1];
     [self.submitImageButton setUserInteractionEnabled:YES];
     [self.view bringSubviewToFront:self.submitImageButton];
@@ -114,10 +114,6 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     activeTextField = nil;
-}
-
-- (void) tapStopEditingRecognizer: (UITapGestureRecognizer *)sender {
-    [[self view] endEditing: YES];
 }
 
 
@@ -210,13 +206,17 @@
 
 #pragma mark - Gesture
 
-- (void)tapRecognizer:(UISwipeGestureRecognizer *)sender {
+- (void)tapSubmitDataRecognizer:(UISwipeGestureRecognizer *)sender {
     
     // Submit Data...
     
     UIViewController *collect = [[CollectViewController alloc] init];
     collect = [self.storyboard instantiateViewControllerWithIdentifier:@"CollectViewController"];
     [self.navigationController showViewController:collect sender:self];
+}
+
+- (void) tapStopEditingRecognizer: (UITapGestureRecognizer *)sender {
+    [[self view] endEditing: YES];
 }
 
 - (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {

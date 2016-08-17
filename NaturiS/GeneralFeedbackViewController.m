@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextView *problemSolutionTextView;
 @property (weak, nonatomic) IBOutlet UITextView *customerFeedbackTextView;
+@property (weak, nonatomic) IBOutlet UIImageView *submitButtonImage;
 
 @end
 
@@ -44,10 +45,17 @@
     recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
     [self.view addGestureRecognizer:recognizerLeft];
     
-    // Add tap gesture
+    // Add stop editing tap gesture
     UITapGestureRecognizer *tapStopEditingRecognizer = [[UITapGestureRecognizer alloc]
                                                         initWithTarget:self action:@selector(tapStopEditingRecognizer:)];
     [self.view addGestureRecognizer: tapStopEditingRecognizer];
+    
+    // Add submit button tap gesture
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapSubmitDataRecognizer:)];
+    [recognizer setNumberOfTapsRequired:1];
+    [self.submitButtonImage setUserInteractionEnabled:YES];
+    [self.view bringSubviewToFront:self.submitButtonImage];
+    [self.submitButtonImage addGestureRecognizer:recognizer];
 }
 
 
@@ -120,6 +128,15 @@
 
 - (void) tapStopEditingRecognizer: (UITapGestureRecognizer *)sender {
     [[self view] endEditing: YES];
+}
+
+- (void)tapSubmitDataRecognizer:(UISwipeGestureRecognizer *)sender {
+    
+    // Submit Data...
+    
+    UIViewController *feedback = [[FeedbackViewController alloc] init];
+    feedback = [self.storyboard instantiateViewControllerWithIdentifier:@"FeedbackViewController"];
+    [self.navigationController showViewController:feedback sender:self];
 }
 
 - (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {

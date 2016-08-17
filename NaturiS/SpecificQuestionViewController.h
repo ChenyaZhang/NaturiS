@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SpecificQuestionViewController : UIViewController <UITextViewDelegate>
+@interface SpecificQuestionViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
 
 @end

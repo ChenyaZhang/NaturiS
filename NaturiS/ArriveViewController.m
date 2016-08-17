@@ -27,6 +27,9 @@
     BOOL yourArrivingLocationStart;
 }
 
+
+#pragma mark - View Did Load
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -61,6 +64,9 @@
     [self.view addGestureRecognizer:recognizerLeft];
 }
 
+
+#pragma mark - Arriving Time Function
+
 - (void) startArrivingTimeTimer {
     yourArrivingTimeTimer = [NSTimer scheduledTimerWithTimeInterval: 1.0
                                                             target: self
@@ -69,6 +75,18 @@
     [yourArrivingTimeTimer fire];
     yourArrivingTimeStart = TRUE;
 }
+
+- (void)updateYourArrivingTime: (NSTimer *)timer {
+    NSDate *currentTime = [NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
+    _yourArrivingTime.numberOfLines = 2;
+    _yourArrivingTime.textAlignment = NSTextAlignmentCenter;
+    _yourArrivingTime.text = [NSString stringWithFormat:@"Your Arriving Time:\n %@", [formatter stringFromDate:currentTime]];
+}
+
+
+#pragma mark - Arriving Location Function
 
 - (void) startArrivingLocationUpdate {
     // Initialize location manager
@@ -89,14 +107,20 @@
     geocoder = [[CLGeocoder alloc] init];
 }
 
+
 #pragma mark - CLLocationManagerDelegate
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     NSLog(@"didFailWithError: %@", error);
-    UIAlertView *errorAlert = [[UIAlertView alloc]
-                               initWithTitle:@"Error" message:@"Failed to Get Your Location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [errorAlert show];
+    
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:@"Failed to Get Your Location" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    }]];
+    
+    // Present action sheet.
+    [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
@@ -126,14 +150,8 @@
     } ];
 }
 
-- (void)updateYourArrivingTime: (NSTimer *)timer {
-    NSDate *currentTime = [NSDate date];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
-    _yourArrivingTime.numberOfLines = 2;
-    _yourArrivingTime.textAlignment = NSTextAlignmentCenter;
-    _yourArrivingTime.text = [NSString stringWithFormat:@"Your Arriving Time:\n %@", [formatter stringFromDate:currentTime]];
-}
+
+#pragma mark - Gesture
 
 - (void)arrivingTimeTapRecognizer:(UITapGestureRecognizer *)sender {
     if (yourArrivingTimeStart) {
@@ -156,16 +174,39 @@
 }
 
 - (void)rightSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
+    
+    // Check data submission...
+    
+    // Stop time & location update
+    [yourArrivingTimeTimer invalidate];
+    yourArrivingTimeTimer = nil;
+    yourArrivingTimeStart = FALSE;
+    [locationManager stopUpdatingLocation];
+    locationManager = nil;
+    yourArrivingLocationStart = FALSE;
+    
     UIViewController *collectIntro = [[CollectIntroViewController alloc] init];
     collectIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"CollectIntroViewController"];
     [self.navigationController showViewController:collectIntro sender:self];
 }
 
 - (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
+    
+    // Stop time & location update
+    [yourArrivingTimeTimer invalidate];
+    yourArrivingTimeTimer = nil;
+    yourArrivingTimeStart = FALSE;
+    [locationManager stopUpdatingLocation];
+    locationManager = nil;
+    yourArrivingLocationStart = FALSE;
+    
     UIViewController *travel = [[TravelViewController alloc] init];
     travel = [self.storyboard instantiateViewControllerWithIdentifier:@"TravelViewController"];
     [self.navigationController showViewController:travel sender:self];
 }
+
+
+#pragma mark - Memory
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

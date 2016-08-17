@@ -43,7 +43,7 @@
     [self.view addGestureRecognizer: tapStopEditingRecognizer];
     
     // Add login button tap gesture
-    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRecognizer:)];
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapSubmitDataRecognizer:)];
     [recognizer setNumberOfTapsRequired:1];
     [self.loginButton setUserInteractionEnabled:YES];
     [self.view bringSubviewToFront:self.loginButton];
@@ -109,12 +109,18 @@
     activeTextField = nil;
 }
 
+
+#pragma mark - Gesture
+
+- (void)tapSubmitDataRecognizer:(UISwipeGestureRecognizer *)sender {
+    UIViewController *demoIntro = [[DemoIntroViewController alloc] init];
+    demoIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"DemoIntroViewController"];
+    [self.navigationController showViewController:demoIntro sender:self];
+}
+
 - (void) tapStopEditingRecognizer: (UITapGestureRecognizer *)sender {
     [[self view] endEditing: YES];
 }
-
-
-#pragma mark - Gesture
 
 - (void)rightSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
     UIViewController *demoIntro = [[DemoIntroViewController alloc] init];
@@ -126,12 +132,6 @@
     UIViewController *view = [[DemoIntroViewController alloc] init];
     view = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
     [self.navigationController showViewController:view sender:self];
-}
-
-- (void)tapRecognizer:(UISwipeGestureRecognizer *)sender {
-    UIViewController *demoIntro = [[DemoIntroViewController alloc] init];
-    demoIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"DemoIntroViewController"];
-    [self.navigationController showViewController:demoIntro sender:self];
 }
 
 
