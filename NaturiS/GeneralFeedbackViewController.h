@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface GeneralFeedbackViewController : UIViewController <UITextViewDelegate>
-
+@property (strong, nonatomic) NSString *userName;
 @end

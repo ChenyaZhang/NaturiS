@@ -26,6 +26,7 @@
     CLPlacemark *placemark;
     BOOL yourCurrentTimeStart;
     BOOL yourCurrentLocationStart;
+    NSString *nextDemo;
 }
 
 
@@ -39,6 +40,9 @@
     
     // Start location update
     [self startCurrentLocationUpdate];
+    
+    // Get Next Demo Info
+    [self getNextDemoInfo];
     
     // Add tap gesture for Your Current Time
     UITapGestureRecognizer *currentTimeTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(currentTimeTapRecognizer:)];
@@ -58,11 +62,6 @@
     UISwipeGestureRecognizer *recognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeRecognizer:)];
     recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:recognizerRight];
-    
-    // Add left swipe gesture
-    UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeRecognizer:)];
-    recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.view addGestureRecognizer:recognizerLeft];
 }
 
 
@@ -143,7 +142,7 @@
             _yourCurrentLocation.numberOfLines = 0;
             _yourCurrentLocation.textAlignment = NSTextAlignmentCenter;
             [self.yourCurrentLocation sizeToFit];
-            _yourCurrentLocation.text = [NSString stringWithFormat:@"Your Current Address:\n %@ %@\n%@ %@",
+            _yourCurrentLocation.text = [NSString stringWithFormat:@"Your Current Address:\n %@\n%@\n%@\n%@",
                                          placemark.subThoroughfare, placemark.thoroughfare, placemark.locality, placemark.postalCode];
         } else {
             NSLog(@"%@", error.debugDescription);
@@ -152,23 +151,121 @@
 }
 
 
+#pragma mark - Get Next Demo
+
+- (void)getNextDemoInfo {
+    NSString *dataURL = [NSString stringWithFormat: @"http://localhost:8080/api/users/userName/%@", _userName];
+    
+    // NSURLSession
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:dataURL]];
+    [request setHTTPMethod:@"GET"];
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+        if (data != nil) {
+            // Convert the returned data into a dictionary.
+            NSError *error;
+            NSMutableDictionary *returnedDict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+            
+            // Check if no returnedDict
+            if (returnedDict == NULL) {
+                NSLog(@"No user info found!");
+                // Check error
+            } else if (error != nil) {
+                NSLog(@"%@", [error localizedDescription]);
+                // No error
+            } else {
+                // If no error occurs, check the HTTP status code.
+                NSInteger HTTPStatusCode = [(NSHTTPURLResponse *)response statusCode];
+                // If it's other than 200, then show it on the console.
+                if (HTTPStatusCode != 200) {
+                    NSLog(@"HTTP status code = %ld", (long)HTTPStatusCode);
+                }
+                
+                nextDemo = [returnedDict valueForKey:@"nextDemo"];
+            }
+        }
+    }] resume];
+}
+
+
 #pragma mark - Gesture
 
 - (void)currentTimeTapRecognizer:(UITapGestureRecognizer *)sender {
+    
     if (yourCurrentTimeStart) {
-        [yourCurrentTimeTimer invalidate];
-        yourCurrentTimeTimer = nil;
-        yourCurrentTimeStart = FALSE;
+        
+        // NSURLSession Submit/Resubmit data
+        if (self.yourCurrentTime.text != NULL) {
+            NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+            
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/userName/%@", self.userName]];
+            NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
+            // "Put" method
+            [urlRequest setHTTPMethod:@"PUT"];
+            [urlRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+            
+            NSString *params = [NSString stringWithFormat:@"leaveTime=%@", self.yourCurrentTime.text];
+            [urlRequest setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
+            
+            [[session dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                NSLog(@"Response:%@ %@\n", response, error);
+                
+                if (error == nil) {
+                    NSLog(@"Stop your current time timer. No error.");
+                    // Stop your current time timer
+                    [yourCurrentTimeTimer invalidate];
+                    yourCurrentTimeTimer = nil;
+                    yourCurrentTimeStart = FALSE;
+                } else {
+                    NSLog(@"Error: %@", [error localizedDescription]);
+                }
+                
+            }] resume];
+        }
+        
     } else {
         [self startCurrentTimeTimer];
     }
 }
 
 - (void)currentLocationTapRecognizer:(UITapGestureRecognizer *)sender {
+    
     if (yourCurrentLocationStart) {
-        [locationManager stopUpdatingLocation];
-        locationManager = nil;
-        yourCurrentLocationStart = FALSE;
+        
+        // NSURLSession Submit/Resubmit data
+        if (self.yourCurrentLocation.text != NULL) {
+            
+            NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+            
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/userName/%@", self.userName]];
+            NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
+            // "Put" method
+            [urlRequest setHTTPMethod:@"PUT"];
+            [urlRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+            NSString *params = [NSString stringWithFormat:@"leaveLocation=%@", self.yourCurrentLocation.text];
+            [urlRequest setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
+            
+            [[session dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                NSLog(@"Response:%@ %@\n", response, error);
+                
+                if (error == nil) {
+                    NSLog(@"Stop your current location. No error.");
+                    // Stop your current location
+                    [locationManager stopUpdatingLocation];
+                    locationManager = nil;
+                    yourCurrentLocationStart = FALSE;
+                } else {
+                    NSLog(@"Error: %@", [error localizedDescription]);
+                }
+                
+            }] resume];
+            
+        }
     } else {
         [self startCurrentLocationUpdate];
     }
@@ -176,34 +273,20 @@
 
 - (void)rightSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
     
-    // Check data submission...
-    
-    // Stop time & location update
-    [yourCurrentTimeTimer invalidate];
-    yourCurrentTimeTimer = nil;
-    yourCurrentTimeStart = FALSE;
-    [locationManager stopUpdatingLocation];
-    locationManager = nil;
-    yourCurrentLocationStart = FALSE;
-    
-    UIViewController *nextDemo = [[NextDemoViewController alloc] init];
-    nextDemo = [self.storyboard instantiateViewControllerWithIdentifier:@"NextDemoViewController"];
-    [self.navigationController showViewController:nextDemo sender:self];
-}
-
-- (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    
-    // Stop time & location update
-    [yourCurrentTimeTimer invalidate];
-    yourCurrentTimeTimer = nil;
-    yourCurrentTimeStart = FALSE;
-    [locationManager stopUpdatingLocation];
-    locationManager = nil;
-    yourCurrentLocationStart = FALSE;
-    
-    UIViewController *leaveIntro = [[LeaveIntroViewController alloc] init];
-    leaveIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"LeaveIntroViewController"];
-    [self.navigationController showViewController:leaveIntro sender:self];
+    if (yourCurrentTimeStart == FALSE && yourCurrentLocationStart == FALSE) {
+        
+        if (self.yourCurrentTime.text != NULL && self.yourCurrentLocation.text != NULL) {
+            
+            NextDemoViewController *nextDemoVC = [[NextDemoViewController alloc] init];
+            nextDemoVC = [self.storyboard instantiateViewControllerWithIdentifier:@"NextDemoViewController"];
+            
+            nextDemoVC.userName = _userName;
+            nextDemoVC.nextDemo = nextDemo;
+            
+            [self.navigationController showViewController:nextDemoVC sender:self];
+        }
+        
+    }
 }
 
 
@@ -213,14 +296,5 @@
     [super didReceiveMemoryWarning];
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

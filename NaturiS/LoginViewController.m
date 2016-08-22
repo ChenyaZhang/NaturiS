@@ -9,6 +9,8 @@
 #import "LoginViewController.h"
 #import "ViewController.h"
 #import "DemoIntroViewController.h"
+#import "NextDemoViewController.h"
+#include <CommonCrypto/CommonDigest.h>
 
 @interface LoginViewController ()
 
@@ -21,8 +23,12 @@
 @end
 
 @implementation LoginViewController {
-        UITextField *activeTextField;
-    }
+    UITextField *activeTextField;
+    NSString *dataURL;
+    NSString *passwordStoredInDatabase;
+    NSString *currentDemo;
+    NSString *userName;
+}
 
 
 #pragma mark - View Did Load
@@ -85,11 +91,11 @@
     CGRect aPoint = activeTextField.frame;
     aPoint.origin.y += aPoint.size.height;
     
-//    NSLog(@"self.view: %@", NSStringFromCGRect(aRect));
-//    NSLog(@"self.activeTextField: %@", NSStringFromCGRect(aPoint));
+    //    NSLog(@"self.view: %@", NSStringFromCGRect(aRect));
+    //    NSLog(@"self.activeTextField: %@", NSStringFromCGRect(aPoint));
     
     if (!CGRectContainsPoint(aRect, aPoint.origin) ) {
-//        NSLog(@"Hello!");
+        //        NSLog(@"Hello!");
         [self.scrollView scrollRectToVisible:activeTextField.frame animated:YES];
     }
 }
@@ -110,26 +116,102 @@
 }
 
 
+#pragma mark - Password Hash
+
+- (NSString *) createSHA512:(NSString *)source {
+    
+    const char *s = [source cStringUsingEncoding:NSASCIIStringEncoding];
+    NSData *keyData = [NSData dataWithBytes:s length:strlen(s)];
+    
+    uint8_t digest[CC_SHA512_DIGEST_LENGTH] = {0};
+    CC_SHA512(keyData.bytes, (int)keyData.length, digest);
+    
+    NSData *out = [NSData dataWithBytes:digest length:CC_SHA512_DIGEST_LENGTH];
+    
+    // NSLog(@"Password Hash: %@", [out description]);
+    return [out description];
+}
+
+
 #pragma mark - Gesture
 
 - (void)tapSubmitDataRecognizer:(UISwipeGestureRecognizer *)sender {
-    UIViewController *demoIntro = [[DemoIntroViewController alloc] init];
-    demoIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"DemoIntroViewController"];
-    [self.navigationController showViewController:demoIntro sender:self];
+    
+    if (_userNameOrEmailTextField.text != NULL) {
+        
+        if ([_userNameOrEmailTextField.text rangeOfString:@"@"].location == NSNotFound) {
+            dataURL = [NSString stringWithFormat: @"http://localhost:8080/api/users/userName/%@", _userNameOrEmailTextField.text];
+        } else {
+            dataURL = [NSString stringWithFormat: @"http://localhost:8080/api/users/email/%@", _userNameOrEmailTextField.text];
+        }
+        
+        // NSURLSession
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:[NSURL URLWithString:dataURL]];
+        [request setHTTPMethod:@"GET"];
+        
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+        [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            
+            if (data != nil) {
+                // Convert the returned data into a dictionary.
+                NSError *error;
+                NSMutableDictionary *returnedDict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                
+                // Check if no returnedDict
+                if (returnedDict == NULL) {
+                    // UI update must be in mainQueue
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        self.loginButton.image = [UIImage imageNamed:@"WrongUser"];
+                    }];
+                    // Check error
+                } else if (error != nil) {
+                    NSLog(@"%@", [error localizedDescription]);
+                    // UI update must be in mainQueue
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        self.loginButton.image = [UIImage imageNamed:@"WrongUser"];
+                    }];
+                    // No error
+                } else {
+                    // If no error occurs, check the HTTP status code.
+                    NSInteger HTTPStatusCode = [(NSHTTPURLResponse *)response statusCode];
+                    // If it's other than 200, then show it on the console.
+                    if (HTTPStatusCode != 200) {
+                        NSLog(@"HTTP status code = %ld", (long)HTTPStatusCode);
+                    }
+                    
+                    userName = [returnedDict valueForKey:@"userName"];
+                    passwordStoredInDatabase = [returnedDict valueForKey:@"password"];
+                    currentDemo = [returnedDict valueForKey:@"currentDemo"];
+                    
+                    // UI update must be in mainQueue
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        if ([passwordStoredInDatabase isEqualToString:[self createSHA512:self.passwordTextField.text]]) {
+                            
+                            DemoIntroViewController *demoIntro = [[DemoIntroViewController alloc] init];
+                            demoIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"DemoIntroViewController"];
+                            // "Prepare for segue"
+                            demoIntro.currentDemo = currentDemo;
+                            demoIntro.userName = userName;
+                            
+                            [self.navigationController showViewController:demoIntro sender:self];
+                            
+                        } else {
+                            self.loginButton.image = [UIImage imageNamed:@"WrongUser"];
+                        }
+                    }];
+                }
+            }
+        }] resume];
+    }
 }
 
 - (void) tapStopEditingRecognizer: (UITapGestureRecognizer *)sender {
     [[self view] endEditing: YES];
 }
 
-- (void)rightSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    UIViewController *demoIntro = [[DemoIntroViewController alloc] init];
-    demoIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"DemoIntroViewController"];
-    [self.navigationController showViewController:demoIntro sender:self];
-}
-
 - (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    UIViewController *view = [[DemoIntroViewController alloc] init];
+    UIViewController *view = [[ViewController alloc] init];
     view = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
     [self.navigationController showViewController:view sender:self];
 }
@@ -141,14 +223,5 @@
     [super didReceiveMemoryWarning];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

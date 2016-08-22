@@ -33,25 +33,34 @@
 }
 
 - (void)rightSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    UIViewController *travel = [[TravelViewController alloc] init];
+    TravelViewController *travel = [[TravelViewController alloc] init];
     travel = [self.storyboard instantiateViewControllerWithIdentifier:@"TravelViewController"];
+    
+    travel.userName = _userName;
+    
     [self.navigationController showViewController:travel sender:self];
 }
 
 - (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    UIViewController *demoIntro = [[DemoIntroViewController alloc] init];
-    demoIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"DemoIntroViewController"];
-    [self.navigationController showViewController:demoIntro sender:self];
+    if (_currentDemo != NULL) {
+        DemoIntroViewController *demoIntro = [[DemoIntroViewController alloc] init];
+        demoIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"DemoIntroViewController"];
+        
+        demoIntro.userName = _userName;
+        demoIntro.currentDemo = _currentDemo;
+        
+        [self.navigationController showViewController:demoIntro sender:self];
+    }
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

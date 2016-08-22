@@ -40,11 +40,6 @@
     UISwipeGestureRecognizer *recognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeRecognizer:)];
     recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:recognizerRight];
-    
-    // Add left swipe gesture
-    UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeRecognizer:)];
-    recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.view addGestureRecognizer:recognizerLeft];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,28 +47,34 @@
 }
 
 - (void)tapRecognizerForCompetitorAnalysis:(UISwipeGestureRecognizer *)sender {
-    UIViewController *competitor = [[CompetitorAnalysisViewController alloc] init];
+    CompetitorAnalysisViewController *competitor = [[CompetitorAnalysisViewController alloc] init];
     competitor = [self.storyboard instantiateViewControllerWithIdentifier:@"CompetitorAnalysisViewController"];
+    
+    competitor.userName = _userName;
+    
     [self.navigationController showViewController:competitor sender:self];
 }
 
 - (void)tapRecognizerForOurProductAnalysis:(UISwipeGestureRecognizer *)sender {
-    UIViewController *ourProduct = [[OurProductViewController alloc] init];
+    OurProductViewController *ourProduct = [[OurProductViewController alloc] init];
     ourProduct = [self.storyboard instantiateViewControllerWithIdentifier:@"OurProductViewController"];
+    
+    ourProduct.userName = _userName;
+    
     [self.navigationController showViewController:ourProduct sender:self];
 }
 
 - (void)rightSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    UIViewController *demoReady = [[DemoReadyViewController alloc] init];
+    // Check data submission
+    
+    DemoReadyViewController *demoReady = [[DemoReadyViewController alloc] init];
     demoReady = [self.storyboard instantiateViewControllerWithIdentifier:@"DemoReadyViewController"];
+    
+    demoReady.userName = _userName;
+    
     [self.navigationController showViewController:demoReady sender:self];
 }
 
-- (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    UIViewController *collectIntro = [[CollectIntroViewController alloc] init];
-    collectIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"CollectIntroViewController"];
-    [self.navigationController showViewController:collectIntro sender:self];
-}
 
 /*
 #pragma mark - Navigation

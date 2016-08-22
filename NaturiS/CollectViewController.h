@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CollectViewController : UIViewController
-
+@property (strong, nonatomic) NSString *userName;
 @end

@@ -206,22 +206,23 @@
 
 #pragma mark - Gesture
 
-- (void)tapSubmitDataRecognizer:(UISwipeGestureRecognizer *)sender {
-    
-    // Submit Data...
-    
-    UIViewController *feedback = [[FeedbackViewController alloc] init];
-    feedback = [self.storyboard instantiateViewControllerWithIdentifier:@"FeedbackViewController"];
-    [self.navigationController showViewController:feedback sender:self];
-}
-
 - (void) tapStopEditingRecognizer: (UITapGestureRecognizer *)sender {
     [[self view] endEditing: YES];
 }
 
+- (void)tapSubmitDataRecognizer:(UISwipeGestureRecognizer *)sender {
+    
+    // Submit Data...
+    
+    [self leftSwipeRecognizer:sender];
+}
+
 - (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    UIViewController *feedback = [[FeedbackViewController alloc] init];
+    FeedbackViewController *feedback = [[FeedbackViewController alloc] init];
     feedback = [self.storyboard instantiateViewControllerWithIdentifier:@"FeedbackViewController"];
+    
+    feedback.userName = _userName;
+    
     [self.navigationController showViewController:feedback sender:self];
 }
 

@@ -134,14 +134,15 @@
     
     // Submit Data...
     
-    UIViewController *feedback = [[FeedbackViewController alloc] init];
-    feedback = [self.storyboard instantiateViewControllerWithIdentifier:@"FeedbackViewController"];
-    [self.navigationController showViewController:feedback sender:self];
+    [self leftSwipeRecognizer:sender];
 }
 
 - (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    UIViewController *feedback = [[FeedbackViewController alloc] init];
+    FeedbackViewController *feedback = [[FeedbackViewController alloc] init];
     feedback = [self.storyboard instantiateViewControllerWithIdentifier:@"FeedbackViewController"];
+    
+    feedback.userName = _userName;
+    
     [self.navigationController showViewController:feedback sender:self];
 }
 

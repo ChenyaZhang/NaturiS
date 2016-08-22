@@ -10,5 +10,5 @@
 #import <CoreLocation/CoreLocation.h>
 
 @interface LeaveViewController : UIViewController <CLLocationManagerDelegate>
-
+@property (strong, nonatomic) NSString *userName;
 @end

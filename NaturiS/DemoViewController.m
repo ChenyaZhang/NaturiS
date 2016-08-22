@@ -18,17 +18,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Add tap gesture
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRecognizer:)];
     [recognizer setNumberOfTapsRequired:1];
     [self.buttonImage setUserInteractionEnabled:YES];
     [self.view bringSubviewToFront:self.buttonImage];
     [self.buttonImage addGestureRecognizer:recognizer];
-    
-    // Add left swipe gesture
-    UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeRecognizer:)];
-    recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.view addGestureRecognizer:recognizerLeft];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,15 +32,12 @@
 }
 
 - (void)tapRecognizer:(UISwipeGestureRecognizer *)sender {
-    UIViewController *feedbackIntro = [[FeedbackIntroViewController alloc] init];
+    FeedbackIntroViewController *feedbackIntro = [[FeedbackIntroViewController alloc] init];
     feedbackIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"FeedbackIntroViewController"];
+    
+    feedbackIntro.userName = _userName;
+    
     [self.navigationController showViewController:feedbackIntro sender:self];
-}
-
-- (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    UIViewController *demoReady = [[DemoReadyViewController alloc] init];
-    demoReady = [self.storyboard instantiateViewControllerWithIdentifier:@"DemoReadyViewController"];
-    [self.navigationController showViewController:demoReady sender:self];
 }
 
 /*

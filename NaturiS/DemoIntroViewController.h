@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface DemoIntroViewController : UIViewController
-
+@property (strong, nonatomic) NSString *currentDemo;
+@property (strong, nonatomic) NSString *userName;
 @end

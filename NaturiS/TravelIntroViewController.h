@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface TravelIntroViewController : UIViewController
-
+@property (strong, nonatomic) NSString *userName;
+@property (strong, nonatomic) NSString *currentDemo;
 @end

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface OurProductViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
-
+@property (strong, nonatomic) NSString *userName;
 @end

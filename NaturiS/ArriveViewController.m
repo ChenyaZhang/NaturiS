@@ -57,11 +57,6 @@
     UISwipeGestureRecognizer *recognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeRecognizer:)];
     recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:recognizerRight];
-    
-    // Add left swipe gesture
-    UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeRecognizer:)];
-    recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.view addGestureRecognizer:recognizerLeft];
 }
 
 
@@ -142,7 +137,7 @@
             _yourArrivingLocation.numberOfLines = 0;
             _yourArrivingLocation.textAlignment = NSTextAlignmentCenter;
             [self.yourArrivingLocation sizeToFit];
-            _yourArrivingLocation.text = [NSString stringWithFormat:@"Your Arriving Address:\n %@ %@\n%@ %@",
+            _yourArrivingLocation.text = [NSString stringWithFormat:@"Your Arriving Address:\n %@\n%@\n%@\n%@",
                                          placemark.subThoroughfare, placemark.thoroughfare, placemark.locality, placemark.postalCode];
         } else {
             NSLog(@"%@", error.debugDescription);
@@ -155,19 +150,75 @@
 
 - (void)arrivingTimeTapRecognizer:(UITapGestureRecognizer *)sender {
     if (yourArrivingTimeStart) {
-        [yourArrivingTimeTimer invalidate];
-        yourArrivingTimeTimer = nil;
-        yourArrivingTimeStart = FALSE;
+        // NSURLSession Submit/Resubmit data
+        if (self.yourArrivingTime.text != NULL) {
+            
+            NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+            
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/userName/%@", self.userName]];
+            NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
+            // "Put" method
+            [urlRequest setHTTPMethod:@"PUT"];
+            [urlRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+            NSString *params = [NSString stringWithFormat:@"arriveTime=%@", self.yourArrivingTime.text];
+            [urlRequest setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
+            
+            [[session dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                NSLog(@"Response:%@ %@\n", response, error);
+                
+                if (error == nil) {
+                    NSLog(@"Stop your arrive time timer. No error.");
+                    // Stop your current time timer
+                    [yourArrivingTimeTimer invalidate];
+                    yourArrivingTimeTimer = nil;
+                    yourArrivingTimeStart = FALSE;
+                } else {
+                    NSLog(@"Error: %@", [error localizedDescription]);
+                }
+                
+            }] resume];
+        }
+        
     } else {
         [self startArrivingTimeTimer];
     }
 }
 
 - (void)arrivingLocationTapRecognizer:(UITapGestureRecognizer *)sender {
+    
     if (yourArrivingLocationStart) {
-        [locationManager stopUpdatingLocation];
-        locationManager = nil;
-        yourArrivingLocationStart = FALSE;
+        
+        // NSURLSession Submit/Resubmit data
+        if (self.yourArrivingLocation.text != NULL) {
+            
+            NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+            
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/userName/%@", self.userName]];
+            NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
+            // "Put" method
+            [urlRequest setHTTPMethod:@"PUT"];
+            [urlRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+            NSString *params = [NSString stringWithFormat:@"arriveLocation=%@", self.yourArrivingLocation.text];
+            [urlRequest setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
+            
+            [[session dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                NSLog(@"Response:%@ %@\n", response, error);
+                
+                if (error == nil) {
+                    NSLog(@"Stop your current location. No error.");
+                    // Stop your current location
+                    [locationManager stopUpdatingLocation];
+                    locationManager = nil;
+                    yourArrivingLocationStart = FALSE;
+                } else {
+                    NSLog(@"Error: %@", [error localizedDescription]);
+                }
+                
+            }] resume];
+            
+        }
     } else {
         [self startArrivingLocationUpdate];
     }
@@ -175,34 +226,19 @@
 
 - (void)rightSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
     
-    // Check data submission...
-    
-    // Stop time & location update
-    [yourArrivingTimeTimer invalidate];
-    yourArrivingTimeTimer = nil;
-    yourArrivingTimeStart = FALSE;
-    [locationManager stopUpdatingLocation];
-    locationManager = nil;
-    yourArrivingLocationStart = FALSE;
-    
-    UIViewController *collectIntro = [[CollectIntroViewController alloc] init];
-    collectIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"CollectIntroViewController"];
-    [self.navigationController showViewController:collectIntro sender:self];
-}
-
-- (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    
-    // Stop time & location update
-    [yourArrivingTimeTimer invalidate];
-    yourArrivingTimeTimer = nil;
-    yourArrivingTimeStart = FALSE;
-    [locationManager stopUpdatingLocation];
-    locationManager = nil;
-    yourArrivingLocationStart = FALSE;
-    
-    UIViewController *travel = [[TravelViewController alloc] init];
-    travel = [self.storyboard instantiateViewControllerWithIdentifier:@"TravelViewController"];
-    [self.navigationController showViewController:travel sender:self];
+    if (yourArrivingTimeStart == FALSE && yourArrivingLocationStart == FALSE) {
+        
+        if (self.yourArrivingTime.text != NULL && self.yourArrivingLocation.text != NULL) {
+            
+            CollectIntroViewController *collectIntro = [[CollectIntroViewController alloc] init];
+            collectIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"CollectIntroViewController"];
+            
+            collectIntro.userName = _userName;
+            
+            [self.navigationController showViewController:collectIntro sender:self];
+        }
+        
+    }
 }
 
 

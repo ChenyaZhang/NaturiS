@@ -12,12 +12,26 @@
 
 @interface DemoIntroViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *buttonImage;
+@property (weak, nonatomic) IBOutlet UILabel *yourUpcomingDemo;
 @end
 
 @implementation DemoIntroViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // From "Prepare for segue"
+    // Parse NSString
+    NSArray *components = [self.currentDemo componentsSeparatedByString: @","];
+    NSString *time = (NSString*) [components objectAtIndex:0];
+    NSString *addressLine1 = (NSString*) [components objectAtIndex:1];
+    NSString *addressLine2 = (NSString*) [components objectAtIndex:2];
+    NSString *addressLine3 = (NSString*) [components objectAtIndex:3];
+    // Add line break
+    self.yourUpcomingDemo.text = [NSString stringWithFormat:@"Your Upcoming Demo:\n\n%@\n%@,\n%@,\n%@", time, addressLine1, addressLine2, addressLine3];
+    // Ensure line break
+    self.yourUpcomingDemo.numberOfLines = 0;
+    self.yourUpcomingDemo.textAlignment = NSTextAlignmentCenter;
     
     // Add tap gesture
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRecognizer:)];
@@ -37,8 +51,12 @@
 }
 
 - (void)tapRecognizer:(UITapGestureRecognizer *)sender {
-    UIViewController *travelIntro = [[TravelIntroViewController alloc] init];
+    TravelIntroViewController *travelIntro = [[TravelIntroViewController alloc] init];
     travelIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"TravelIntroViewController"];
+    
+    travelIntro.userName = _userName;
+    travelIntro.currentDemo = _currentDemo;
+    
     [self.navigationController showViewController:travelIntro sender:self];
 }
 

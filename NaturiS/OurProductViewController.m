@@ -227,9 +227,7 @@
     
     // Submit Data...
     
-    UIViewController *collect = [[CollectViewController alloc] init];
-    collect = [self.storyboard instantiateViewControllerWithIdentifier:@"CollectViewController"];
-    [self.navigationController showViewController:collect sender:self];
+    [self leftSwipeRecognizer:sender];
 }
 
 - (void) tapStopEditingRecognizer: (UITapGestureRecognizer *)sender {
@@ -237,8 +235,11 @@
 }
 
 - (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    UIViewController *collect = [[CollectViewController alloc] init];
+    CollectViewController *collect = [[CollectViewController alloc] init];
     collect = [self.storyboard instantiateViewControllerWithIdentifier:@"CollectViewController"];
+    
+    collect.userName = _userName;
+    
     [self.navigationController showViewController:collect sender:self];
 }
 

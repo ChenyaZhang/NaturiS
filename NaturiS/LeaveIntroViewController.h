@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface LeaveIntroViewController : UIViewController
-
+@property (strong, nonatomic) NSString *userName;
 @end

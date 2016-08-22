@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface FeedbackIntroViewController : UIViewController
-
+@property (strong, nonatomic) NSString *userName;
 @end

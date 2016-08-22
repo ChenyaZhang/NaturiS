@@ -10,27 +10,36 @@
 #import "LeaveViewController.h"
 
 @interface NextDemoViewController ()
-
+@property (weak, nonatomic) IBOutlet UILabel *nextUpcomingDemo;
 @end
 
 @implementation NextDemoViewController
 
+
+#pragma mark - View Did Load
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Add left swipe gesture
-    UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeRecognizer:)];
-    recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.view addGestureRecognizer:recognizerLeft];
+    
+    // From "Prepare for segue"
+    // Parse NSString
+    NSArray *components = [self.nextDemo componentsSeparatedByString: @","];
+    NSString *time = (NSString*) [components objectAtIndex:0];
+    NSString *addressLine1 = (NSString*) [components objectAtIndex:1];
+    NSString *addressLine2 = (NSString*) [components objectAtIndex:2];
+    NSString *addressLine3 = (NSString*) [components objectAtIndex:3];
+    // Add line break
+    self.nextUpcomingDemo.text = [NSString stringWithFormat:@"Your Next Demo:\n\n%@\n%@,\n%@,\n%@", time, addressLine1, addressLine2, addressLine3];
+    // Ensure line break
+    self.nextUpcomingDemo.numberOfLines = 0;
+    self.nextUpcomingDemo.textAlignment = NSTextAlignmentCenter;
 }
+
+
+#pragma mark - Memory
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-}
-
-- (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    UIViewController *leave = [[LeaveViewController alloc] init];
-    leave = [self.storyboard instantiateViewControllerWithIdentifier:@"LeaveViewController"];
-    [self.navigationController showViewController:leave sender:self];
 }
 
 /*

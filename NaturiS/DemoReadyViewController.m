@@ -18,14 +18,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Add right swipe gesture
     UISwipeGestureRecognizer *recognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeRecognizer:)];
     recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:recognizerRight];
-    // Add left swipe gesture
-    UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeRecognizer:)];
-    recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.view addGestureRecognizer:recognizerLeft];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,16 +30,14 @@
 }
 
 - (void)rightSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    UIViewController *demo = [[DemoViewController alloc] init];
+    DemoViewController *demo = [[DemoViewController alloc] init];
     demo = [self.storyboard instantiateViewControllerWithIdentifier:@"DemoViewController"];
+    
+    demo.userName = _userName;
+    
     [self.navigationController showViewController:demo sender:self];
 }
 
-- (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    UIViewController *collect = [[CollectViewController alloc] init];
-    collect = [self.storyboard instantiateViewControllerWithIdentifier:@"CollectViewController"];
-    [self.navigationController showViewController:collect sender:self];
-}
 
 /*
 #pragma mark - Navigation

@@ -18,14 +18,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Add right swipe gesture
     UISwipeGestureRecognizer *recognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeRecognizer:)];
     recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:recognizerRight];
-    // Add left swipe gesture
-    UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeRecognizer:)];
-    recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.view addGestureRecognizer:recognizerLeft];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,15 +30,12 @@
 }
 
 - (void)rightSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    UIViewController *leaveIntro = [[LeaveIntroViewController alloc] init];
+    LeaveIntroViewController *leaveIntro = [[LeaveIntroViewController alloc] init];
     leaveIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"LeaveIntroViewController"];
+    
+    leaveIntro.userName = _userName;
+    
     [self.navigationController showViewController:leaveIntro sender:self];
-}
-
-- (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    UIViewController *feedback = [[FeedbackViewController alloc] init];
-    feedback = [self.storyboard instantiateViewControllerWithIdentifier:@"FeedbackViewController"];
-    [self.navigationController showViewController:feedback sender:self];
 }
 
 /*
