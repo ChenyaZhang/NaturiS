@@ -29,7 +29,7 @@
     NSString *addressLine2 = (NSString*) [components objectAtIndex:2];
     NSString *addressLine3 = (NSString*) [components objectAtIndex:3];
     // Add line break
-    self.nextUpcomingDemo.text = [NSString stringWithFormat:@"Your Next Demo:\n\n%@\n%@,\n%@,\n%@", time, addressLine1, addressLine2, addressLine3];
+    self.nextUpcomingDemo.text = [NSString stringWithFormat:@"Upcoming Demo:\n\n\n%@\n%@,\n%@,\n%@", time, addressLine1, addressLine2, addressLine3];
     // Ensure line break
     self.nextUpcomingDemo.numberOfLines = 0;
     self.nextUpcomingDemo.textAlignment = NSTextAlignmentCenter;

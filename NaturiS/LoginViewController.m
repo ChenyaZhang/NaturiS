@@ -54,11 +54,6 @@
     [self.loginButton setUserInteractionEnabled:YES];
     [self.view bringSubviewToFront:self.loginButton];
     [self.loginButton addGestureRecognizer:recognizer];
-    
-    // Add left swipe gesture
-    UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeRecognizer:)];
-    recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.view addGestureRecognizer:recognizerLeft];
 }
 
 
@@ -208,12 +203,6 @@
 
 - (void) tapStopEditingRecognizer: (UITapGestureRecognizer *)sender {
     [[self view] endEditing: YES];
-}
-
-- (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    UIViewController *view = [[ViewController alloc] init];
-    view = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
-    [self.navigationController showViewController:view sender:self];
 }
 
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5f6-Iv-l2R">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Gpc-QM-dVs">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -446,7 +446,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Button2" translatesAutoresizingMaskIntoConstraints="NO" id="spj-1X-IdK">
-                                <rect key="frame" x="300" y="183" width="126" height="126"/>
+                                <rect key="frame" x="300" y="154.5" width="126" height="126"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="spj-1X-IdK" secondAttribute="height" multiplier="1:1" id="Z4m-Mh-Mp0"/>
                                 </constraints>
@@ -467,7 +467,7 @@
                             <constraint firstItem="bSU-dy-TIo" firstAttribute="centerY" secondItem="tve-0e-RHO" secondAttribute="centerY" id="EBo-0G-mS6"/>
                             <constraint firstItem="otO-pn-0k2" firstAttribute="centerY" secondItem="bSU-dy-TIo" secondAttribute="centerY" multiplier="1.11" id="IgH-Ql-jpx"/>
                             <constraint firstItem="bSU-dy-TIo" firstAttribute="centerX" secondItem="tve-0e-RHO" secondAttribute="centerX" id="hyA-OY-tVW"/>
-                            <constraint firstItem="spj-1X-IdK" firstAttribute="centerY" secondItem="bSU-dy-TIo" secondAttribute="centerY" multiplier="0.82" id="oVz-ed-8cg"/>
+                            <constraint firstItem="spj-1X-IdK" firstAttribute="centerY" secondItem="bSU-dy-TIo" secondAttribute="centerY" multiplier="0.725" id="oVz-ed-8cg"/>
                             <constraint firstItem="spj-1X-IdK" firstAttribute="centerX" secondItem="bSU-dy-TIo" secondAttribute="centerX" multiplier="1.21" id="onH-xn-rlY"/>
                             <constraint firstItem="spj-1X-IdK" firstAttribute="centerY" secondItem="bSU-dy-TIo" secondAttribute="centerY" multiplier="0.77" id="psC-hJ-88C"/>
                             <constraint firstItem="bSU-dy-TIo" firstAttribute="height" secondItem="tve-0e-RHO" secondAttribute="height" id="qZ6-lZ-n8J"/>
@@ -1205,7 +1205,7 @@ feedback?</string>
                                                     <constraint firstAttribute="width" secondItem="KHc-rM-e4G" secondAttribute="height" multiplier="1:1" id="ySF-xg-mmo"/>
                                                 </constraints>
                                             </imageView>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product Category" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8RX-J3-tKV">
+                                            <textField opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product Category" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8RX-J3-tKV">
                                                 <rect key="frame" x="120" y="273" width="360" height="30"/>
                                                 <color key="backgroundColor" red="1" green="0.85746929449999998" blue="0.6131197142" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -1226,7 +1226,7 @@ feedback?</string>
                                                     </mask>
                                                 </variation>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Brand Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zi3-1k-UZn">
+                                            <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Brand Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zi3-1k-UZn">
                                                 <rect key="frame" x="165" y="240" width="270" height="30"/>
                                                 <color key="backgroundColor" red="1" green="0.85746929449999998" blue="0.6131197142" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -1247,7 +1247,7 @@ feedback?</string>
                                                     </mask>
                                                 </variation>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your first observation or thought" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="827-mj-vmD">
+                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your first observation or thought" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="827-mj-vmD">
                                                 <rect key="frame" x="60" y="120" width="480" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="827-mj-vmD" secondAttribute="height" multiplier="20:1" id="5qF-2j-VtN"/>
@@ -1266,7 +1266,7 @@ feedback?</string>
                                                     </mask>
                                                 </variation>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your second observation or thought" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cKQ-pb-QCe">
+                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your second observation or thought" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cKQ-pb-QCe">
                                                 <rect key="frame" x="60" y="156" width="480" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="cKQ-pb-QCe" secondAttribute="height" multiplier="20:1" id="kAJ-AP-nke"/>
@@ -1285,7 +1285,7 @@ feedback?</string>
                                                     </mask>
                                                 </variation>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your third observation or thought" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EYx-ME-PPC">
+                                            <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your third observation or thought" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EYx-ME-PPC">
                                                 <rect key="frame" x="60" y="192" width="480" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="EYx-ME-PPC" secondAttribute="height" multiplier="20:1" id="emc-Bq-7A5"/>
@@ -1413,7 +1413,7 @@ feedback?</string>
                                     </mask>
                                 </variation>
                             </scrollView>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Esj-nK-MJM">
+                            <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Esj-nK-MJM">
                                 <rect key="frame" x="15" y="240" width="300" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Esj-nK-MJM" secondAttribute="height" multiplier="1:1" id="ELX-Ug-lsg"/>
@@ -1423,7 +1423,7 @@ feedback?</string>
                                     <action selector="choosePhotoButtonPressed:" destination="c1e-zc-X0e" eventType="touchUpInside" id="qW4-dK-nqm"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fw2-jh-TuC">
+                            <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fw2-jh-TuC">
                                 <rect key="frame" x="15" y="369" width="300" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="fw2-jh-TuC" secondAttribute="height" multiplier="1:1" id="5Nj-Az-w0N"/>
@@ -1433,7 +1433,7 @@ feedback?</string>
                                     <action selector="choosePhotoButtonPressed:" destination="c1e-zc-X0e" eventType="touchUpInside" id="gtt-by-DuD"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1a-7h-6LB">
+                            <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1a-7h-6LB">
                                 <rect key="frame" x="270" y="369" width="300" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="k1a-7h-6LB" secondAttribute="height" multiplier="1:1" id="mFz-h7-zFi"/>
@@ -1443,7 +1443,7 @@ feedback?</string>
                                     <action selector="choosePhotoButtonPressed:" destination="c1e-zc-X0e" eventType="touchUpInside" id="gSl-cU-uJs"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ode-OL-lt9">
+                            <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ode-OL-lt9">
                                 <rect key="frame" x="270" y="240" width="300" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ode-OL-lt9" secondAttribute="height" multiplier="1:1" id="jGD-xz-1EJ"/>
@@ -1561,6 +1561,15 @@ feedback?</string>
                         <outlet property="secondObservationTextField" destination="cKQ-pb-QCe" id="fNg-Kf-GhD"/>
                         <outlet property="submitImageButton" destination="KHc-rM-e4G" id="gmL-1I-trN"/>
                         <outlet property="thirdObservationTextField" destination="EYx-ME-PPC" id="VRj-cy-8S8"/>
+                        <outletCollection property="photoButtons" destination="fw2-jh-TuC" id="54M-oG-TIZ"/>
+                        <outletCollection property="photoButtons" destination="Esj-nK-MJM" id="jIP-Yu-7uk"/>
+                        <outletCollection property="photoButtons" destination="ode-OL-lt9" id="L1t-1h-qUC"/>
+                        <outletCollection property="photoButtons" destination="k1a-7h-6LB" id="5CS-7K-88E"/>
+                        <outletCollection property="allTextFields" destination="827-mj-vmD" id="Uhu-vI-SCd"/>
+                        <outletCollection property="allTextFields" destination="8RX-J3-tKV" id="TqF-Pg-Z7z"/>
+                        <outletCollection property="allTextFields" destination="zi3-1k-UZn" id="C5O-vH-OTt"/>
+                        <outletCollection property="allTextFields" destination="cKQ-pb-QCe" id="332-Nt-VPZ"/>
+                        <outletCollection property="allTextFields" destination="EYx-ME-PPC" id="Ned-1q-hNL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="58b-a5-9tM" sceneMemberID="firstResponder"/>
@@ -1588,8 +1597,8 @@ feedback?</string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BPs-8c-jfc">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xWO-z0-7dN">
-                                                <rect key="frame" x="60" y="79" width="480" height="320"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xWO-z0-7dN">
+                                                <rect key="frame" x="60" y="80" width="480" height="320"/>
                                                 <color key="backgroundColor" red="0.70937611889999996" green="1" blue="0.87559480980000004" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="xWO-z0-7dN" secondAttribute="height" multiplier="3:2" id="4Tj-P1-kDa"/>
@@ -1611,8 +1620,8 @@ feedback?</string>
                                                     </mask>
                                                 </variation>
                                             </textView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Bsn-9v-lHG">
-                                                <rect key="frame" x="60" y="283" width="480" height="320"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Bsn-9v-lHG">
+                                                <rect key="frame" x="60" y="284" width="480" height="320"/>
                                                 <color key="backgroundColor" red="1" green="0.81720300560000003" blue="0.75714335560000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Bsn-9v-lHG" secondAttribute="height" multiplier="11:2" id="BOh-FU-Sjt"/>
@@ -1882,8 +1891,8 @@ feedback?</string>
                                                     </mask>
                                                 </variation>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Bberry Q" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tf0-em-6fU">
-                                                <rect key="frame" x="62" y="257" width="158" height="30"/>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Bberry Q" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tf0-em-6fU">
+                                                <rect key="frame" x="62" y="258" width="158" height="30"/>
                                                 <color key="backgroundColor" red="1" green="0.85746929449999998" blue="0.6131197142" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="tf0-em-6fU" secondAttribute="height" multiplier="7:1" id="z4T-qR-WVG"/>
@@ -1960,8 +1969,8 @@ feedback?</string>
                                                     </mask>
                                                 </variation>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Sberry Q" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="btF-U2-UE0">
-                                                <rect key="frame" x="221" y="257" width="158" height="30"/>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Sberry Q" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="btF-U2-UE0">
+                                                <rect key="frame" x="221" y="258" width="158" height="30"/>
                                                 <color key="backgroundColor" red="1" green="0.85746929449999998" blue="0.6131197142" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="btF-U2-UE0" secondAttribute="height" multiplier="7:1" id="ByT-o5-NA6"/>
@@ -1981,8 +1990,8 @@ feedback?</string>
                                                     </mask>
                                                 </variation>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Cherry Q" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yrW-lz-CgK">
-                                                <rect key="frame" x="380" y="257" width="158" height="30"/>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Cherry Q" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yrW-lz-CgK">
+                                                <rect key="frame" x="380" y="258" width="158" height="30"/>
                                                 <color key="backgroundColor" red="1" green="0.85746929449999998" blue="0.6131197142" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="yrW-lz-CgK" secondAttribute="height" multiplier="7:1" id="KVx-jm-SF1"/>

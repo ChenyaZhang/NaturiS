@@ -173,8 +173,15 @@
                     [yourArrivingTimeTimer invalidate];
                     yourArrivingTimeTimer = nil;
                     yourArrivingTimeStart = FALSE;
+                    // Update UI in main queue
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        self.yourArrivingTimeButtonImage.image = [UIImage imageNamed:@"Correct"];
+                    }];
                 } else {
                     NSLog(@"Error: %@", [error localizedDescription]);
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        self.yourArrivingTimeButtonImage.image = [UIImage imageNamed:@"WrongUser"];
+                    }];
                 }
                 
             }] resume];
@@ -182,6 +189,9 @@
         
     } else {
         [self startArrivingTimeTimer];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            self.yourArrivingTimeButtonImage.image = [UIImage imageNamed:@"Button2"];
+        }];
     }
 }
 
@@ -212,8 +222,16 @@
                     [locationManager stopUpdatingLocation];
                     locationManager = nil;
                     yourArrivingLocationStart = FALSE;
+                    // Update UI in main queue
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        self.yourArrivingLocationButtonImage.image = [UIImage imageNamed:@"Correct"];
+                    }];
                 } else {
                     NSLog(@"Error: %@", [error localizedDescription]);
+                    // Update UI in main queue
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        self.yourArrivingLocationButtonImage.image = [UIImage imageNamed:@"WrongUser"];
+                    }];
                 }
                 
             }] resume];
@@ -221,6 +239,10 @@
         }
     } else {
         [self startArrivingLocationUpdate];
+        // Update UI in main queue
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            self.yourArrivingLocationButtonImage.image = [UIImage imageNamed:@"Button2"];
+        }];
     }
 }
 

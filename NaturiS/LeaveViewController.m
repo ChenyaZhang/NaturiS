@@ -220,8 +220,15 @@
                     [yourCurrentTimeTimer invalidate];
                     yourCurrentTimeTimer = nil;
                     yourCurrentTimeStart = FALSE;
+                    // Update UI in main queue
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        self.yourCurrentTimeButtonImage.image = [UIImage imageNamed:@"Correct"];
+                    }];
                 } else {
                     NSLog(@"Error: %@", [error localizedDescription]);
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        self.yourCurrentTimeButtonImage.image = [UIImage imageNamed:@"WrongUser"];
+                    }];
                 }
                 
             }] resume];
@@ -229,6 +236,9 @@
         
     } else {
         [self startCurrentTimeTimer];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            self.yourCurrentTimeButtonImage.image = [UIImage imageNamed:@"Button2"];
+        }];
     }
 }
 
@@ -259,8 +269,16 @@
                     [locationManager stopUpdatingLocation];
                     locationManager = nil;
                     yourCurrentLocationStart = FALSE;
+                    // Update UI in main queue
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        self.yourCurrentLocationButtonImage.image = [UIImage imageNamed:@"Correct"];
+                    }];
                 } else {
                     NSLog(@"Error: %@", [error localizedDescription]);
+                    // Update UI in main queue
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        self.yourCurrentLocationButtonImage.image = [UIImage imageNamed:@"WrongUser"];
+                    }];
                 }
                 
             }] resume];
@@ -268,6 +286,10 @@
         }
     } else {
         [self startCurrentLocationUpdate];
+        // Update UI in main queue
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            self.yourCurrentLocationButtonImage.image = [UIImage imageNamed:@"Button2"];
+        }];
     }
 }
 
