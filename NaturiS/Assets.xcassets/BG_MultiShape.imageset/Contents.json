@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "BG_MultiShape.png",
+      "filename" : "BG_MultiShape@3x-1.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "BG_MultiShape@2x.png",
+      "filename" : "BG_MultiShape@3x-2.png",
       "scale" : "2x"
     },
     {

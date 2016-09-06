@@ -11,6 +11,7 @@
 
 @interface NextDemoViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *nextUpcomingDemo;
+@property (weak, nonatomic) IBOutlet UILabel *nextDemoContent;
 @end
 
 @implementation NextDemoViewController
@@ -19,8 +20,7 @@
 #pragma mark - View Did Load
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    
+    [super viewDidLoad];    
     // From "Prepare for segue"
     // Parse NSString
     NSArray *components = [self.nextDemo componentsSeparatedByString: @","];
@@ -28,11 +28,22 @@
     NSString *addressLine1 = (NSString*) [components objectAtIndex:1];
     NSString *addressLine2 = (NSString*) [components objectAtIndex:2];
     NSString *addressLine3 = (NSString*) [components objectAtIndex:3];
-    // Add line break
-    self.nextUpcomingDemo.text = [NSString stringWithFormat:@"Upcoming Demo:\n\n\n%@\n%@,\n%@,\n%@", time, addressLine1, addressLine2, addressLine3];
+    // Display text
+    // NSAttributed String
+    NSString *nextDemoString = @"Next Demo";
+    NSMutableAttributedString *nextDemoAttributedString =[[NSMutableAttributedString alloc] initWithString: nextDemoString];
+    UIFont *font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
+    [nextDemoAttributedString addAttribute:NSFontAttributeName
+                                         value:font
+                                         range:NSMakeRange(0, [nextDemoString length])];
+    // Put together
+    self.nextUpcomingDemo.attributedText = nextDemoAttributedString;
+    self.nextDemoContent.text = [NSString stringWithFormat:@"%@\n%@,\n%@,\n%@", time, addressLine1, addressLine2, addressLine3];
     // Ensure line break
     self.nextUpcomingDemo.numberOfLines = 0;
     self.nextUpcomingDemo.textAlignment = NSTextAlignmentCenter;
+    self.nextDemoContent.numberOfLines = 0;
+    self.nextDemoContent.textAlignment = NSTextAlignmentCenter;
 }
 
 

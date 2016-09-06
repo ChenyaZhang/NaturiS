@@ -10,4 +10,6 @@
 
 @interface GeneralFeedbackViewController : UIViewController <UITextViewDelegate>
 @property (strong, nonatomic) NSString *userName;
+@property (strong, nonatomic) NSString *problemSolution;
+@property (strong, nonatomic) NSString *customerFeedback;
 @end

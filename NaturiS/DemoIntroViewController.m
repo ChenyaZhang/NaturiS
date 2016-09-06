@@ -13,6 +13,7 @@
 @interface DemoIntroViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *buttonImage;
 @property (weak, nonatomic) IBOutlet UILabel *yourUpcomingDemo;
+@property (weak, nonatomic) IBOutlet UILabel *upcomingDemoContent;
 @end
 
 @implementation DemoIntroViewController
@@ -27,12 +28,22 @@
     NSString *addressLine1 = (NSString*) [components objectAtIndex:1];
     NSString *addressLine2 = (NSString*) [components objectAtIndex:2];
     NSString *addressLine3 = (NSString*) [components objectAtIndex:3];
-    // Add line break
-    self.yourUpcomingDemo.text = [NSString stringWithFormat:@"Your Upcoming Demo:\n\n%@\n%@,\n%@,\n%@", time, addressLine1, addressLine2, addressLine3];
+    // Display text
+    // NSAttributed String
+    NSString *upcomingDemoString = @"Upcoming Demo";
+    NSMutableAttributedString *upcomingDemoAttributedString =[[NSMutableAttributedString alloc] initWithString: upcomingDemoString];
+    UIFont *font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
+    [upcomingDemoAttributedString addAttribute:NSFontAttributeName
+                   value:font
+                   range:NSMakeRange(0, [upcomingDemoString length])];
+    // Put together
+    self.yourUpcomingDemo.attributedText = upcomingDemoAttributedString;
+    self.upcomingDemoContent.text = [NSString stringWithFormat:@"%@\n%@,\n%@,\n%@", time, addressLine1, addressLine2, addressLine3];
     // Ensure line break
     self.yourUpcomingDemo.numberOfLines = 0;
     self.yourUpcomingDemo.textAlignment = NSTextAlignmentCenter;
-    
+    self.upcomingDemoContent.numberOfLines = 0;
+    self.upcomingDemoContent.textAlignment = NSTextAlignmentCenter;
     // Add tap gesture
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRecognizer:)];
     [recognizer setNumberOfTapsRequired:1];

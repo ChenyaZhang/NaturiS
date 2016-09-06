@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *yourCurrentLocation;
 @property (weak, nonatomic) IBOutlet UIImageView *yourCurrentTimeButtonImage;
 @property (weak, nonatomic) IBOutlet UIImageView *yourCurrentLocationButtonImage;
+@property (weak, nonatomic) IBOutlet UILabel *currentTimeContent;
+@property (weak, nonatomic) IBOutlet UILabel *currentLocationContent;
 
 @end
 
@@ -75,10 +77,21 @@
 - (void)updateYourCurrentTime: (NSTimer *)timer {
     NSDate *currentTime = [NSDate date];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
-    _yourCurrentTime.numberOfLines = 2;
-    _yourCurrentTime.textAlignment = NSTextAlignmentCenter;
-    _yourCurrentTime.text = [NSString stringWithFormat:@"Your Current Time:\n %@", [formatter stringFromDate:currentTime]];
+    [formatter setDateFormat:@"MMM-dd hh:mm a"];
+    // Display text
+    // NSAttributed String
+    NSString *currentTimeString = @"Current Time";
+    NSMutableAttributedString *currentTimeAttributedString =[[NSMutableAttributedString alloc] initWithString: currentTimeString];
+    UIFont *font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
+    [currentTimeAttributedString addAttribute:NSFontAttributeName
+                                        value:font
+                                        range:NSMakeRange(0, [currentTimeString length])];
+    self.yourCurrentTime.attributedText = currentTimeAttributedString;
+    self.yourCurrentTime.numberOfLines = 0;
+    self.yourCurrentTime.textAlignment = NSTextAlignmentCenter;
+    self.currentTimeContent.text = [NSString stringWithFormat:@"%@", [formatter stringFromDate:currentTime]];
+    self.currentTimeContent.numberOfLines = 0;
+    self.currentTimeContent.textAlignment = NSTextAlignmentCenter;
 }
 
 
@@ -134,11 +147,22 @@
         NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
         if (error == nil && [placemarks count] > 0) {
             placemark = [placemarks lastObject];
-            _yourCurrentLocation.numberOfLines = 0;
-            _yourCurrentLocation.textAlignment = NSTextAlignmentCenter;
-            [self.yourCurrentLocation sizeToFit];
-            _yourCurrentLocation.text = [NSString stringWithFormat:@"Your Current Address:\n %@\n%@\n%@\n%@",
-                                         placemark.subThoroughfare, placemark.thoroughfare, placemark.locality, placemark.postalCode];
+            // Display text
+            // NSAttributed String
+            NSString *currentLocationString = @"Current Location";
+            NSMutableAttributedString *currentLocationAttributedString =[[NSMutableAttributedString alloc] initWithString: currentLocationString];
+            UIFont *font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
+            [currentLocationAttributedString addAttribute:NSFontAttributeName
+                                                value:font
+                                                range:NSMakeRange(0, [currentLocationString length])];
+            
+            self.yourCurrentLocation.attributedText = currentLocationAttributedString;
+            self.yourCurrentLocation.numberOfLines = 0;
+            self.yourCurrentLocation.textAlignment = NSTextAlignmentCenter;
+            self.currentLocationContent.text = [NSString stringWithFormat:@"%@\n%@\n%@\n%@",
+                                                placemark.subThoroughfare, placemark.thoroughfare, placemark.locality, placemark.postalCode];
+            self.currentLocationContent.numberOfLines = 0;
+            self.currentLocationContent.textAlignment = NSTextAlignmentCenter;
         } else {
             NSLog(@"%@", error.debugDescription);
         }

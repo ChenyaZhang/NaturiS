@@ -49,8 +49,14 @@
 - (void)tapRecognizerForCompetitorAnalysis:(UISwipeGestureRecognizer *)sender {
     CompetitorAnalysisViewController *competitor = [[CompetitorAnalysisViewController alloc] init];
     competitor = [self.storyboard instantiateViewControllerWithIdentifier:@"CompetitorAnalysisViewController"];
-    
+    NSLog(@"tapRecognizerForCompetitorAnalysis competitorAnalysisPhotoSubmitted.count: %lu", (unsigned long)self.competitorAnalysisPhotoSubmitted.count);
     competitor.userName = _userName;
+    competitor.firstObservation = self.competitorAnalysisFirstObservation;
+    competitor.secondObservation = self.competitorAnalysisSecondObservation;
+    competitor.thirdObservation = self.competitorAnalysisThirdObservation;
+    competitor.brandName = self.competitorAnalysisBrandName;
+    competitor.productCategory = self.competitorAnalysisProductCategory;
+    competitor.allImageSubmitted = self.competitorAnalysisPhotoSubmitted;
     
     [self.navigationController showViewController:competitor sender:self];
 }

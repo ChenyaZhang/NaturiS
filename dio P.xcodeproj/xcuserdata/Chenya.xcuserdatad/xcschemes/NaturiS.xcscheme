@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F55E95FD1D510CA600EFEAAA"
-               BuildableName = "NaturiS.app"
-               BlueprintName = "NaturiS"
-               ReferencedContainer = "container:NaturiS.xcodeproj">
+               BuildableName = "dio P.app"
+               BlueprintName = "dio P"
+               ReferencedContainer = "container:dio P.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F55E96191D510CA600EFEAAA"
-               BuildableName = "NaturiSTests.xctest"
-               BlueprintName = "NaturiSTests"
-               ReferencedContainer = "container:NaturiS.xcodeproj">
+               BuildableName = "dio P.xctest"
+               BlueprintName = "dio PTests"
+               ReferencedContainer = "container:dio P.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F55E96241D510CA600EFEAAA"
-               BuildableName = "NaturiSUITests.xctest"
-               BlueprintName = "NaturiSUITests"
-               ReferencedContainer = "container:NaturiS.xcodeproj">
+               BuildableName = "dio P.xctest"
+               BlueprintName = "dio PUITests"
+               ReferencedContainer = "container:dio P.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F55E95FD1D510CA600EFEAAA"
-            BuildableName = "NaturiS.app"
-            BlueprintName = "NaturiS"
-            ReferencedContainer = "container:NaturiS.xcodeproj">
+            BuildableName = "dio P.app"
+            BlueprintName = "dio P"
+            ReferencedContainer = "container:dio P.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F55E95FD1D510CA600EFEAAA"
-            BuildableName = "NaturiS.app"
-            BlueprintName = "NaturiS"
-            ReferencedContainer = "container:NaturiS.xcodeproj">
+            BuildableName = "dio P.app"
+            BlueprintName = "dio P"
+            ReferencedContainer = "container:dio P.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F55E95FD1D510CA600EFEAAA"
-            BuildableName = "NaturiS.app"
-            BlueprintName = "NaturiS"
-            ReferencedContainer = "container:NaturiS.xcodeproj">
+            BuildableName = "dio P.app"
+            BlueprintName = "dio P"
+            ReferencedContainer = "container:dio P.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

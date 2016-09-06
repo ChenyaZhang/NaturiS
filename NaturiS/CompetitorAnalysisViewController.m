@@ -15,8 +15,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *firstObservationTextField;
 @property (weak, nonatomic) IBOutlet UITextField *secondObservationTextField;
 @property (weak, nonatomic) IBOutlet UITextField *thirdObservationTextField;
-@property (weak, nonatomic) IBOutlet UITextField *brandName;
-@property (weak, nonatomic) IBOutlet UITextField *productCategory;
+@property (weak, nonatomic) IBOutlet UITextField *brandNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *productCategoryTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *gift1ImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *gift2ImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *gift3ImageView;
@@ -24,7 +24,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *gift5ImageView;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *photoButtons;
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *allTextFields;
-
 @end
 
 @implementation CompetitorAnalysisViewController {
@@ -32,26 +31,44 @@
     UITextField *activeTextField;
     BOOL allTextFieldsFinished;
     BOOL allPhotosUploadFinished;
-    BOOL textUploadTaskDone;
-    BOOL photoUploadTaskDone;
 }
 
 #pragma mark - ViewDidLoad
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Resume previously submitted data
+    // for text
+    self.firstObservationTextField.text = self.firstObservation;
+    self.secondObservationTextField.text = self.secondObservation;
+    self.thirdObservationTextField.text = self.thirdObservation;
+    self.brandNameTextField.text = self.brandName;
+    self.productCategoryTextField.text = self.productCategory;
+    // for photo
+    if (!self.allImageSubmitted) {
+        self.allImageSubmitted = [[NSMutableDictionary alloc] init];
+    }
+    for (UIButton *photoButton in self.photoButtons) {
+        [photoButton setImage:[UIImage imageNamed:@"Camera"] forState:UIControlStateNormal];
+    }
+    if (self.allImageSubmitted.count != 0) {
+        for (int i = 0; i < self.allImageSubmitted.count; i++) {
+            NSString *key = [NSString stringWithFormat:@"photo%d", i + 1];
+            [[self.photoButtons objectAtIndex:i] setImage:[self.allImageSubmitted objectForKey:key] forState:UIControlStateNormal];
+        }
+    }
     // Hide gift images
-    self.gift1ImageView.hidden = TRUE;
-    self.gift2ImageView.hidden = TRUE;
-    self.gift3ImageView.hidden = TRUE;
-    self.gift4ImageView.hidden = TRUE;
-    self.gift5ImageView.hidden = TRUE;
+    self.gift1ImageView.hidden = YES;
+    self.gift2ImageView.hidden = YES;
+    self.gift3ImageView.hidden = YES;
+    self.gift4ImageView.hidden = YES;
+    self.gift5ImageView.hidden = YES;
     // Assign delegate
     self.firstObservationTextField.delegate = self;
     self.secondObservationTextField.delegate = self;
     self.thirdObservationTextField.delegate = self;
-    self.brandName.delegate = self;
-    self.productCategory.delegate = self;
+    self.brandNameTextField.delegate = self;
+    self.productCategoryTextField.delegate = self;
     // Register keyboard notification
     [self registerForKeyboardNotifications];
     // Add stop editing tap gesture
@@ -71,40 +88,34 @@
 }
 
 
-#pragma mark - ViewDidAppear
+#pragma mark - ViewWillAppear
 
-- (void)viewDidAppear:(BOOL)animated {
-    // Initialize variable
-    textUploadTaskDone = FALSE;
-    photoUploadTaskDone = FALSE;
-    // Download data from database...
-    
-    
-    // Image appear based on tag
+- (void)viewWillAppear:(BOOL)animated {
+    // Gift image appear based on textfield
     if (self.firstObservationTextField.text.length != 0) {
-        self.gift1ImageView.hidden = FALSE;
+        self.gift1ImageView.hidden = NO;
     } else {
-        self.gift1ImageView.hidden = TRUE;
+        self.gift1ImageView.hidden = YES;
     }
     if (self.secondObservationTextField.text.length != 0) {
-        self.gift2ImageView.hidden = FALSE;
+        self.gift2ImageView.hidden = NO;
     } else {
-        self.gift2ImageView.hidden = TRUE;
+        self.gift2ImageView.hidden = YES;
     }
     if (self.thirdObservationTextField.text.length != 0) {
-        self.gift3ImageView.hidden = FALSE;
+        self.gift3ImageView.hidden = NO;
     } else {
-        self.gift3ImageView.hidden = TRUE;
+        self.gift3ImageView.hidden = YES;
     }
-    if (self.brandName.text.length != 0) {
-        self.gift4ImageView.hidden = FALSE;
+    if (self.brandNameTextField.text.length != 0) {
+        self.gift4ImageView.hidden = NO;
     } else {
-        self.gift4ImageView.hidden = TRUE;
+        self.gift4ImageView.hidden = YES;
     }
-    if (self.productCategory.text.length != 0) {
-        self.gift5ImageView.hidden = FALSE;
+    if (self.productCategoryTextField.text.length != 0) {
+        self.gift5ImageView.hidden = NO;
     } else {
-        self.gift5ImageView.hidden = TRUE;
+        self.gift5ImageView.hidden = YES;
     }
 }
 
@@ -115,7 +126,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:)
                                                  name:UIKeyboardDidShowNotification object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillBeHidden:)
                                                  name:UIKeyboardWillHideNotification object:nil];
@@ -126,23 +136,17 @@
 - (void)keyboardWasShown:(NSNotification*)aNotification {
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
     self.scrollView.contentInset = contentInsets;
     self.scrollView.scrollIndicatorInsets = contentInsets;
-    
     // If active text field is hidden by keyboard, scroll it so it's visible
     CGRect aRect = self.view.frame;
     aRect.size.height -= kbSize.height;
-    
     CGRect aPoint = activeTextField.frame;
     aPoint.origin.y += aPoint.size.height;
-    
     //    NSLog(@"self.view: %@", NSStringFromCGRect(aRect));
     //    NSLog(@"self.activeTextField: %@", NSStringFromCGRect(aPoint));
-    
     if (!CGRectContainsPoint(aRect, aPoint.origin) ) {
-        //        NSLog(@"Hello!");
         [self.scrollView scrollRectToVisible:activeTextField.frame animated:YES];
     }
 }
@@ -161,34 +165,30 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     activeTextField = nil;
     // Image appear based on tag
-    if (textField.tag == 1 && textField.text.length != 0) {
-        self.gift1ImageView.hidden = FALSE;
-    } else if (textField.tag == 1 && textField.text.length == 0) {
-        self.gift1ImageView.hidden = TRUE;
-    }
-    
-    if (textField.tag == 2 && textField.text.length != 0) {
-        self.gift2ImageView.hidden = FALSE;
-    } else if (textField.tag == 2 && textField.text.length == 0) {
-        self.gift2ImageView.hidden = TRUE;
-    }
-    
-    if (textField.tag == 3 && textField.text.length != 0) {
-        self.gift3ImageView.hidden = FALSE;
-    } else if (textField.tag == 3 && textField.text.length == 0) {
-        self.gift3ImageView.hidden = TRUE;
-    }
-    
-    if (textField.tag == 4 && textField.text.length != 0) {
-        self.gift4ImageView.hidden = FALSE;
-    } else if (textField.tag == 4 && textField.text.length == 0) {
-        self.gift4ImageView.hidden = TRUE;
-    }
-    
     if (textField.tag == 5 && textField.text.length != 0) {
-        self.gift5ImageView.hidden = FALSE;
+        self.gift1ImageView.hidden = NO;
     } else if (textField.tag == 5 && textField.text.length == 0) {
-        self.gift5ImageView.hidden = TRUE;
+        self.gift1ImageView.hidden = YES;
+    }
+    if (textField.tag == 6 && textField.text.length != 0) {
+        self.gift2ImageView.hidden = NO;
+    } else if (textField.tag == 6 && textField.text.length == 0) {
+        self.gift2ImageView.hidden = YES;
+    }
+    if (textField.tag == 7 && textField.text.length != 0) {
+        self.gift3ImageView.hidden = NO;
+    } else if (textField.tag == 7 && textField.text.length == 0) {
+        self.gift3ImageView.hidden = YES;
+    }
+    if (textField.tag == 8 && textField.text.length != 0) {
+        self.gift4ImageView.hidden = NO;
+    } else if (textField.tag == 8 && textField.text.length == 0) {
+        self.gift4ImageView.hidden = YES;
+    }
+    if (textField.tag == 9 && textField.text.length != 0) {
+        self.gift5ImageView.hidden = NO;
+    } else if (textField.tag == 9 && textField.text.length == 0) {
+        self.gift5ImageView.hidden = YES;
     }
 }
 
@@ -199,7 +199,6 @@
     pressedButtonTagNumber = sender.tag;
     // UIAlertController action sheet
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
     }]];
     // UIAlertController action button
@@ -211,11 +210,11 @@
     }];
     // Disable take a photo button if source not available
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        [takePhotoActionButton setEnabled:FALSE];
+        [takePhotoActionButton setEnabled:NO];
     }
     // Disable upload a photo button if source not available
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-        [uploadPhotoActionButton setEnabled:FALSE];
+        [uploadPhotoActionButton setEnabled:NO];
     }
     // Add action to action sheet
     [actionSheet addAction:takePhotoActionButton];
@@ -240,7 +239,6 @@
     // Initialize UIImagePickerController
     UIImagePickerController *uploadPhotoImagePickerController = [[UIImagePickerController alloc] init];            uploadPhotoImagePickerController.delegate = self;
     uploadPhotoImagePickerController.allowsEditing = YES;
-    
     uploadPhotoImagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     // Present UIImagePickerController
     [self presentViewController:uploadPhotoImagePickerController animated:YES completion:NULL];
@@ -257,6 +255,10 @@
     UIImage *roundedChosenImage = [self getRoundedRectImageFromImage:chosenImage onReferenceView:referenceImageView withCornerRadius: referenceImageView.frame.size.width/2];
     // Set button image
     [choosePhotoButton setImage:roundedChosenImage forState:UIControlStateNormal];
+    // add to image array for reappear
+    NSString *key = [NSString stringWithFormat:@"photo%ld", (long)pressedButtonTagNumber];
+    [self.allImageSubmitted setObject:roundedChosenImage forKey:key];
+    NSLog(@"!!!!!!!!self.allImageSubmitted.count: %lu", (unsigned long)self.allImageSubmitted.count);
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
@@ -281,8 +283,8 @@
 
 - (void)tapSubmitDataRecognizer:(UISwipeGestureRecognizer *)sender {
     // Initial value
-    allTextFieldsFinished = TRUE;
-    allPhotosUploadFinished = TRUE;
+    allTextFieldsFinished = YES;
+    allPhotosUploadFinished = YES;
     //Check textfield
     for (UITextField *textField in self.allTextFields) {
         if (textField.text.length == 0) {
@@ -290,66 +292,68 @@
             textField.placeholder = @"Tell Us Something?";
             textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:textField.placeholder attributes:@{NSForegroundColorAttributeName: [UIColor redColor]}];
             self.submitImageButton.image = [UIImage imageNamed:@"WrongSubmit"];
-            allTextFieldsFinished = FALSE;
+            allTextFieldsFinished = NO;
         }
     }
     // Check photo
-    /*for (UIButton *button in self.photoButtons) {
-     // Image Comparison
-     UIImage *buttonImage = [button imageForState:UIControlStateNormal];
-     UIImage *cameraImage = [UIImage imageNamed:@"Camera"];
-     UIImage *noPicImage = [UIImage imageNamed:@"NoPic"];
-     if ([UIImagePNGRepresentation(buttonImage) isEqualToData:UIImagePNGRepresentation(cameraImage)] || [UIImagePNGRepresentation(buttonImage) isEqualToData:UIImagePNGRepresentation(noPicImage)]) {
-     [button setImage:[UIImage imageNamed:@"NoPic"] forState:UIControlStateNormal];
-     self.submitImageButton.image = [UIImage imageNamed:@"WrongSubmit"];
-     allPhotosUploadFinished = FALSE;
-     }
-     }*/
+    for (UIButton *button in self.photoButtons) {
+        // Image Comparison
+        UIImage *buttonImage = [button imageForState:UIControlStateNormal];
+        UIImage *cameraImage = [UIImage imageNamed:@"Camera"];
+        UIImage *noPicImage = [UIImage imageNamed:@"NoPic"];
+        if ([UIImagePNGRepresentation(buttonImage) isEqualToData:UIImagePNGRepresentation(cameraImage)] || [UIImagePNGRepresentation(buttonImage) isEqualToData:UIImagePNGRepresentation(noPicImage)]) {
+            [button setImage:[UIImage imageNamed:@"NoPic"] forState:UIControlStateNormal];
+            self.submitImageButton.image = [UIImage imageNamed:@"WrongSubmit"];
+            allPhotosUploadFinished = NO;
+        }
+    }
     // Check data submission
     if (allTextFieldsFinished && allPhotosUploadFinished) {
         // Disable text field and photo upload
-        self.firstObservationTextField.enabled = FALSE;
-        self.secondObservationTextField.enabled = FALSE;
-        self.thirdObservationTextField.enabled = FALSE;
-        self.brandName.enabled = FALSE;
-        self.productCategory.enabled = FALSE;
+        self.firstObservationTextField.enabled = NO;
+        self.secondObservationTextField.enabled = NO;
+        self.thirdObservationTextField.enabled = NO;
+        self.brandNameTextField.enabled = NO;
+        self.productCategoryTextField.enabled = NO;
         for (UIButton *button in self.photoButtons) {
-            button.enabled = FALSE;
+            button.enabled = NO;
         }
         // Upload text data
         [self uploadTextData];
         // Upload photo data
         [self uploadPhotoData];
-        // Update UI
-        if (textUploadTaskDone && photoUploadTaskDone) {
-            self.submitImageButton.image = [UIImage imageNamed:@"Correct"];;
-        } else {
-            self.submitImageButton.image = [UIImage imageNamed:@"WrongUser"];;
-        }
+        // Updata UI
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            self.submitImageButton.image = [UIImage imageNamed:@"Correct"];
+        }];
+        self.submitImageButton.userInteractionEnabled = NO;
+        self.alreadySubmitted = YES;
     }
 }
 
 - (void) uploadTextData {
     // NSURLSession Submit/Resubmit data
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/competitorAnalysisTextData/%@", self.userName]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/competitorProductTextData/%@", self.userName]];
     NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
     // "Put" method
     // Request setup
-    [urlRequest setHTTPMethod:@"PUT"];
+    [urlRequest setHTTPMethod:@"POST"];
     [urlRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     // Set params
-    NSString *params = [NSString stringWithFormat:@"firstObservation=%@&secondObservation=%@&thirdObservation=%@&brandName=%@&productCategory=%@", self.firstObservationTextField.text, self.secondObservationTextField.text, self.thirdObservationTextField.text, self.brandName.text, self.productCategory.text];
+    NSString *params = [NSString stringWithFormat:@"firstObservation=%@&secondObservation=%@&thirdObservation=%@&brandName=%@&productCategory=%@", self.firstObservationTextField.text, self.secondObservationTextField.text, self.thirdObservationTextField.text, self.brandNameTextField.text, self.productCategoryTextField.text];
     // Set http body
     [urlRequest setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
     // Send dataTaskWithRequest
     [[session dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error == nil) {
             NSLog(@"Successfully submitted text data. No error.");
-            textUploadTaskDone = TRUE;
         } else {
             NSLog(@"Text data Error: %@", [error localizedDescription]);
+            // Updata UI
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                self.submitImageButton.image = [UIImage imageNamed:@"WrongUser"];
+            }];
         }
     }] resume];
 }
@@ -358,26 +362,27 @@
     // NSURLSession Submit/Resubmit data
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     // NSURL
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/competitorAnalysisPhotoData/%@", self.userName]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/competitorProductPhotoData/%@", self.userName]];
     NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
     // "Put" method
     // Request setup
-    [urlRequest setHTTPMethod:@"PUT"];
+    // [urlRequest setHTTPMethod:@"PUT"];
+    [urlRequest setHTTPMethod:@"POST"];
     [urlRequest addValue:@"image/png" forHTTPHeaderField:@"Content-Type"];
-    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
-    [urlRequest setHTTPShouldHandleCookies:NO];
-    [urlRequest setTimeoutInterval:30];
+    //    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    //    [urlRequest setHTTPShouldHandleCookies:NO];
+    //    [urlRequest setTimeoutInterval:3000];
     // Set boundary and content type (boundary is a random String)
     NSString *boundaryConstant = [NSString stringWithFormat:@"---------------------------14737809831464368775746641449"];
     NSString* fileParamConstant = @"photo";
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundaryConstant];
     [urlRequest setValue:contentType forHTTPHeaderField: @"Content-Type"];
     // Image data array
-    NSMutableArray *allImgData;
+    NSMutableArray *allImgData = [[NSMutableArray alloc] init];
     for (UIButton *photoButton in self.photoButtons) {
         UIImage *buttonImage = [photoButton imageForState:UIControlStateNormal];
         NSData *imgData = UIImagePNGRepresentation(buttonImage);
-        // add to array
+        // add to image data array for upload
         [allImgData addObject:imgData];
     }
     // Append image data to body data
@@ -390,7 +395,6 @@
         [bodyData appendData:imgData];
         [bodyData appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
         i++;
-        NSLog(@"!!!!!!!!!Upload 1 photo.");
     }
     // Append one last boundary
     [bodyData appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -401,13 +405,14 @@
     [urlRequest setValue:postLength forHTTPHeaderField:@"Content-Length"];
     // Start session task
     NSURLSessionUploadTask* task = [session uploadTaskWithRequest:urlRequest fromData:bodyData completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSLog(@"%@", response);
         if (error == nil && [(NSHTTPURLResponse*)response statusCode] < 300) {
             if (error == nil) {
                 NSLog(@"Successfully submitted photo data. No error.");
-                photoUploadTaskDone = TRUE;
             } else {
                 NSLog(@"Photo data Error: %@", [error localizedDescription]);
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    self.submitImageButton.image = [UIImage imageNamed:@"WrongUser"];
+                }];
             }
         }
     }];
@@ -419,12 +424,17 @@
 }
 
 - (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    // Submit Data...
-    
     // Navigation
     CollectViewController *collect = [[CollectViewController alloc] init];
     collect = [self.storyboard instantiateViewControllerWithIdentifier:@"CollectViewController"];
     collect.userName = _userName;
+    collect.competitorAnalysisFirstObservation = self.firstObservationTextField.text;
+    collect.competitorAnalysisSecondObservation = self.secondObservationTextField.text;
+    collect.competitorAnalysisThirdObservation = self.thirdObservationTextField.text;
+    collect.competitorAnalysisBrandName = self.brandNameTextField.text;
+    collect.competitorAnalysisProductCategory = self.productCategoryTextField.text;
+    collect.competitorAnalysisPhotoSubmitted = self.allImageSubmitted;
+    collect.competitorAnalysisAlreadySubmitted = self.alreadySubmitted;
     [self.navigationController showViewController:collect sender:self];
 }
 

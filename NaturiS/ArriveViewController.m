@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *yourArrivingLocation;
 @property (weak, nonatomic) IBOutlet UIImageView *yourArrivingTimeButtonImage;
 @property (weak, nonatomic) IBOutlet UIImageView *yourArrivingLocationButtonImage;
+@property (weak, nonatomic) IBOutlet UILabel *arrivingTimeContent;
+@property (weak, nonatomic) IBOutlet UILabel *arrivingLocationContent;
 @end
 
 @implementation ArriveViewController {
@@ -74,10 +76,21 @@
 - (void)updateYourArrivingTime: (NSTimer *)timer {
     NSDate *currentTime = [NSDate date];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
-    _yourArrivingTime.numberOfLines = 2;
-    _yourArrivingTime.textAlignment = NSTextAlignmentCenter;
-    _yourArrivingTime.text = [NSString stringWithFormat:@"Your Arriving Time:\n %@", [formatter stringFromDate:currentTime]];
+    [formatter setDateFormat:@"MMM-dd hh:mm a"];
+    // Display text
+    // NSAttributed String
+    NSString *currentTimeString = @"Current Time";
+    NSMutableAttributedString *currentTimeAttributedString =[[NSMutableAttributedString alloc] initWithString: currentTimeString];
+    UIFont *font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
+    [currentTimeAttributedString addAttribute:NSFontAttributeName
+                                        value:font
+                                        range:NSMakeRange(0, [currentTimeString length])];
+    self.yourArrivingTime.attributedText = currentTimeAttributedString;
+    self.yourArrivingTime.numberOfLines = 0;
+    self.yourArrivingTime.textAlignment = NSTextAlignmentCenter;
+    self.arrivingTimeContent.text = [NSString stringWithFormat:@"%@", [formatter stringFromDate:currentTime]];
+    self.arrivingTimeContent.numberOfLines = 0;
+    self.arrivingTimeContent.textAlignment = NSTextAlignmentCenter;
 }
 
 
@@ -134,11 +147,22 @@
         NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
         if (error == nil && [placemarks count] > 0) {
             placemark = [placemarks lastObject];
-            _yourArrivingLocation.numberOfLines = 0;
-            _yourArrivingLocation.textAlignment = NSTextAlignmentCenter;
-            [self.yourArrivingLocation sizeToFit];
-            _yourArrivingLocation.text = [NSString stringWithFormat:@"Your Arriving Address:\n %@\n%@\n%@\n%@",
-                                         placemark.subThoroughfare, placemark.thoroughfare, placemark.locality, placemark.postalCode];
+            // Display text
+            // NSAttributed String
+            NSString *currentLocationString = @"Current Location";
+            NSMutableAttributedString *currentLocationAttributedString =[[NSMutableAttributedString alloc] initWithString: currentLocationString];
+            UIFont *font=[UIFont fontWithName:@"Helvetica-Bold" size:14.0];
+            [currentLocationAttributedString addAttribute:NSFontAttributeName
+                                                    value:font
+                                                    range:NSMakeRange(0, [currentLocationString length])];
+            
+            self.yourArrivingLocation.attributedText = currentLocationAttributedString;
+            self.yourArrivingLocation.numberOfLines = 0;
+            self.yourArrivingLocation.textAlignment = NSTextAlignmentCenter;
+            self.arrivingLocationContent.text = [NSString stringWithFormat:@"%@\n%@\n%@\n%@",
+                                                placemark.subThoroughfare, placemark.thoroughfare, placemark.locality, placemark.postalCode];
+            self.arrivingLocationContent.numberOfLines = 0;
+            self.arrivingLocationContent.textAlignment = NSTextAlignmentCenter;
         } else {
             NSLog(@"%@", error.debugDescription);
         }
