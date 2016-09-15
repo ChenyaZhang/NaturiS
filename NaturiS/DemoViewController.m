@@ -18,7 +18,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     // Add tap gesture
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRecognizer:)];
     [recognizer setNumberOfTapsRequired:1];
@@ -33,10 +32,7 @@
 
 - (void)tapRecognizer:(UISwipeGestureRecognizer *)sender {
     FeedbackIntroViewController *feedbackIntro = [[FeedbackIntroViewController alloc] init];
-    feedbackIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"FeedbackIntroViewController"];
-    
-    feedbackIntro.userName = _userName;
-    
+    feedbackIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"FeedbackIntroViewController"];    
     [self.navigationController showViewController:feedbackIntro sender:self];
 }
 

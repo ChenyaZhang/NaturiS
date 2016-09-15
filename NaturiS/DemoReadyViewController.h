@@ -9,5 +9,4 @@
 #import <UIKit/UIKit.h>
 
 @interface DemoReadyViewController : UIViewController
-@property (strong, nonatomic) NSString *userName;
 @end

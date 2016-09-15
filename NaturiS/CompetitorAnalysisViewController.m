@@ -23,7 +23,12 @@
 @property (weak, nonatomic) IBOutlet UIImageView *gift4ImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *gift5ImageView;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *photoButtons;
+@property (weak, nonatomic) IBOutlet UIButton *photo1Button;
+@property (weak, nonatomic) IBOutlet UIButton *photo2Button;
+@property (weak, nonatomic) IBOutlet UIButton *photo3Button;
+@property (weak, nonatomic) IBOutlet UIButton *photo4Button;
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *allTextFields;
+@property (strong, nonatomic) NSMutableDictionary *allImageSubmitted;
 @end
 
 @implementation CompetitorAnalysisViewController {
@@ -38,25 +43,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Resume previously submitted data
-    // for text
-    self.firstObservationTextField.text = self.firstObservation;
-    self.secondObservationTextField.text = self.secondObservation;
-    self.thirdObservationTextField.text = self.thirdObservation;
-    self.brandNameTextField.text = self.brandName;
-    self.productCategoryTextField.text = self.productCategory;
-    // for photo
-    if (!self.allImageSubmitted) {
-        self.allImageSubmitted = [[NSMutableDictionary alloc] init];
-    }
-    for (UIButton *photoButton in self.photoButtons) {
-        [photoButton setImage:[UIImage imageNamed:@"Camera"] forState:UIControlStateNormal];
-    }
-    if (self.allImageSubmitted.count != 0) {
-        for (int i = 0; i < self.allImageSubmitted.count; i++) {
-            NSString *key = [NSString stringWithFormat:@"photo%d", i + 1];
-            [[self.photoButtons objectAtIndex:i] setImage:[self.allImageSubmitted objectForKey:key] forState:UIControlStateNormal];
-        }
-    }
+    [self loadPreviousData];
     // Hide gift images
     self.gift1ImageView.hidden = YES;
     self.gift2ImageView.hidden = YES;
@@ -85,6 +72,90 @@
     UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeRecognizer:)];
     recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
     [self.view addGestureRecognizer:recognizerLeft];
+}
+
+- (void)loadPreviousData {
+    // NSURLSession Submit/Resubmit data
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    // NSURL
+    NSString *userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginUserName"];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/userName/%@", userName]];
+    NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
+    // Set URL Request
+    [urlRequest setURL:url];
+    [urlRequest setHTTPMethod:@"GET"];
+    [[session dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (data != nil) {
+            // Convert the returned data into a dictionary.
+            NSError *error;
+            NSMutableDictionary *returnedDict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+            NSLog(@"returnedDict: %@", returnedDict);
+            // Check if no returnedDict
+            if (returnedDict == NULL) {
+                NSLog(@"No returnedDict when calling (void)loadPreviousTextData.");
+                // Check error
+            } else if (error != nil) {
+                NSLog(@"%@", [error localizedDescription]);
+                // No error
+            } else {
+                // If no error occurs, check the HTTP status code.
+                NSInteger HTTPStatusCode = [(NSHTTPURLResponse *)response statusCode];
+                // If it's other than 200, then show it on the console.
+                if (HTTPStatusCode != 200) {
+                    NSLog(@"HTTP status code = %ld", (long)HTTPStatusCode);
+                }
+                // For text
+                NSArray *firstObservation = [returnedDict valueForKeyPath:@"competitorProduct.firstObservation"];
+                NSArray *secondObservation = [returnedDict valueForKeyPath:@"competitorProduct.secondObservation"];
+                NSArray *thirdObservation = [returnedDict valueForKeyPath:@"competitorProduct.thirdObservation"];
+                NSArray *brandName = [returnedDict valueForKeyPath:@"competitorProduct.brandName"];
+                NSArray *productCategory = [returnedDict valueForKeyPath:@"competitorProduct.productCategory"];
+                // For photo
+                NSArray *photo1 = [returnedDict valueForKeyPath:@"competitorProductPhoto.photo1"];
+                NSArray *photo2 = [returnedDict valueForKeyPath:@"competitorProductPhoto.photo2"];
+                NSArray *photo3 = [returnedDict valueForKeyPath:@"competitorProductPhoto.photo3"];
+                NSArray *photo4 = [returnedDict valueForKeyPath:@"competitorProductPhoto.photo4"];
+                // UI update must be in mainQueue
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    if (firstObservation && firstObservation.count != 0) {
+                        self.firstObservationTextField.text = firstObservation[0];
+                    }
+                    if (secondObservation && secondObservation.count != 0) {
+                        self.secondObservationTextField.text = secondObservation[0];
+                    }
+                    if (thirdObservation && thirdObservation.count != 0) {
+                        self.thirdObservationTextField.text = thirdObservation[0];
+                    }
+                    if (brandName && brandName.count != 0) {
+                        self.brandNameTextField.text = brandName[0];
+                    }
+                    if (productCategory && productCategory.count != 0) {
+                        self.productCategoryTextField.text = productCategory[0];
+                    }
+                    if (photo1 && photo1.count != 0) {
+                        NSLog(@"photo1[0] NSString: %@", photo1[0]);
+                        NSData *data = [photo1[0] dataUsingEncoding:NSUTF8StringEncoding];
+                        NSLog(@"Data is here: %@", data);
+                        UIImage *photo1Image = [UIImage imageWithData:data];
+                        NSLog(@"Image is here: %@", photo1Image);
+                        [self.photo1Button setImage:photo1Image forState:UIControlStateNormal];
+                    }
+                    if (photo2 && photo2.count != 0) {
+                        UIImage *photo2Image = [UIImage imageWithData:[photo2[0]dataUsingEncoding:NSUTF8StringEncoding]];
+                        [self.photo2Button setImage:photo2Image forState:UIControlStateNormal];
+                    }
+                    if (photo3 && photo3.count != 0) {
+                        UIImage *photo3Image = [UIImage imageWithData:[photo3[0]dataUsingEncoding:NSUTF8StringEncoding]];
+                        [self.photo3Button setImage:photo3Image forState:UIControlStateNormal];
+                    }
+                    if (photo4 && photo4.count != 0) {
+                        UIImage *photo4Image = [UIImage imageWithData:[photo4[0]dataUsingEncoding:NSUTF8StringEncoding]];
+                        [self.photo4Button setImage:photo4Image forState:UIControlStateNormal];
+                    }
+                }];
+            }
+        }
+    }] resume];
 }
 
 
@@ -307,34 +378,21 @@
             allPhotosUploadFinished = NO;
         }
     }
-    // Check data submission
-    if (allTextFieldsFinished && allPhotosUploadFinished) {
-        // Disable text field and photo upload
-        self.firstObservationTextField.enabled = NO;
-        self.secondObservationTextField.enabled = NO;
-        self.thirdObservationTextField.enabled = NO;
-        self.brandNameTextField.enabled = NO;
-        self.productCategoryTextField.enabled = NO;
-        for (UIButton *button in self.photoButtons) {
-            button.enabled = NO;
-        }
-        // Upload text data
-        [self uploadTextData];
-        // Upload photo data
-        [self uploadPhotoData];
-        // Updata UI
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            self.submitImageButton.image = [UIImage imageNamed:@"Correct"];
-        }];
-        self.submitImageButton.userInteractionEnabled = NO;
-        self.alreadySubmitted = YES;
-    }
+    // Upload text data
+    [self uploadTextData];
+    // Upload photo data
+    [self uploadPhotoData];
+    // Update UI
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        self.submitImageButton.image = [UIImage imageNamed:@"Correct"];
+    }];
 }
 
 - (void) uploadTextData {
     // NSURLSession Submit/Resubmit data
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/competitorProductTextData/%@", self.userName]];
+    NSString *userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginUserName"];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/competitorProductTextData/%@", userName]];
     NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
     // "Put" method
     // Request setup
@@ -362,7 +420,8 @@
     // NSURLSession Submit/Resubmit data
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     // NSURL
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/competitorProductPhotoData/%@", self.userName]];
+    NSString *userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginUserName"];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/competitorProductPhotoData/%@", userName]];
     NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
     // "Put" method
     // Request setup
@@ -382,6 +441,7 @@
     for (UIButton *photoButton in self.photoButtons) {
         UIImage *buttonImage = [photoButton imageForState:UIControlStateNormal];
         NSData *imgData = UIImagePNGRepresentation(buttonImage);
+        // NSString *imgString = [UIImagePNGRepresentation(buttonImage) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
         // add to image data array for upload
         [allImgData addObject:imgData];
     }
@@ -393,6 +453,7 @@
         [bodyData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"image\"; filename=\"%@%d.png\"\r\n", fileParamConstant, i] dataUsingEncoding:NSUTF8StringEncoding]];
         [bodyData appendData:[@"Content-Type: image/png\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
         [bodyData appendData:imgData];
+        // [bodyData appendData:[imgData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
         [bodyData appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
         i++;
     }
@@ -427,14 +488,6 @@
     // Navigation
     CollectViewController *collect = [[CollectViewController alloc] init];
     collect = [self.storyboard instantiateViewControllerWithIdentifier:@"CollectViewController"];
-    collect.userName = _userName;
-    collect.competitorAnalysisFirstObservation = self.firstObservationTextField.text;
-    collect.competitorAnalysisSecondObservation = self.secondObservationTextField.text;
-    collect.competitorAnalysisThirdObservation = self.thirdObservationTextField.text;
-    collect.competitorAnalysisBrandName = self.brandNameTextField.text;
-    collect.competitorAnalysisProductCategory = self.productCategoryTextField.text;
-    collect.competitorAnalysisPhotoSubmitted = self.allImageSubmitted;
-    collect.competitorAnalysisAlreadySubmitted = self.alreadySubmitted;
     [self.navigationController showViewController:collect sender:self];
 }
 

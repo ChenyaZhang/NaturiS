@@ -29,8 +29,7 @@
     [super viewDidLoad];
     // Resume previously submitted data
     // for text
-    self.problemSolutionTextView.text = self.problemSolution;
-    self.customerFeedbackTextView.text = self.customerFeedback;
+    [self loadPreviousTextData];
     // Assign delegate
     self.problemSolutionTextView.delegate = self;
     self.customerFeedbackTextView.delegate = self;
@@ -57,6 +56,51 @@
     [self.submitButtonImage addGestureRecognizer:recognizer];
 }
 
+- (void)loadPreviousTextData {
+    // NSURLSession Submit/Resubmit data
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    // NSURL
+    NSString *userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginUserName"];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/userName/%@", userName]];
+    NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
+    // Set URL Request
+    [urlRequest setURL:url];
+    [urlRequest setHTTPMethod:@"GET"];
+    [[session dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (data != nil) {
+            // Convert the returned data into a dictionary.
+            NSError *error;
+            NSMutableDictionary *returnedDict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+            NSLog(@"returnedDict: %@", returnedDict);
+            // Check if no returnedDict
+            if (returnedDict == NULL) {
+                NSLog(@"No returnedDict when calling (void)loadPreviousTextData.");
+                // Check error
+            } else if (error != nil) {
+                NSLog(@"%@", [error localizedDescription]);
+                // No error
+            } else {
+                // If no error occurs, check the HTTP status code.
+                NSInteger HTTPStatusCode = [(NSHTTPURLResponse *)response statusCode];
+                // If it's other than 200, then show it on the console.
+                if (HTTPStatusCode != 200) {
+                    NSLog(@"HTTP status code = %ld", (long)HTTPStatusCode);
+                }
+                NSArray *problemSolution = [returnedDict valueForKeyPath:@"generalFeedback.problemSolution"];
+                NSArray *customerFeedback = [returnedDict valueForKeyPath:@"generalFeedback.customerFeedback"];
+                // UI update must be in mainQueue
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    if (problemSolution && problemSolution.count != 0) {
+                        self.problemSolutionTextView.text = problemSolution[0];
+                    }
+                    if (customerFeedback && customerFeedback.count != 0) {
+                        self.customerFeedbackTextView.text = customerFeedback[0];
+                    }
+                }];
+            }
+        }
+    }] resume];
+}
 
 #pragma mark - Keyboard & Scroll
 
@@ -138,25 +182,19 @@
             allTextViewsFinished = NO;
         }
     }
-    // Check data submission
-    if (allTextViewsFinished) {
-        // Disable text field and photo upload
-        self.problemSolutionTextView.editable = NO;
-        self.customerFeedbackTextView.editable = NO;
-        // Upload text data
-        [self uploadTextData];
-        // Updata UI
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            self.submitButtonImage.image = [UIImage imageNamed:@"Correct"];
-        }];
-        self.submitButtonImage.userInteractionEnabled = NO;
-    }
+    // Upload text data
+    [self uploadTextData];
+    // Updata UI
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        self.submitButtonImage.image = [UIImage imageNamed:@"Correct"];
+    }];
 }
 
 - (void) uploadTextData {
     // NSURLSession Submit/Resubmit data
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/generalFeedbackTextData/%@", self.userName]];
+    NSString *userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginUserName"];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/generalFeedbackTextData/%@", userName]];
     NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
     // "Put" method
     // Request setup
@@ -183,9 +221,6 @@
 - (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
     FeedbackViewController *feedback = [[FeedbackViewController alloc] init];
     feedback = [self.storyboard instantiateViewControllerWithIdentifier:@"FeedbackViewController"];
-    feedback.userName = _userName;
-    feedback.generalFeedbackProblemSolution = self.problemSolutionTextView.text;
-    feedback.generalFeedbackCustomerFeedback = self.customerFeedbackTextView.text;
     [self.navigationController showViewController:feedback sender:self];
 }
 

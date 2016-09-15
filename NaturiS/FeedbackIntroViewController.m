@@ -18,7 +18,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     // Add right swipe gesture
     UISwipeGestureRecognizer *recognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeRecognizer:)];
     recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
@@ -31,10 +30,7 @@
 
 - (void)rightSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
     FeedbackViewController *feedback = [[FeedbackViewController alloc] init];
-    feedback = [self.storyboard instantiateViewControllerWithIdentifier:@"FeedbackViewController"];
-    
-    feedback.userName = _userName;
-    
+    feedback = [self.storyboard instantiateViewControllerWithIdentifier:@"FeedbackViewController"];    
     [self.navigationController showViewController:feedback sender:self];
 }
 

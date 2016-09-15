@@ -9,5 +9,4 @@
 #import <UIKit/UIKit.h>
 
 @interface CongratulationViewController : UIViewController
-@property (strong, nonatomic) NSString *userName;
 @end

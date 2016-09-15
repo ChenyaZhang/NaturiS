@@ -8,10 +8,12 @@
 
 #import "NextDemoViewController.h"
 #import "LeaveViewController.h"
+#import "LoginViewController.h"
 
 @interface NextDemoViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *nextUpcomingDemo;
 @property (weak, nonatomic) IBOutlet UILabel *nextDemoContent;
+@property (weak, nonatomic) IBOutlet UIImageView *buttonImage;
 @end
 
 @implementation NextDemoViewController
@@ -44,6 +46,18 @@
     self.nextUpcomingDemo.textAlignment = NSTextAlignmentCenter;
     self.nextDemoContent.numberOfLines = 0;
     self.nextDemoContent.textAlignment = NSTextAlignmentCenter;
+    // Add tap gesture
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRecognizer:)];
+    [recognizer setNumberOfTapsRequired:1];
+    [self.buttonImage setUserInteractionEnabled:YES];
+    [self.view bringSubviewToFront:self.buttonImage];
+    [self.buttonImage addGestureRecognizer:recognizer];
+}
+
+- (void)tapRecognizer:(UISwipeGestureRecognizer *)sender {
+    LoginViewController *login = [[LoginViewController alloc] init];
+    login = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    [self.navigationController showViewController:login sender:self];
 }
 
 

@@ -1,0 +1,32 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "4DB8A2562CBF7B7613BDAD9EFEC668E9C1349119",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "4acb82bf-45c4-459c-a24d-65e7752386e7++5833" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "4acb82bf-45c4-459c-a24d-65e7752386e7++5833" : 0,
+    "4DB8A2562CBF7B7613BDAD9EFEC668E9C1349119" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C44FE3A3-0A32-4261-B67C-5E1393C47103",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "4acb82bf-45c4-459c-a24d-65e7752386e7++5833" : "..\/..\/..\/Downloads\/base64",
+    "4DB8A2562CBF7B7613BDAD9EFEC668E9C1349119" : "NaturiS\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "dio P",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "dio P.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:ChenyaZhang\/NaturiS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4DB8A2562CBF7B7613BDAD9EFEC668E9C1349119"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/repo.flipdevnet.com\/svn\/osx",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4acb82bf-45c4-459c-a24d-65e7752386e7++5833"
+    }
+  ]
+}

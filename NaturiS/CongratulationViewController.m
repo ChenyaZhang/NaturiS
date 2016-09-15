@@ -18,7 +18,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     // Add right swipe gesture
     UISwipeGestureRecognizer *recognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeRecognizer:)];
     recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
@@ -31,10 +30,7 @@
 
 - (void)rightSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
     LeaveIntroViewController *leaveIntro = [[LeaveIntroViewController alloc] init];
-    leaveIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"LeaveIntroViewController"];
-    
-    leaveIntro.userName = _userName;
-    
+    leaveIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"LeaveIntroViewController"];    
     [self.navigationController showViewController:leaveIntro sender:self];
 }
 

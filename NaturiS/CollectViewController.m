@@ -21,21 +21,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     // Add tap gesture for Competitor Analysis
     UITapGestureRecognizer *recognizer1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRecognizerForCompetitorAnalysis:)];
     [recognizer1 setNumberOfTapsRequired:1];
     [self.competitorAnalysisButton setUserInteractionEnabled:YES];
     [self.view bringSubviewToFront:self.competitorAnalysisButton];
     [self.competitorAnalysisButton addGestureRecognizer:recognizer1];
-    
     // Add tap gesture for Our Product Analysis
     UITapGestureRecognizer *recognizer2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRecognizerForOurProductAnalysis:)];
     [recognizer2 setNumberOfTapsRequired:1];
     [self.ourProductAnalysisButton setUserInteractionEnabled:YES];
     [self.view bringSubviewToFront:self.ourProductAnalysisButton];
     [self.ourProductAnalysisButton addGestureRecognizer:recognizer2];
-    
     // Add right swipe gesture
     UISwipeGestureRecognizer *recognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeRecognizer:)];
     recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
@@ -50,34 +47,22 @@
     CompetitorAnalysisViewController *competitor = [[CompetitorAnalysisViewController alloc] init];
     competitor = [self.storyboard instantiateViewControllerWithIdentifier:@"CompetitorAnalysisViewController"];
     NSLog(@"tapRecognizerForCompetitorAnalysis competitorAnalysisPhotoSubmitted.count: %lu", (unsigned long)self.competitorAnalysisPhotoSubmitted.count);
-    competitor.userName = _userName;
-    competitor.firstObservation = self.competitorAnalysisFirstObservation;
-    competitor.secondObservation = self.competitorAnalysisSecondObservation;
-    competitor.thirdObservation = self.competitorAnalysisThirdObservation;
-    competitor.brandName = self.competitorAnalysisBrandName;
-    competitor.productCategory = self.competitorAnalysisProductCategory;
-    competitor.allImageSubmitted = self.competitorAnalysisPhotoSubmitted;
-    
     [self.navigationController showViewController:competitor sender:self];
 }
 
 - (void)tapRecognizerForOurProductAnalysis:(UISwipeGestureRecognizer *)sender {
     OurProductViewController *ourProduct = [[OurProductViewController alloc] init];
     ourProduct = [self.storyboard instantiateViewControllerWithIdentifier:@"OurProductViewController"];
-    
-    ourProduct.userName = _userName;
-    
     [self.navigationController showViewController:ourProduct sender:self];
 }
 
 - (void)rightSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    // Check data submission
+    
+    // Check data submission from NSUserDefault
+    // ...
     
     DemoReadyViewController *demoReady = [[DemoReadyViewController alloc] init];
     demoReady = [self.storyboard instantiateViewControllerWithIdentifier:@"DemoReadyViewController"];
-    
-    demoReady.userName = _userName;
-    
     [self.navigationController showViewController:demoReady sender:self];
 }
 

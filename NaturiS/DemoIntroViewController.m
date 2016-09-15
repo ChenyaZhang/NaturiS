@@ -20,7 +20,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     // From "Prepare for segue"
     // Parse NSString
     NSArray *components = [self.currentDemo componentsSeparatedByString: @","];
@@ -50,7 +49,6 @@
     [self.buttonImage setUserInteractionEnabled:YES];
     [self.view bringSubviewToFront:self.buttonImage];
     [self.buttonImage addGestureRecognizer:recognizer];
-    
     // Add left swipe gesture
     UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeRecognizer:)];
     recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -65,7 +63,6 @@
     TravelIntroViewController *travelIntro = [[TravelIntroViewController alloc] init];
     travelIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"TravelIntroViewController"];
     
-    travelIntro.userName = _userName;
     travelIntro.currentDemo = _currentDemo;
     
     [self.navigationController showViewController:travelIntro sender:self];

@@ -35,27 +35,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     // Start time update
     [self startCurrentTimeTimer];
-    
     // Start location update
     [self startCurrentLocationUpdate];
-    
     // Add tap gesture for Your Current Time
     UITapGestureRecognizer *currentTimeTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(currentTimeTapRecognizer:)];
     [currentTimeTapRecognizer setNumberOfTapsRequired:1];
     [self.yourCurrentTimeButtonImage setUserInteractionEnabled:YES];
     [self.view bringSubviewToFront:self.yourCurrentTimeButtonImage];
     [self.yourCurrentTimeButtonImage addGestureRecognizer:currentTimeTapRecognizer];
-    
     // Add tap gesture for Your Current Location
     UITapGestureRecognizer *currentLocationTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(currentLocationTapRecognizer:)];
     [currentLocationTapRecognizer setNumberOfTapsRequired:1];
     [self.yourCurrentLocationButtonImage setUserInteractionEnabled:YES];
     [self.view bringSubviewToFront:self.yourCurrentLocationButtonImage];
     [self.yourCurrentLocationButtonImage addGestureRecognizer:currentLocationTapRecognizer];
-    
     // Add right swipe gesture
     UISwipeGestureRecognizer *recognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeRecognizer:)];
     recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
@@ -102,16 +97,13 @@
     locationManager = [[CLLocationManager alloc]init];
     locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    
     // Location authorization
     [locationManager requestWhenInUseAuthorization];
     if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [locationManager requestWhenInUseAuthorization];
     }
-    
     [locationManager startUpdatingLocation];
     yourCurrentLocationStart = TRUE;
-    
     // Initialize geocoder
     geocoder = [[CLGeocoder alloc] init];
 }
@@ -121,12 +113,9 @@
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     NSLog(@"didFailWithError: %@", error);
-    
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:@"Failed to Get Your Location" preferredStyle:UIAlertControllerStyleActionSheet];
-    
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     }]];
-    
     // Present action sheet.
     [self presentViewController:actionSheet animated:YES completion:nil];
 }
@@ -135,12 +124,10 @@
 {
     NSLog(@"didUpdateToLocation: %@", newLocation);
     CLLocation *currentLocation = newLocation;
-    
     if (currentLocation != nil) {
         NSLog(@"currentLocation.coordinate.longitude: %@", [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude]);
         NSLog(@"currentLocation.coordinate.latitude: %@", [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude]);
     }
-    
     // Reverse Geocoding
     NSLog(@"Resolving the Address");
     [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
@@ -176,21 +163,18 @@
     if (yourCurrentTimeStart) {
         // NSURLSession Submit/Resubmit data
         if (self.yourCurrentTime.text != NULL) {
-            
             NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-            
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/userName/%@", self.userName]];
+            // Get user name from NSUserDefaults
+            NSString *userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginUserName"];
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/userName/%@", userName]];
             NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
             // "Put" method
             [urlRequest setHTTPMethod:@"PUT"];
             [urlRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-            NSString *params = [NSString stringWithFormat:@"startTime=%@", self.yourCurrentTime.text];
+            NSString *params = [NSString stringWithFormat:@"startTime=%@", self.currentTimeContent.text];
             [urlRequest setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
-            
             [[session dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                
                 NSLog(@"Response:%@ %@\n", response, error);
-                
                 if (error == nil) {
                     NSLog(@"Stop your current time timer. No error.");
                     // Stop your current time timer
@@ -222,26 +206,20 @@
 }
 
 - (void)currentLocationTapRecognizer:(UITapGestureRecognizer *)sender {
-
     if (yourCurrentLocationStart) {
-        
         // NSURLSession Submit/Resubmit data
         if (self.yourCurrentLocation.text != NULL) {
-            
             NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-            
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/userName/%@", self.userName]];
+            NSString *userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginUserName"];
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/userName/%@", userName]];
             NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
             // "Put" method
             [urlRequest setHTTPMethod:@"PUT"];
             [urlRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-            NSString *params = [NSString stringWithFormat:@"startLocation=%@", self.yourCurrentLocation.text];
+            NSString *params = [NSString stringWithFormat:@"startLocation=%@", self.currentLocationContent.text];
             [urlRequest setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
-            
             [[session dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                
                 NSLog(@"Response:%@ %@\n", response, error);
-                
                 if (error == nil) {
                     NSLog(@"Stop your current location. No error.");
                     // Stop your current location
@@ -259,7 +237,6 @@
                         self.yourCurrentLocationButtonImage.image = [UIImage imageNamed:@"WrongUser"];
                     }];
                 }
-                
             }] resume];
             
         }
@@ -273,16 +250,10 @@
 }
 
 - (void)rightSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    
     if (yourCurrentTimeStart == FALSE && yourCurrentLocationStart == FALSE) {
-        
         if (self.yourCurrentTime.text != NULL && self.yourCurrentLocation.text != NULL) {
-            
             ArriveViewController *arrive = [[ArriveViewController alloc] init];
             arrive = [self.storyboard instantiateViewControllerWithIdentifier:@"ArriveViewController"];
-            
-            arrive.userName = _userName;
-            
             [self.navigationController showViewController:arrive sender:self];
         }
         

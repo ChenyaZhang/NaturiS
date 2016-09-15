@@ -32,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *plainTextField;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *photoButtons;
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *allTextFields;
+@property (strong, nonatomic) NSMutableDictionary *allImageSubmitted;
 @end
 
 @implementation OurProductViewController {
@@ -48,31 +49,9 @@
     [super viewDidLoad];
     // Resume previously submitted data
     // for text
-    self.firstObservationTextField.text = self.firstObservation;
-    self.secondObservationTextField.text = self.secondObservation;
-    self.thirdObservationTextField.text = self.thirdObservation;
-    self.lemonQTextField.text = self.lemonQ;
-    self.bananaTextField.text = self.bananaQ;
-    self.peachTextField.text = self.peachQ;
-    self.bberryTextField.text = self.bBerryQ;
-    self.sberryTextField.text = self.sBerryQ;
-    self.cherryTextField.text = self.cherryQ;
-    self.vanilaTextField.text = self.vanillaQ;
-    self.honeyTextField.text = self.honeyQ;
-    self.plainTextField.text = self.plainQ;
+    [self loadPreviousTextData];
     // for photo
-    if (!self.allImageSubmitted) {
-        self.allImageSubmitted = [[NSMutableDictionary alloc] init];
-    }
-    for (UIButton *photoButton in self.photoButtons) {
-        [photoButton setImage:[UIImage imageNamed:@"Camera"] forState:UIControlStateNormal];
-    }
-    if (self.allImageSubmitted.count != 0) {
-        for (int i = 0; i < self.allImageSubmitted.count; i++) {
-            NSString *key = [NSString stringWithFormat:@"photo%d", i + 1];
-            [[self.photoButtons objectAtIndex:i] setImage:[self.allImageSubmitted objectForKey:key] forState:UIControlStateNormal];
-        }
-    }
+    
     // Hide gift images
     self.gift6ImageView.hidden = YES;
     self.gift7ImageView.hidden = YES;
@@ -114,6 +93,91 @@
     }
 }
 
+- (void)loadPreviousTextData {
+    // NSURLSession Submit/Resubmit data
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    // NSURL
+    NSString *userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginUserName"];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/userName/%@", userName]];
+    NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
+    // Set URL Request
+    [urlRequest setURL:url];
+    [urlRequest setHTTPMethod:@"GET"];
+    [[session dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (data != nil) {
+            // Convert the returned data into a dictionary.
+            NSError *error;
+            NSMutableDictionary *returnedDict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+            NSLog(@"returnedDict: %@", returnedDict);
+            // Check if no returnedDict
+            if (returnedDict == NULL) {
+                NSLog(@"No returnedDict when calling (void)loadPreviousTextData.");
+                // Check error
+            } else if (error != nil) {
+                NSLog(@"%@", [error localizedDescription]);
+                // No error
+            } else {
+                // If no error occurs, check the HTTP status code.
+                NSInteger HTTPStatusCode = [(NSHTTPURLResponse *)response statusCode];
+                // If it's other than 200, then show it on the console.
+                if (HTTPStatusCode != 200) {
+                    NSLog(@"HTTP status code = %ld", (long)HTTPStatusCode);
+                }
+                NSArray *firstObservation = [returnedDict valueForKeyPath:@"ourProduct.firstObservation"];
+                NSArray *secondObservation = [returnedDict valueForKeyPath:@"ourProduct.secondObservation"];
+                NSArray *thirdObservation = [returnedDict valueForKeyPath:@"ourProduct.thirdObservation"];
+                NSArray *lemonQ = [returnedDict valueForKeyPath:@"ourProduct.lemonQ"];
+                NSArray *bananaQ = [returnedDict valueForKeyPath:@"ourProduct.bananaQ"];
+                NSArray *peachQ = [returnedDict valueForKeyPath:@"ourProduct.peachQ"];
+                NSArray *bBerryQ = [returnedDict valueForKeyPath:@"ourProduct.bBerryQ"];
+                NSArray *sBerryQ = [returnedDict valueForKeyPath:@"ourProduct.sBerryQ"];
+                NSArray *cherryQ = [returnedDict valueForKeyPath:@"ourProduct.cherryQ"];
+                NSArray *vanillaQ = [returnedDict valueForKeyPath:@"ourProduct.vanillaQ"];
+                NSArray *honeyQ = [returnedDict valueForKeyPath:@"ourProduct.honeyQ"];
+                NSArray *plainQ = [returnedDict valueForKeyPath:@"ourProduct.plainQ"];
+                // UI update must be in mainQueue
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    if (firstObservation && firstObservation.count != 0) {
+                        self.firstObservationTextField.text = firstObservation[0];
+                    }
+                    if (secondObservation && secondObservation.count != 0) {
+                        self.secondObservationTextField.text = secondObservation[0];
+                    }
+                    if (thirdObservation && thirdObservation.count != 0) {
+                        self.thirdObservationTextField.text = thirdObservation[0];
+                    }
+                    if (lemonQ && lemonQ.count != 0) {
+                        self.lemonQTextField.text = lemonQ[0];
+                    }
+                    if (bananaQ && bananaQ.count != 0) {
+                        self.bananaTextField.text = bananaQ[0];
+                    }
+                    if (peachQ && peachQ.count != 0) {
+                        self.peachTextField.text = peachQ[0];
+                    }
+                    if (bBerryQ && bBerryQ.count != 0) {
+                        self.bberryTextField.text = bBerryQ[0];
+                    }
+                    if (sBerryQ && sBerryQ.count != 0) {
+                        self.sberryTextField.text = sBerryQ[0];
+                    }
+                    if (cherryQ && cherryQ.count != 0) {
+                        self.cherryTextField.text = cherryQ[0];
+                    }
+                    if (vanillaQ && vanillaQ.count != 0) {
+                        self.vanilaTextField.text = vanillaQ[0];
+                    }
+                    if (honeyQ && honeyQ.count != 0) {
+                        self.honeyTextField.text = honeyQ[0];
+                    }
+                    if (plainQ && plainQ.count != 0) {
+                        self.plainTextField.text = plainQ[0];
+                    }
+                }];
+            }
+        }
+    }] resume];
+}
 
 
 #pragma mark - ViewWillAppear
@@ -334,41 +398,21 @@
             allPhotosUploadFinished = NO;
         }
     }
-    // Check data submission
-    if (allTextFieldsFinished && allPhotosUploadFinished) {
-        // Disable text field and photo upload
-        self.firstObservationTextField.enabled = NO;
-        self.secondObservationTextField.enabled = NO;
-        self.thirdObservationTextField.enabled = NO;
-        self.lemonQTextField.enabled = NO;
-        self.bananaTextField.enabled = NO;
-        self.peachTextField.enabled = NO;
-        self.bberryTextField.enabled = NO;
-        self.sberryTextField.enabled = NO;
-        self.cherryTextField.enabled = NO;
-        self.vanilaTextField.enabled = NO;
-        self.honeyTextField.enabled = NO;
-        self.plainTextField.enabled = NO;
-        for (UIButton *button in self.photoButtons) {
-            button.enabled = NO;
-        }
-        // Upload text data
-        [self uploadTextData];
-        // Upload photo data
-        [self uploadPhotoData];
-        // Updata UI
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            self.submitImageButton.image = [UIImage imageNamed:@"Correct"];
-        }];
-        self.submitImageButton.userInteractionEnabled = NO;
-        self.alreadySubmitted = YES;
-    }
+    // Upload text data
+    [self uploadTextData];
+    // Upload photo data
+    [self uploadPhotoData];
+    // Updata UI
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        self.submitImageButton.image = [UIImage imageNamed:@"Correct"];
+    }];
 }
 
 - (void) uploadTextData {
     // NSURLSession Submit/Resubmit data
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/ourProductTextData/%@", self.userName]];
+    NSString *userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginUserName"];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/ourProductTextData/%@", userName]];
     NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
     // "Put" method
     // Request setup
@@ -396,7 +440,8 @@
     // NSURLSession Submit/Resubmit data
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     // NSURL
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/ourProductPhotoData/%@", self.userName]];
+    NSString *userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginUserName"];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/ourProductPhotoData/%@", userName]];
     NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
     // "Put" method
     // Request setup
@@ -461,21 +506,6 @@
     // Navigation
     CollectViewController *collect = [[CollectViewController alloc] init];
     collect = [self.storyboard instantiateViewControllerWithIdentifier:@"CollectViewController"];
-    collect.userName = _userName;
-    collect.competitorAnalysisFirstObservation = self.firstObservationTextField.text;
-    collect.competitorAnalysisSecondObservation = self.secondObservationTextField.text;
-    collect.competitorAnalysisThirdObservation = self.thirdObservationTextField.text;
-    collect.ourProductLemonQ = self.lemonQTextField.text;
-    collect.ourProductBananaQ = self.bananaTextField.text;
-    collect.ourProductPeachQ = self.peachTextField.text;
-    collect.ourProductBberryQ = self.bberryTextField.text;
-    collect.ourProductSBerryQ = self.sberryTextField.text;
-    collect.ourProductCherryQ = self.cherryTextField.text;
-    collect.ourProductVanillaQ = self.vanilaTextField.text;
-    collect.ourProductHoneyQ = self.honeyTextField.text;
-    collect.ourProductPlainQ = self.plainTextField.text;
-    collect.ourProductPhotoSubmitted = self.allImageSubmitted;
-    collect.ourProductAlreadySubmitted = self.alreadySubmitted;
     [self.navigationController showViewController:collect sender:self];
 }
 
@@ -487,13 +517,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

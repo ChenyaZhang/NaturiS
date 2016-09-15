@@ -36,24 +36,9 @@
     [super viewDidLoad];
     // Resume previously submitted data
     // for text
-    self.totalSaleTextField.text = self.totalSale;
-    self.totalSamplingTextField.text = self.totalSampling;
-    self.mostPopularTextField.text = self.mostPopular;
-    self.leastPopularTextField.text = self.leastPopular;
-    self.receiptsTextField.text = self.receipts;
+    [self loadPreviousTextData];
     // for photo
-    if (!self.allImageSubmitted) {
-        self.allImageSubmitted = [[NSMutableDictionary alloc] init];
-    }
-    for (UIButton *photoButton in self.photoButtons) {
-        [photoButton setImage:[UIImage imageNamed:@"Camera"] forState:UIControlStateNormal];
-    }
-    if (self.allImageSubmitted.count != 0) {
-        for (int i = 0; i < self.allImageSubmitted.count; i++) {
-            NSString *key = [NSString stringWithFormat:@"photo%d", i + 1];
-            [[self.photoButtons objectAtIndex:i] setImage:[self.allImageSubmitted objectForKey:key] forState:UIControlStateNormal];
-        }
-    }
+    
     // Assign delegate
     self.totalSaleTextField.delegate = self;
     self.totalSamplingTextField.delegate = self;
@@ -80,6 +65,64 @@
     for (UIButton *button in self.photoButtons) {
         [self.view bringSubviewToFront:button];
     }
+}
+
+- (void)loadPreviousTextData {
+    // NSURLSession Submit/Resubmit data
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    // NSURL
+    NSString *userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginUserName"];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/userName/%@", userName]];
+    NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
+    // Set URL Request
+    [urlRequest setURL:url];
+    [urlRequest setHTTPMethod:@"GET"];
+    [[session dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (data != nil) {
+            // Convert the returned data into a dictionary.
+            NSError *error;
+            NSMutableDictionary *returnedDict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+            NSLog(@"returnedDict: %@", returnedDict);
+            // Check if no returnedDict
+            if (returnedDict == NULL) {
+                NSLog(@"No returnedDict when calling (void)loadPreviousTextData.");
+                // Check error
+            } else if (error != nil) {
+                NSLog(@"%@", [error localizedDescription]);
+                // No error
+            } else {
+                // If no error occurs, check the HTTP status code.
+                NSInteger HTTPStatusCode = [(NSHTTPURLResponse *)response statusCode];
+                // If it's other than 200, then show it on the console.
+                if (HTTPStatusCode != 200) {
+                    NSLog(@"HTTP status code = %ld", (long)HTTPStatusCode);
+                }
+                NSArray *totalSale = [returnedDict valueForKeyPath:@"specificQuestion.totalSale"];
+                NSArray *totalSampling = [returnedDict valueForKeyPath:@"specificQuestion.totalSampling"];
+                NSArray *mostPopular = [returnedDict valueForKeyPath:@"specificQuestion.mostPopular"];
+                NSArray *leastPopular = [returnedDict valueForKeyPath:@"specificQuestion.leastPopular"];
+                NSArray *receipts = [returnedDict valueForKeyPath:@"specificQuestion.receipts"];
+                // UI update must be in mainQueue
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    if (totalSale && totalSale.count != 0) {
+                        self.totalSaleTextField.text = totalSale[0];
+                    }
+                    if (totalSampling && totalSampling.count != 0) {
+                        self.totalSamplingTextField.text = totalSampling[0];
+                    }
+                    if (mostPopular && mostPopular.count != 0) {
+                        self.mostPopularTextField.text = mostPopular[0];
+                    }
+                    if (leastPopular && leastPopular.count != 0) {
+                        self.leastPopularTextField.text = leastPopular[0];
+                    }
+                    if (receipts && receipts.count != 0) {
+                        self.receiptsTextField.text = receipts[0];
+                    }
+                }];
+            }
+        }
+    }] resume];
 }
 
 
@@ -240,34 +283,21 @@
             allPhotosUploadFinished = NO;
         }
     }
-    // Check data submission
-    if (allTextFieldsFinished && allPhotosUploadFinished) {
-        // Disable text field and photo upload
-        self.totalSaleTextField.enabled = NO;
-        self.totalSamplingTextField.enabled = NO;
-        self.mostPopularTextField.enabled = NO;
-        self.leastPopularTextField.enabled = NO;
-        self.receiptsTextField.enabled = NO;
-        for (UIButton *button in self.photoButtons) {
-            button.enabled = NO;
-        }
-        // Upload text data
-        [self uploadTextData];
-        // Upload photo data
-        [self uploadPhotoData];
-        // Updata UI
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            self.submitButtonImage.image = [UIImage imageNamed:@"Correct"];
-        }];
-        self.submitButtonImage.userInteractionEnabled = NO;
-        self.alreadySubmitted = YES;
-    }
+    // Upload text data
+    [self uploadTextData];
+    // Upload photo data
+    [self uploadPhotoData];
+    // Updata UI
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        self.submitButtonImage.image = [UIImage imageNamed:@"Correct"];
+    }];
 }
 
 - (void) uploadTextData {
     // NSURLSession Submit/Resubmit data
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/specificQuestionTextData/%@", self.userName]];
+    NSString *userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginUserName"];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/specificQuestionTextData/%@", userName]];
     NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
     // "Put" method
     // Request setup
@@ -295,7 +325,8 @@
     // NSURLSession Submit/Resubmit data
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     // NSURL
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/specificQuestionPhotoData/%@", self.userName]];
+    NSString *userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginUserName"];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/specificQuestionPhotoData/%@", userName]];
     NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
     // "Put" method
     // Request setup
@@ -355,14 +386,6 @@
 - (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
     FeedbackViewController *feedback = [[FeedbackViewController alloc] init];
     feedback = [self.storyboard instantiateViewControllerWithIdentifier:@"FeedbackViewController"];
-    feedback.userName = _userName;
-    feedback.specificQuestionTotalSale = self.totalSaleTextField.text;
-    feedback.specificQuestionTotalSampling = self.totalSamplingTextField.text;
-    feedback.specificQuestionMostPopular = self.mostPopularTextField.text;
-    feedback.specificQuestionLeastPopular = self.leastPopularTextField.text;
-    feedback.specificQuestionReceipts = self.receiptsTextField.text;
-    feedback.specificQuestionPhotoSubmitted = self.allImageSubmitted;
-    feedback.specificQuestionAlreadySubmitted = self.alreadySubmitted;
     [self.navigationController showViewController:feedback sender:self];
 }
 
@@ -374,13 +397,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

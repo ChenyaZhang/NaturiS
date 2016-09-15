@@ -21,21 +21,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     // Add tap gesture for Specific Question
     UITapGestureRecognizer *recognizer1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRecognizerForSpecificQuestion:)];
     [recognizer1 setNumberOfTapsRequired:1];
     [self.specificQuestionButton setUserInteractionEnabled:YES];
     [self.view bringSubviewToFront:self.specificQuestionButton];
     [self.specificQuestionButton addGestureRecognizer:recognizer1];
-    
     // Add tap gesture for General Feedback
     UITapGestureRecognizer *recognizer2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRecognizerForGeneralFeedback:)];
     [recognizer2 setNumberOfTapsRequired:1];
     [self.generalFeedbackButton setUserInteractionEnabled:YES];
     [self.view bringSubviewToFront:self.generalFeedbackButton];
     [self.generalFeedbackButton addGestureRecognizer:recognizer2];
-    
     // Add right swipe gesture
     UISwipeGestureRecognizer *recognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeRecognizer:)];
     recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
@@ -49,27 +46,22 @@
 - (void)tapRecognizerForSpecificQuestion:(UISwipeGestureRecognizer *)sender {
     SpecificQuestionViewController *specificQuestion = [[SpecificQuestionViewController alloc] init];
     specificQuestion = [self.storyboard instantiateViewControllerWithIdentifier:@"SpecificQuestionViewController"];
-    
-    specificQuestion.userName = _userName;
-    
     [self.navigationController showViewController:specificQuestion sender:self];
 }
 
 - (void)tapRecognizerForGeneralFeedback:(UISwipeGestureRecognizer *)sender {
     GeneralFeedbackViewController *generalFeedback = [[GeneralFeedbackViewController alloc] init];
     generalFeedback = [self.storyboard instantiateViewControllerWithIdentifier:@"GeneralFeedbackViewController"];
-    
-    generalFeedback.userName = _userName;
-    
     [self.navigationController showViewController:generalFeedback sender:self];
 }
 
 - (void)rightSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
+    
+    // Check Data Submission
+    // ...
+    
     CongratulationViewController *congrat = [[CongratulationViewController alloc] init];
     congrat = [self.storyboard instantiateViewControllerWithIdentifier:@"CongratulationViewController"];
-    
-    congrat.userName = _userName;
-    
     [self.navigationController showViewController:congrat sender:self];
 }
 

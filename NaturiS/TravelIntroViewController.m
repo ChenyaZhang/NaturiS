@@ -35,9 +35,6 @@
 - (void)rightSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
     TravelViewController *travel = [[TravelViewController alloc] init];
     travel = [self.storyboard instantiateViewControllerWithIdentifier:@"TravelViewController"];
-    
-    travel.userName = _userName;
-    
     [self.navigationController showViewController:travel sender:self];
 }
 
@@ -45,8 +42,7 @@
     if (_currentDemo != NULL) {
         DemoIntroViewController *demoIntro = [[DemoIntroViewController alloc] init];
         demoIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"DemoIntroViewController"];
-        
-        demoIntro.userName = _userName;
+
         demoIntro.currentDemo = _currentDemo;
         
         [self.navigationController showViewController:demoIntro sender:self];
