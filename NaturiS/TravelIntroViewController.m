@@ -18,10 +18,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Add right swipe gesture
-    UISwipeGestureRecognizer *recognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeRecognizer:)];
-    recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.view addGestureRecognizer:recognizerRight];
     // Add left swipe gesture
     UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeRecognizer:)];
     recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -32,21 +28,10 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)rightSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
+- (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
     TravelViewController *travel = [[TravelViewController alloc] init];
     travel = [self.storyboard instantiateViewControllerWithIdentifier:@"TravelViewController"];
     [self.navigationController showViewController:travel sender:self];
-}
-
-- (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    if (_currentDemo != NULL) {
-        DemoIntroViewController *demoIntro = [[DemoIntroViewController alloc] init];
-        demoIntro = [self.storyboard instantiateViewControllerWithIdentifier:@"DemoIntroViewController"];
-
-        demoIntro.currentDemo = _currentDemo;
-        
-        [self.navigationController showViewController:demoIntro sender:self];
-    }
 }
 
 /*

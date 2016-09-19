@@ -50,10 +50,10 @@
     [self.yourArrivingLocationButtonImage setUserInteractionEnabled:YES];
     [self.view bringSubviewToFront:self.yourArrivingLocationButtonImage];
     [self.yourArrivingLocationButtonImage addGestureRecognizer:arrivingLocationTapRecognizer];
-    // Add right swipe gesture
-    UISwipeGestureRecognizer *recognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeRecognizer:)];
-    recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.view addGestureRecognizer:recognizerRight];
+    // Add left swipe gesture
+    UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeRecognizer:)];
+    recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:recognizerLeft];
 }
 
 
@@ -244,7 +244,7 @@
     }
 }
 
-- (void)rightSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
+- (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
     if (yourArrivingTimeStart == FALSE && yourArrivingLocationStart == FALSE) {
         if (self.yourArrivingTime.text != NULL && self.yourArrivingLocation.text != NULL) {
             CollectIntroViewController *collectIntro = [[CollectIntroViewController alloc] init];

@@ -58,7 +58,7 @@
 
 /* Begin PBXFileReference section */
 		F54297CF1D5E1467007C6E41 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		F55E95FE1D510CA600EFEAAA /* dio P.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dio P.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F55E95FE1D510CA600EFEAAA /* BrandEasy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrandEasy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F55E96021D510CA600EFEAAA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F55E96041D510CA600EFEAAA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F55E96051D510CA600EFEAAA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -67,10 +67,10 @@
 		F55E960E1D510CA600EFEAAA /* NaturiS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NaturiS.xcdatamodel; sourceTree = "<group>"; };
 		F55E96131D510CA600EFEAAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F55E96151D510CA600EFEAAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F55E961A1D510CA600EFEAAA /* dio P.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "dio P.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F55E961A1D510CA600EFEAAA /* BrandEasy.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BrandEasy.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F55E961E1D510CA600EFEAAA /* NaturiSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NaturiSTests.m; sourceTree = "<group>"; };
 		F55E96201D510CA600EFEAAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F55E96251D510CA600EFEAAA /* dio P.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "dio P.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F55E96251D510CA600EFEAAA /* BrandEasy.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BrandEasy.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F55E96291D510CA600EFEAAA /* NaturiSUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NaturiSUITests.m; sourceTree = "<group>"; };
 		F55E962B1D510CA600EFEAAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F55E96371D510CCF00EFEAAA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -158,9 +158,9 @@
 		F55E95FF1D510CA600EFEAAA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F55E95FE1D510CA600EFEAAA /* dio P.app */,
-				F55E961A1D510CA600EFEAAA /* dio P.xctest */,
-				F55E96251D510CA600EFEAAA /* dio P.xctest */,
+				F55E95FE1D510CA600EFEAAA /* BrandEasy.app */,
+				F55E961A1D510CA600EFEAAA /* BrandEasy.xctest */,
+				F55E96251D510CA600EFEAAA /* BrandEasy.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -266,9 +266,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F55E95FD1D510CA600EFEAAA /* dio P */ = {
+		F55E95FD1D510CA600EFEAAA /* BrandEasy */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F55E962E1D510CA600EFEAAA /* Build configuration list for PBXNativeTarget "dio P" */;
+			buildConfigurationList = F55E962E1D510CA600EFEAAA /* Build configuration list for PBXNativeTarget "BrandEasy" */;
 			buildPhases = (
 				F55E95FA1D510CA600EFEAAA /* Sources */,
 				F55E95FB1D510CA600EFEAAA /* Frameworks */,
@@ -278,14 +278,14 @@
 			);
 			dependencies = (
 			);
-			name = "dio P";
+			name = BrandEasy;
 			productName = NaturiS;
-			productReference = F55E95FE1D510CA600EFEAAA /* dio P.app */;
+			productReference = F55E95FE1D510CA600EFEAAA /* BrandEasy.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F55E96191D510CA600EFEAAA /* dio PTests */ = {
+		F55E96191D510CA600EFEAAA /* BrandEasyTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F55E96311D510CA600EFEAAA /* Build configuration list for PBXNativeTarget "dio PTests" */;
+			buildConfigurationList = F55E96311D510CA600EFEAAA /* Build configuration list for PBXNativeTarget "BrandEasyTests" */;
 			buildPhases = (
 				F55E96161D510CA600EFEAAA /* Sources */,
 				F55E96171D510CA600EFEAAA /* Frameworks */,
@@ -296,14 +296,14 @@
 			dependencies = (
 				F55E961C1D510CA600EFEAAA /* PBXTargetDependency */,
 			);
-			name = "dio PTests";
+			name = BrandEasyTests;
 			productName = NaturiSTests;
-			productReference = F55E961A1D510CA600EFEAAA /* dio P.xctest */;
+			productReference = F55E961A1D510CA600EFEAAA /* BrandEasy.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		F55E96241D510CA600EFEAAA /* dio PUITests */ = {
+		F55E96241D510CA600EFEAAA /* BrandEasyUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F55E96341D510CA600EFEAAA /* Build configuration list for PBXNativeTarget "dio PUITests" */;
+			buildConfigurationList = F55E96341D510CA600EFEAAA /* Build configuration list for PBXNativeTarget "BrandEasyUITests" */;
 			buildPhases = (
 				F55E96211D510CA600EFEAAA /* Sources */,
 				F55E96221D510CA600EFEAAA /* Frameworks */,
@@ -314,9 +314,9 @@
 			dependencies = (
 				F55E96271D510CA600EFEAAA /* PBXTargetDependency */,
 			);
-			name = "dio PUITests";
+			name = BrandEasyUITests;
 			productName = NaturiSUITests;
-			productReference = F55E96251D510CA600EFEAAA /* dio P.xctest */;
+			productReference = F55E96251D510CA600EFEAAA /* BrandEasy.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -341,7 +341,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F55E95F91D510CA600EFEAAA /* Build configuration list for PBXProject "dio P" */;
+			buildConfigurationList = F55E95F91D510CA600EFEAAA /* Build configuration list for PBXProject "BrandEasy" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -354,9 +354,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F55E95FD1D510CA600EFEAAA /* dio P */,
-				F55E96191D510CA600EFEAAA /* dio PTests */,
-				F55E96241D510CA600EFEAAA /* dio PUITests */,
+				F55E95FD1D510CA600EFEAAA /* BrandEasy */,
+				F55E96191D510CA600EFEAAA /* BrandEasyTests */,
+				F55E96241D510CA600EFEAAA /* BrandEasyUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -440,12 +440,12 @@
 /* Begin PBXTargetDependency section */
 		F55E961C1D510CA600EFEAAA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F55E95FD1D510CA600EFEAAA /* dio P */;
+			target = F55E95FD1D510CA600EFEAAA /* BrandEasy */;
 			targetProxy = F55E961B1D510CA600EFEAAA /* PBXContainerItemProxy */;
 		};
 		F55E96271D510CA600EFEAAA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F55E95FD1D510CA600EFEAAA /* dio P */;
+			target = F55E95FD1D510CA600EFEAAA /* BrandEasy */;
 			targetProxy = F55E96261D510CA600EFEAAA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -553,7 +553,7 @@
 				INFOPLIST_FILE = NaturiS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ChenyaZhang.NaturiS;
-				PRODUCT_NAME = "dio P";
+				PRODUCT_NAME = BrandEasy;
 			};
 			name = Debug;
 		};
@@ -564,7 +564,7 @@
 				INFOPLIST_FILE = NaturiS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ChenyaZhang.NaturiS;
-				PRODUCT_NAME = "dio P";
+				PRODUCT_NAME = BrandEasy;
 			};
 			name = Release;
 		};
@@ -575,8 +575,8 @@
 				INFOPLIST_FILE = NaturiSTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ChenyaZhang.NaturiSTests;
-				PRODUCT_NAME = "dio P";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dio P.app/dio P";
+				PRODUCT_NAME = BrandEasy;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BrandEasy.app/BrandEasy";
 			};
 			name = Debug;
 		};
@@ -587,8 +587,8 @@
 				INFOPLIST_FILE = NaturiSTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ChenyaZhang.NaturiSTests;
-				PRODUCT_NAME = "dio P";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dio P.app/dio P";
+				PRODUCT_NAME = BrandEasy;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BrandEasy.app/BrandEasy";
 			};
 			name = Release;
 		};
@@ -598,7 +598,7 @@
 				INFOPLIST_FILE = NaturiSUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ChenyaZhang.NaturiSUITests;
-				PRODUCT_NAME = "dio P";
+				PRODUCT_NAME = BrandEasy;
 				TEST_TARGET_NAME = NaturiS;
 			};
 			name = Debug;
@@ -609,7 +609,7 @@
 				INFOPLIST_FILE = NaturiSUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ChenyaZhang.NaturiSUITests;
-				PRODUCT_NAME = "dio P";
+				PRODUCT_NAME = BrandEasy;
 				TEST_TARGET_NAME = NaturiS;
 			};
 			name = Release;
@@ -617,7 +617,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F55E95F91D510CA600EFEAAA /* Build configuration list for PBXProject "dio P" */ = {
+		F55E95F91D510CA600EFEAAA /* Build configuration list for PBXProject "BrandEasy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F55E962C1D510CA600EFEAAA /* Debug */,
@@ -626,7 +626,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F55E962E1D510CA600EFEAAA /* Build configuration list for PBXNativeTarget "dio P" */ = {
+		F55E962E1D510CA600EFEAAA /* Build configuration list for PBXNativeTarget "BrandEasy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F55E962F1D510CA600EFEAAA /* Debug */,
@@ -635,7 +635,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F55E96311D510CA600EFEAAA /* Build configuration list for PBXNativeTarget "dio PTests" */ = {
+		F55E96311D510CA600EFEAAA /* Build configuration list for PBXNativeTarget "BrandEasyTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F55E96321D510CA600EFEAAA /* Debug */,
@@ -644,7 +644,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F55E96341D510CA600EFEAAA /* Build configuration list for PBXNativeTarget "dio PUITests" */ = {
+		F55E96341D510CA600EFEAAA /* Build configuration list for PBXNativeTarget "BrandEasyUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F55E96351D510CA600EFEAAA /* Debug */,

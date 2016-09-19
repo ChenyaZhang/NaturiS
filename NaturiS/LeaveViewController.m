@@ -54,10 +54,10 @@
     [self.yourCurrentLocationButtonImage setUserInteractionEnabled:YES];
     [self.view bringSubviewToFront:self.yourCurrentLocationButtonImage];
     [self.yourCurrentLocationButtonImage addGestureRecognizer:currentLocationTapRecognizer];
-    // Add right swipe gesture
-    UISwipeGestureRecognizer *recognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeRecognizer:)];
-    recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.view addGestureRecognizer:recognizerRight];
+    // Add left swipe gesture
+    UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeRecognizer:)];
+    recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:recognizerLeft];
 }
 
 
@@ -288,7 +288,7 @@
     }
 }
 
-- (void)rightSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
+- (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
     if (yourCurrentTimeStart == FALSE && yourCurrentLocationStart == FALSE) {
         if (self.yourCurrentTime.text != NULL && self.yourCurrentLocation.text != NULL) {
             NextDemoViewController *nextDemoVC = [[NextDemoViewController alloc] init];

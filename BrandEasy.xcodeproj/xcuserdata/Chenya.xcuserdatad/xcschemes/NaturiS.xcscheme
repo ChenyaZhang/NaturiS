@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F55E95FD1D510CA600EFEAAA"
                BuildableName = "dio P.app"
-               BlueprintName = "dio P"
-               ReferencedContainer = "container:dio P.xcodeproj">
+               BlueprintName = "BrandEasy"
+               ReferencedContainer = "container:BrandEasy.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F55E96191D510CA600EFEAAA"
-               BuildableName = "dio P.xctest"
-               BlueprintName = "dio PTests"
-               ReferencedContainer = "container:dio P.xcodeproj">
+               BuildableName = "BrandEasy.xctest"
+               BlueprintName = "BrandEasyTests"
+               ReferencedContainer = "container:BrandEasy.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F55E96241D510CA600EFEAAA"
-               BuildableName = "dio P.xctest"
-               BlueprintName = "dio PUITests"
-               ReferencedContainer = "container:dio P.xcodeproj">
+               BuildableName = "BrandEasy.xctest"
+               BlueprintName = "BrandEasyUITests"
+               ReferencedContainer = "container:BrandEasy.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -54,8 +54,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F55E95FD1D510CA600EFEAAA"
             BuildableName = "dio P.app"
-            BlueprintName = "dio P"
-            ReferencedContainer = "container:dio P.xcodeproj">
+            BlueprintName = "BrandEasy"
+            ReferencedContainer = "container:BrandEasy.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -77,8 +77,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F55E95FD1D510CA600EFEAAA"
             BuildableName = "dio P.app"
-            BlueprintName = "dio P"
-            ReferencedContainer = "container:dio P.xcodeproj">
+            BlueprintName = "BrandEasy"
+            ReferencedContainer = "container:BrandEasy.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -96,8 +96,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F55E95FD1D510CA600EFEAAA"
             BuildableName = "dio P.app"
-            BlueprintName = "dio P"
-            ReferencedContainer = "container:dio P.xcodeproj">
+            BlueprintName = "BrandEasy"
+            ReferencedContainer = "container:BrandEasy.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

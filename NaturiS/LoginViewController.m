@@ -51,6 +51,12 @@
     if (userName != NULL || userName.length != 0) {
         self.userNameOrEmailTextField.text = userName;
     }
+    // Clear previous user data
+    [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"CompetitorProductDataSubmitted"];
+    [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"OurProductDataSubmitted"];
+    [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"SpecificQuestionDataSubmitted"];
+    [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"GeneralFeedbackDataSubmitted"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     // Assign delegate
     self.userNameOrEmailTextField.delegate = self;
     self.passwordTextField.delegate = self;
@@ -60,7 +66,6 @@
     UITapGestureRecognizer *tapStopEditingRecognizer = [[UITapGestureRecognizer alloc]
                                                         initWithTarget:self action:@selector(tapStopEditingRecognizer:)];
     [self.view addGestureRecognizer: tapStopEditingRecognizer];
-    
     // Add login button tap gesture
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapSubmitDataRecognizer:)];
     [recognizer setNumberOfTapsRequired:1];

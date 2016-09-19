@@ -36,9 +36,7 @@
     [super viewDidLoad];
     // Resume previously submitted data
     // for text
-    [self loadPreviousTextData];
-    // for photo
-    
+    // [self loadPreviousTextData];
     // Assign delegate
     self.totalSaleTextField.delegate = self;
     self.totalSamplingTextField.delegate = self;
@@ -57,17 +55,17 @@
     [self.submitButtonImage setUserInteractionEnabled:YES];
     [self.view bringSubviewToFront:self.submitButtonImage];
     [self.submitButtonImage addGestureRecognizer:recognizer];
-    // Add left swipe gesture
-    UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeRecognizer:)];
-    recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.view addGestureRecognizer:recognizerLeft];
+    // Add right swipe gesture
+    UISwipeGestureRecognizer *recognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeRecognizer:)];
+    recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:recognizerRight];
     // Bring buttons to front
     for (UIButton *button in self.photoButtons) {
         [self.view bringSubviewToFront:button];
     }
 }
 
-- (void)loadPreviousTextData {
+/**- (void)loadPreviousTextData {
     // NSURLSession Submit/Resubmit data
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     // NSURL
@@ -123,7 +121,7 @@
             }
         }
     }] resume];
-}
+}**/
 
 
 #pragma mark - Keyboard & Scroll
@@ -283,14 +281,36 @@
             allPhotosUploadFinished = NO;
         }
     }
-    // Upload text data
-    [self uploadTextData];
-    // Upload photo data
-    [self uploadPhotoData];
-    // Updata UI
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+    if (allTextFieldsFinished && allPhotosUploadFinished) {
         self.submitButtonImage.image = [UIImage imageNamed:@"Correct"];
-    }];
+        // UIAlertController action sheet
+        UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        }]];
+        // UIAlertController action button
+        UIAlertAction *submitActionButton = [UIAlertAction actionWithTitle:@"Confirm Submission" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            // Store status
+            [[NSUserDefaults standardUserDefaults] setValue:@"1" forKey:@"SpecificQuestionDataSubmitted"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            // Upload text data
+            [self uploadTextData];
+            // Upload photo data
+            [self uploadPhotoData];
+            // Updata UI
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                for (UITextField *textField in self.allTextFields) {
+                    [textField setUserInteractionEnabled:NO];
+                }
+                for (UIButton *photoButton in self.photoButtons) {
+                    photoButton.enabled = NO;
+                }
+            }];
+        }];
+        // Add action to action sheet
+        [actionSheet addAction:submitActionButton];
+        // Present action sheet
+        [self presentViewController:actionSheet animated:YES completion:nil];
+    }
 }
 
 - (void) uploadTextData {
@@ -383,10 +403,29 @@
     [task resume];
 }
 
-- (void)leftSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    FeedbackViewController *feedback = [[FeedbackViewController alloc] init];
-    feedback = [self.storyboard instantiateViewControllerWithIdentifier:@"FeedbackViewController"];
-    [self.navigationController showViewController:feedback sender:self];
+- (void)rightSwipeRecognizer:(UISwipeGestureRecognizer *)sender {
+    NSString *submitSpecificData = [[NSUserDefaults standardUserDefaults] valueForKey:@"SpecificQuestionDataSubmitted"];
+    // Check data submission
+    if ([submitSpecificData isEqualToString:@"1"]) {
+        FeedbackViewController *feedback = [[FeedbackViewController alloc] init];
+        feedback = [self.storyboard instantiateViewControllerWithIdentifier:@"FeedbackViewController"];
+        [self.navigationController showViewController:feedback sender:self];
+    } else {
+        // UIAlertController action sheet
+        UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:@"YOUR DATA WILL NOT BE SAVED IF NOT SUBMITTED." preferredStyle:UIAlertControllerStyleActionSheet];
+        [actionSheet addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        }]];
+        // UIAlertController action button
+        UIAlertAction *discardActionButton = [UIAlertAction actionWithTitle:@"Discard All" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            FeedbackViewController *feedback = [[FeedbackViewController alloc] init];
+            feedback = [self.storyboard instantiateViewControllerWithIdentifier:@"FeedbackViewController"];
+            [self.navigationController showViewController:feedback sender:self];
+        }];
+        // Add action to action sheet
+        [actionSheet addAction:discardActionButton];
+        // Present action sheet
+        [self presentViewController:actionSheet animated:YES completion:nil];
+    }
 }
 
 
