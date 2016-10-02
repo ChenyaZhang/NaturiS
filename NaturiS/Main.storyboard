@@ -827,7 +827,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next Demo Content" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="enW-3M-Qq1">
-                                <rect key="frame" x="227" y="524" width="128" height="17"/>
+                                <rect key="frame" x="227" y="513" width="128" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -854,7 +854,7 @@
                             <constraint firstItem="idg-hg-2vG" firstAttribute="centerX" secondItem="VbQ-fF-78S" secondAttribute="centerX" id="k1z-m4-O6B"/>
                             <constraint firstItem="BUO-rV-RJa" firstAttribute="centerY" secondItem="VbQ-fF-78S" secondAttribute="centerY" multiplier="1.45" id="rxX-w0-2iz"/>
                             <constraint firstItem="enW-3M-Qq1" firstAttribute="centerY" secondItem="idg-hg-2vG" secondAttribute="centerY" multiplier="1.425" id="sIr-N8-r9X"/>
-                            <constraint firstItem="enW-3M-Qq1" firstAttribute="centerY" secondItem="idg-hg-2vG" secondAttribute="centerY" multiplier="1.4" id="v0E-vm-lId"/>
+                            <constraint firstItem="enW-3M-Qq1" firstAttribute="centerY" secondItem="idg-hg-2vG" secondAttribute="centerY" multiplier="1.37" id="v0E-vm-lId"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">

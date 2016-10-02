@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F55E95FD1D510CA600EFEAAA"
-               BuildableName = "dio P.app"
+               BuildableName = "BrandEasy.app"
                BlueprintName = "BrandEasy"
                ReferencedContainer = "container:BrandEasy.xcodeproj">
             </BuildableReference>
@@ -53,7 +53,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F55E95FD1D510CA600EFEAAA"
-            BuildableName = "dio P.app"
+            BuildableName = "BrandEasy.app"
             BlueprintName = "BrandEasy"
             ReferencedContainer = "container:BrandEasy.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F55E95FD1D510CA600EFEAAA"
-            BuildableName = "dio P.app"
+            BuildableName = "BrandEasy.app"
             BlueprintName = "BrandEasy"
             ReferencedContainer = "container:BrandEasy.xcodeproj">
          </BuildableReference>
@@ -95,7 +95,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F55E95FD1D510CA600EFEAAA"
-            BuildableName = "dio P.app"
+            BuildableName = "BrandEasy.app"
             BlueprintName = "BrandEasy"
             ReferencedContainer = "container:BrandEasy.xcodeproj">
          </BuildableReference>

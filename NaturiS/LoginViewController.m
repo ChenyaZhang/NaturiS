@@ -143,9 +143,9 @@
 - (void)tapSubmitDataRecognizer:(UISwipeGestureRecognizer *)sender {
     if (_userNameOrEmailTextField.text != NULL) {
         if ([_userNameOrEmailTextField.text rangeOfString:@"@"].location == NSNotFound) {
-            dataURL = [NSString stringWithFormat: @"http://localhost:8080/api/users/userName/%@", _userNameOrEmailTextField.text];
+            dataURL = [NSString stringWithFormat: @"http://ec2-54-163-207-173.compute-1.amazonaws.com:8080/api/users/userName/%@", _userNameOrEmailTextField.text];
         } else {
-            dataURL = [NSString stringWithFormat: @"http://localhost:8080/api/users/email/%@", _userNameOrEmailTextField.text];
+            dataURL = [NSString stringWithFormat: @"http://ec2-54-163-207-173.compute-1.amazonaws.com:8080/api/users/email/%@", _userNameOrEmailTextField.text];
         }
         // NSURLSession
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];

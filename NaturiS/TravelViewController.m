@@ -166,7 +166,7 @@
             NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
             // Get user name from NSUserDefaults
             NSString *userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginUserName"];
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/userName/%@", userName]];
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://ec2-54-163-207-173.compute-1.amazonaws.com:8080/api/users/userName/%@", userName]];
             NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
             // "Put" method
             [urlRequest setHTTPMethod:@"PUT"];
@@ -211,7 +211,7 @@
         if (self.yourCurrentLocation.text != NULL) {
             NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
             NSString *userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginUserName"];
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/userName/%@", userName]];
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://ec2-54-163-207-173.compute-1.amazonaws.com:8080/api/users/userName/%@", userName]];
             NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
             // "Put" method
             [urlRequest setHTTPMethod:@"PUT"];

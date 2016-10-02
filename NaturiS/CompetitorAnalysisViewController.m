@@ -79,7 +79,7 @@
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     // NSURL
     NSString *userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginUserName"];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/userName/%@", userName]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://ec2-54-163-207-173.compute-1.amazonaws.com:8080/api/users/userName/%@", userName]];
     NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
     // Set URL Request
     [urlRequest setURL:url];
@@ -413,7 +413,7 @@
     // NSURLSession Submit/Resubmit data
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     NSString *userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginUserName"];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/competitorProductTextData/%@", userName]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://ec2-54-163-207-173.compute-1.amazonaws.com:8080/api/users/competitorProductTextData/%@", userName]];
     NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
     // "Put" method
     // Request setup
@@ -442,7 +442,7 @@
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     // NSURL
     NSString *userName = [[NSUserDefaults standardUserDefaults] valueForKey:@"LoginUserName"];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://localhost:8080/api/users/competitorProductPhotoData/%@", userName]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://ec2-54-163-207-173.compute-1.amazonaws.com:8080/api/users/competitorProductPhotoData/%@", userName]];
     NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
     // "Put" method
     // Request setup
